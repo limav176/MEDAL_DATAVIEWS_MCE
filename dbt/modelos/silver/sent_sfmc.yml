@@ -1,0 +1,127 @@
+version: 2
+
+models:
+  - name: sent_sfmc
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.autorizado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Registra detalhes de e-mails enviados, incluindo dados do cliente, lista de destinatários, assunto e metadados. Essencial para avaliar o sucesso das campanhas de e-mail.
+
+      **Escopo:** Analisa o desempenho de e-mails enviados, desde a entrega até a interação.
+
+      **Audiência:** Para profissionais de marketing focados em otimizar campanhas de e-mail.
+
+      **Processo:** Dados coletados com o Salesforce Marketing Cloud usando a dataview de envios como origem. Essa dataview contém os disparos efetuados em nível de assinante de emails da conta Willbank. 
+
+      **Recorrência de atualização:** Atualizada diariamente.
+
+    tags: [silver, comunicacoes, salesforce, email_sent]
+
+    columns:
+      - name: primkey
+        description: Chave unica que envolve a cmbinacao de CONCAT(subscriberkey, sendid, batchid)
+        tags: []
+
+      - name: client_id
+        description: Identificador do willbank como cliente no Salesforce (MID)
+        tags: []
+
+      - name: partnerkey
+        description: O número do ID da conta para todas as contas relacionadas Em seu nome. Esse campo se aplica apenas a contas corporativas
+        tags: []
+
+      - name: listid
+        description: O número do ID da lista para a lista usada no envio
+        tags: []
+
+      - name: subscriberid
+        description: O ID do assinante para o assinante afetado. Esse número representa o ID exclusivo para cada registro de assinante.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: objectid
+        description: Identificador do objeto de envio no Salesforce que é gerado junto com o job de envio
+        tags: []
+
+      - name: sendid
+        description: Identificador [u]nico do evento de envio de emails
+        tags: []
+
+      - name: subscriberkey
+        description: A chave de assinante para o assinante afetado
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: eventdate
+        description: Data e hora do evento de envio
+        tags: []
+
+      - name: eventtype
+        description: Tipo de evento registrado (enviado, aberto, clicado)
+        tags: []
+
+      - name: triggerersenddefinitionobjectid
+        description: O ID do objeto para a definição de envio acionado
+        tags: []
+
+      - name: batchid
+        description: O número do ID do lote para todos os lotes usados no envio
+        tags: []
+
+      - name: triggeredsendcustomerkey
+        description: A chave do cliente para o envio acionado
+        tags: []
+
+      - name: partnerproperties
+        description: Propriedades do parceiro associadas a conta do Willbank do envio.
+        tags: []
+
+      - name: ingestion_date
+        description: Data de ingestão do evento.
+        tags: []
+
+      - name: ingestion_year
+        description: Ano de ingestão.
+        tags: []
+
+      - name: ingestion_month
+        description: Mês de ingestão.
+        tags: []
+
+      - name: ingestion_day
+        description: Dia de ingestão.
+        tags: []
+
+      - name: execution_date
+        description: Data de execução do evento.
+        tags: []
+
+      - name: execution_year
+        description: Ano de execução.
+        tags: []
+
+      - name: execution_month
+        description: Mês de execução.
+        tags: []
+
+      - name: execution_day
+        description: Dia de execução.
+        tags: []

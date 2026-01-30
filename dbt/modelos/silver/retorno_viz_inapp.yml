@@ -1,0 +1,98 @@
+version: 2
+
+models:
+  - name: retorno_viz_inapp
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.autorizado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Esta tabela consolida dados de visualizações em comunicações in-app, refinados para análises mais detalhadas de engajamento dos clientes e desempenho das campanhas.
+
+      **Escopo:** Contém dados como ID do cliente, data da visualização, campanha, comunicação, e detalhes de ingestão e execução. Esses dados são utilizados para análises avançadas de comportamento de visualização dos clientes.
+
+      **Audiência:** Destinada às equipes de análise de dados e CRM, que utilizam os dados para otimizar estratégias de comunicação e engajamento com base nas visualizações in-app.
+
+      **Recorrência de atualização:** Atualizada diariamente.
+
+    tags: [silver, comunicacoes, inapp, visualizacao, analise]
+
+    columns:
+      - name: id_salesforce
+        description: ID do cliente na Salesforce.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: phone
+        description: Número de telefone do cliente.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: email
+        description: Endereço de e-mail do cliente.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: datahora_visualizacao
+        description: Data e hora da visualização da comunicação.
+        tags: []
+
+      - name: campanha
+        description: Nome da campanha associada à visualização.
+        tags: []
+
+      - name: nome_da_comunicacao
+        description: Nome da comunicação enviada.
+        tags: []
+
+      - name: ingestion_date
+        description: Data de ingestão do evento.
+        tags: []
+
+      - name: ingestion_year
+        description: Ano de ingestão.
+        tags: []
+
+      - name: ingestion_month
+        description: Mês de ingestão.
+        tags: []
+
+      - name: ingestion_day
+        description: Dia de ingestão.
+        tags: []
+
+      - name: execution_date
+        description: Data de execução da comunicação.
+        tags: []
+
+      - name: execution_year
+        description: Ano de execução.
+        tags: []
+
+      - name: execution_month
+        description: Mês de execução.
+        tags: []
+
+      - name: execution_day
+        description: Dia de execução.
+        tags: []

@@ -1,0 +1,247 @@
+version: 2
+
+models:
+  - name: sms_sfmc
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.autorizado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Documenta eventos de SMS enviados, entregues, não entregues, opt-ins, opt-outs, e mensagens inbound e outbound, oferecendo uma visão abrangente da eficácia das campanhas de SMS. Inclui detalhes do assinante, IDs de mensagem, status de entrega, e timestamps de criação e modificação.
+
+      **Escopo:** Analisa a efetividade das comunicações via SMS, auxiliando na compreensão do engajamento dos destinatários e na eficiência das mensagens.
+
+      **Audiência:** Voltada para equipes de marketing que necessitam de insights detalhados sobre a performance das campanhas de SMS para otimização das estratégias.
+
+      **Processo:** As informações são coletadas a partir dos eventos de SMS gerados pela Salesforce Marketing Cloud.
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia.
+
+    tags: [silver, comunicacoes, salesforce, sms_activity]
+
+    columns:
+      - name: subscriberid
+        description: Identificador do assinante no Salesforce.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: id_pessoa
+        description: Chave única do assinante.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: mobilemessagetrackingid
+        description: ID de rastreamento da mensagem móvel.
+        tags: []
+
+      - name: eid
+        description: Identificador externo.
+        tags: []
+
+      - name: mid
+        description: Identificador do membro.
+        tags: []
+
+      - name: mobile
+        description: Número de celular do assinante.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: messageid
+        description: ID da mensagem enviada.
+        tags: []
+
+      - name: keywordid
+        description: ID da palavra-chave associada à mensagem.
+        tags: []
+
+      - name: codeid
+        description: ID do código associado à mensagem.
+        tags: []
+
+      - name: conversationid
+        description: ID da conversa.
+        tags: []
+
+      - name: campaignid
+        description: ID da campanha de SMS.
+        tags: []
+
+      - name: sent
+        description: Data e hora em que a mensagem foi enviada.
+        tags: []
+
+      - name: delivered
+        description: Data e hora da entrega da mensagem.
+        tags: []
+
+      - name: undelivered
+        description: Data e hora em que a mensagem foi marcada como não entregue.
+        tags: []
+
+      - name: unsub
+        description: Data e hora em que o assinante optou por não receber mais mensagens.
+        tags: []
+
+      - name: optin
+        description: Data e hora em que o assinante optou por receber mensagens.
+        tags: []
+
+      - name: optout
+        description: Data e hora em que o assinante optou por sair.
+        tags: []
+
+      - name: inbound
+        description: Mensagens recebidas do assinante.
+        tags: []
+
+      - name: outbound
+        description: Mensagens enviadas ao assinante.
+        tags: []
+
+      - name: createdatetime
+        description: Timestamp de criação do registro.
+        tags: []
+
+      - name: modifieddatetime
+        description: Timestamp de última modificação do registro.
+        tags: []
+
+      - name: actiondatetime
+        description: Timestamp da ação realizada.
+        tags: []
+
+      - name: istest
+        description: Indica se a mensagem foi enviada em modo de teste.
+        tags: []
+
+      - name: mobilemessagerecurrenceid
+        description: ID de recorrência da mensagem móvel.
+        tags: []
+
+      - name: responsetomobilemessagetrackingid
+        description: ID de rastreamento da resposta à mensagem móvel.
+        tags: []
+
+      - name: isvalid
+        description: Indica se a mensagem foi validada.
+        tags: []
+
+      - name: invalidationcode
+        description: Código de invalidação da mensagem.
+        tags: []
+
+      - name: sendid
+        description: ID do envio.
+        tags: []
+
+      - name: sendsplitid
+        description: ID da divisão do envio.
+        tags: []
+
+      - name: sendsegmentid
+        description: ID do segmento do envio.
+        tags: []
+
+      - name: sendjobid
+        description: ID do trabalho de envio.
+        tags: []
+
+      - name: sendgroupid
+        description: ID do grupo de envio.
+        tags: []
+
+      - name: sendpersonid
+        description: ID da pessoa no envio.
+        tags: []
+
+      - name: smsstandardstatuscodeid
+        description: ID do código de status padrão do SMS.
+        tags: []
+
+      - name: description
+        description: Descrição da mensagem ou evento.
+        tags: []
+
+      - name: sms_name
+        description: Nome da campanha ou evento.
+        tags: []
+
+      - name: shortcode
+        description: Código curto usado para enviar/receber a mensagem.
+        tags: []
+      - name: sharedkeyword
+        description: Palavra-chave compartilhada usada na campanha SMS.
+        tags: []
+
+      - name: ordinal
+        description: Posição ordinal da mensagem na campanha ou sequência.
+        tags: []
+
+      - name: fromname
+        description: Nome ou identificador do remetente da mensagem.
+        tags: []
+
+      - name: jbdefinitionid
+        description: Identificador da definição de trabalho no Journey Builder.
+        tags: []
+
+      - name: jbactivityid
+        description: Identificador da atividade no Journey Builder.
+        tags: []
+
+      - name: smsjobid
+        description: Identificador do trabalho de SMS.
+        tags: []
+
+      - name: ingestion_date
+        description: Data de ingestão do registro no sistema.
+        tags: []
+
+      - name: ingestion_year
+        description: Ano de ingestão do registro.
+        tags: []
+
+      - name: ingestion_month
+        description: Mês de ingestão do registro.
+        tags: []
+
+      - name: ingestion_day
+        description: Dia de ingestão do registro.
+        tags: []
+
+      - name: execution_date
+        description: Data de execução do registro no sistema.
+        tags: []
+
+      - name: execution_year
+        description: Ano de execução do registro.
+        tags: []
+
+      - name: execution_month
+        description: Mês de execução do registro.
+        tags: []
+
+      - name: execution_day
+        description: Dia de execução do registro.
+        tags: []

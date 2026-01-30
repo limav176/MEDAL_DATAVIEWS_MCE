@@ -1,0 +1,73 @@
+version: 2
+
+models:
+  - name: tipocontato_sfmc
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Esta tabela contém informações agregadas sobre a entrada de contatos na Salesforce Marketing Cloud (SFMC), segmentadas por tipo de contato (lead ou cliente), com o objetivo de apoiar a análise do crescimento da base de comunicação.
+
+      **Escopo:** Consolida a soma de registros inseridos na SFMC, agrupados por tipo de contato, facilitando o acompanhamento da evolução da base de pessoas elegíveis para ações de comunicação.
+
+      **Audiência:** Destinada às equipes de Marketing, CRM e Operações que utilizam a Salesforce Marketing Cloud, oferecendo uma visão das principais origens e métodos de inserção de contatos na plataforma.
+
+      **Processo:** Os dados são coletados a partir das atividades de cadastro de contatos na SFMC e consolidados diariamente por meio de processos de ingestão e transformação.
+
+      **Recorrência de atualização:** Atualização diária (D-1), após a finalização das cargas no Data Lake.
+
+    tags: [silver, comunicacoes, salesforce, totalizador, subscribers, tipo, pessoacontato, lead, ingestao]
+
+    columns:
+      - name: total
+        description: Quantidade total de registros agregados por tipo de pessoa (lead ou cliente), representando o volume consolidado para cada categoria.
+        tags: [tipo]
+
+      - name: tipo
+        description: Classificação da pessoa no momento do registro, podendo ser 'lead' (potencial cliente) ou 'cliente' (já convertido). 
+        tags: [Total]
+
+      - name: dtRegistro
+        description: Data de sumarização dos dados, representando o dia em que os registros foram consolidados no modelo.
+        tags: [dtRegistro]
+
+      - name: ingestion_date
+        description: Data de ingestão do evento.
+        tags: [ingestion_date]
+
+      - name: ingestion_year
+        description: Ano de ingestão.
+        tags: [ingestion_year]
+
+      - name: ingestion_month
+        description: Mês de ingestão.
+        tags: [ingestion_month]
+
+      - name: ingestion_day
+        description: Dia de ingestão.
+        tags: [ingestion_day]
+
+      - name: execution_date
+        description: Data de execução.
+        tags: [execution_date]
+
+      - name: execution_year
+        description: Ano de execução.
+        tags: [execution_year]
+
+      - name: execution_month
+        description: Mês de execução.
+        tags: [execution_month]
+
+      - name: execution_day
+        description: Dia de execução.
+        tags: [execution_day]

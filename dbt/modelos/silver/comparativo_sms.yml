@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: comparativo_sms
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier4'
+
+    description: >
+        **Propósito:** Este modelo é usado para comparar os totais diários de registros de SMS enviados, diferenciando-os entre as camadas silver e bronze para garantir a integridade dos dados.
+
+        **Escopo:** Contém dados agregados sobre envios diários de SMS, permitindo identificar possíveis discrepâncias entre as camadas silver e bronze.
+
+        **Audiência:** Voltado para equipes de martech e de qualidade de dados, que monitoram a consistência e a confiabilidade das informações.
+
+        **Processo:** Os dados são extraídos das tabelas de SMS nas camadas silver (sms_sfmc) e bronze (stg_sms_sfi), com ajuste de timezone (+3h). São feitas agregações diárias de registros distintos por data de disparo, que depois são unificadas por meio de um full outer join para comparação dos totais, evidenciando diferenças entre as camadas.
+
+        **Recorrência de atualização:** A tabela é atualizada diariamente, geralmente nas primeiras horas da manhã.
+
+    tags: [silver, comunicacoes, sms]
+
+    columns:
+      - name: dt_disparo
+        description: Data em que os registros de SMS foram disparados, ajustada para o fuso horário local (+3h). Usada para agregação diária e análise temporal dos envios.
+
+      - name: total_bronze
+        description: Quantidade total de registros de SMS enviados presentes na camada bronze do Data Lake. Esta camada representa os dados brutos e ingeridos diretamente da fonte, antes de qualquer processamento.
+
+      - name: total_silver
+        description: Quantidade total de registros de SMS enviados presentes na camada silver do Data Lake. A camada silver contém dados já processados, limpos e enriquecidos, prontos para análises mais confiáveis.
+
+      - name: total_gold
+        description: Quantidade total de registros de SMS enviados presentes na camada gold do Data Lake. A camada gold representa dados finais e refinados, normalmente usados para relatórios e análises estratégicas.
+
+      - name: diff_silver_bronze
+        description: Diferença numérica entre o total de registros enviados nas camadas silver e bronze, evidenciando discrepâncias ou perdas de dados durante o processamento e transformação.
+
+
+

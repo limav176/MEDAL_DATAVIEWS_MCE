@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: comparativo_push
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Este modelo é usado para comparar os totais de registros de push enviados, diferenciando-os entre as camadas  bronze e silver.
+
+      **Escopo:** Contém dados agregados sobre envios de push, comparando as quantidades de registros entre as camadas para  identificar possíveis discrepâncias.
+
+      **Audiência:** Voltado para a equipes de martech como ferramenta de qualidade de dados.
+
+      **Processo:** Dados são extraídos das tabelas de push nas camadas bronze e silver, são unificados e comparados para  fornecer uma visão clara das discrepâncias entre cada camada.
+
+      **Recorrência de atualização:** A tabela é atualizada diariamente.
+
+    tags: [silver, comunicacoes, push]
+
+    columns:
+      - name: dt_disparo
+        description: Data do disparo dos registros push.
+
+      - name: total_bronze
+        description: Total de registros enviados na camada bronze.
+
+      - name: total_silver
+        description: Total de registros enviados na camada silver.
+
+      - name: diff_silver_bronze
+        description: Diferença no total de registros enviados entre as camadas silver e bronze.

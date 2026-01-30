@@ -1,0 +1,101 @@
+version: 2
+
+models:
+  - name: unsubscribe_sfmc
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.autorizado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Registra eventos de cancelamento de inscrição por usuários em campanhas de e-mail, fornecendo insights para estratégias de retenção e melhoria de atendimento.
+
+      **Escopo:** Contém detalhes específicos de eventos de cancelamento de inscrição, incluindo a identificação do assinante e metadados do evento, essenciais para análises de atendimento ao cliente.
+
+      **Audiência:** Essencial para equipes de atendimento ao cliente e marketing, que buscam entender as razões de cancelamento de inscrição e desenvolver ações para melhorar a satisfação e retenção de clientes.
+
+      **Processo:** Os dados são extraídos da Salesforce processados para identificar eventos de cancelamento de inscrição únicos e relevantes para análises de atendimento.
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia.
+
+    tags: [silver, comunicacoes, salesforce, unsubscribe]
+
+    columns:
+      - name: accountid
+        description: Identificador da conta na Salesforce, vinculada ao evento de cancelamento.
+
+      - name: id_email
+        description: Identificador do e-mail no sistema, relacionado ao evento de cancelamento.
+
+      - name: id_unsubscribe
+        description: Identificador único para o evento de cancelamento de inscrição, facilitando análises específicas.
+
+      - name: oybaccountid
+        description: Identificador da conta associada ao evento, específico para sistemas integrados.
+
+      - name: jobid
+        description: ID do trabalho de envio de e-mail, permitindo rastrear a campanha específica que levou ao cancelamento.
+
+      - name: listid
+        description: Identificador da lista de e-mails da qual o usuário se desinscreveu.
+
+      - name: batchid
+        description: ID do lote de envio, útil para análises de desempenho de campanhas específicas.
+
+      - name: subscriberid
+        description: Identificador do assinante no sistema de e-mail marketing.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: subscriberkey
+        description: Chave única do assinante, utilizada para rastrear atividades e preferências.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+            
+      - name: eventdate
+        description: Data e hora do evento de cancelamento, crucial para análise temporal de comportamento de cancelamento.
+
+      - name: isunique
+        description: Indica se o cancelamento é um evento único, importante para entender repetições de comportamento.
+
+      - name: domain
+        description: Domínio de e-mail do assinante, útil para segmentação e análises específicas de domínio.
+
+      - name: ingestion_date
+        description: Data de ingestão do registro, indicando quando o evento foi capturado no sistema.
+
+      - name: ingestion_year
+        description: Ano de ingestão, útil para análises anuais e tendências de longo prazo.
+
+      - name: ingestion_month
+        description: Mês de ingestão, para análises mensais e identificação de padrões sazonais.
+
+      - name: ingestion_day
+        description: Dia de ingestão, permitindo análises diárias e detecção de picos de cancelamento.
+
+      - name: execution_date
+        description: Data de execução relacionada ao registro, para rastrear quando ações específicas foram tomadas.
+
+      - name: execution_year
+        description: Ano de execução, auxiliando na análise de eficácia das estratégias de atendimento ao longo do tempo.
+
+      - name: execution_month
+        description: Mês de execução, importante para avaliar o impacto de ações específicas em diferentes períodos.
+
+      - name: execution_day
+        description: Dia de execução, crucial para o acompanhamento diário de atividades de atendimento e marketing.

@@ -1,0 +1,86 @@
+version: 2
+
+models:
+  - name: elegiveis_emp
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.autorizado',
+        ]
+        tier: 'Tier.Tier4'
+
+    description: >
+      **Propósito:** Esta tabela, no contexto do domínio de empréstimos do willbank, contém informações sobre pessoas elegíveis para a concessão de um novo empréstimo. Reúne dados como o identificador do usuário, o dígito do documento e a data de entrada, sendo usada principalmente para apoiar campanhas de comunicação direcionadas conduzidas pela equipe de empréstimos.
+
+      **Escopo:** Cada linha da tabela representa uma pessoa que atende aos critérios internos de elegibilidade para um novo empréstimo. A tabela é limitada a clientes identificados na extensão de dados da Salesforce Marketing Cloud e não deve ser utilizada para análises regulatórias ou de crédito.
+
+      **Audiência:** A tabela foi criada para atender à equipe de Empréstimos e é consumida principalmente pelos times de Marketing e CRM que atuam com campanhas na Salesforce Marketing Cloud.
+
+      **Processo:** Os dados são extraídos da data extension `Backend11650_emprestimo_emprestimos_new_eligibles_created_account_email`, localizada na Salesforce Marketing Cloud, e são ingeridos no Data Lake por meio do pipeline `salesforce_ingestion`.
+
+      **Recorrência de atualização:** A tabela é atualizada diariamente (D-1), após a carga de dados no Data Lake.
+
+    tags: [silver, comunicacoes, salesforce, emprestimos, elegiveis, ingestao]
+
+    columns:
+      - name: documentNumberSeventhDigit
+        description: representa o identificador único de documento do usuário, utilizado exclusivamente para fins de controle e validação dentro dos processos operacionais da plataforma. Este número é fundamental para garantir a legitimidade dos registros, evitando duplicidades na base de dados, e permitindo rastrear ações vinculadas a um indivíduo específico, de forma segura e auditável
+        tags: []
+
+      - name: idRegistro
+        description: id da entrada do dado, código numérico gerado de forma que seja garantido que seja único na Data Extnsion
+        tags: [totalContatos]
+
+      - name: dataRegistro
+        description: data da entrada do dado na Data Extension, representando o momento em que o registro foi criado ou atualizado 
+        tags: []
+
+      - name: id_pessoa
+        description: hash do cpf do contato, representa o identificador único do usuário na plataforma, utilizado para garantir a integridade e a singularidade dos registros. Este hash é gerado a partir do CPF do usuário, assegurando que cada contato seja tratado de forma exclusiva, facilitando o cruzamento de dados e a análise de informações sem expor dados sensíveis diretamente.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: firstName
+        description: primeiro nome do contato que foi inserido na Data Extension, utilizado para personalização e identificação do usuário dentro da plataforma
+        tags: []
+
+      - name: ingestion_date
+        description: Data de ingestão do evento.
+        tags: [ingestion_date]
+
+      - name: ingestion_year
+        description: Ano de ingestão.
+        tags: [ingestion_year]
+
+      - name: ingestion_month
+        description: Mês de ingestão.
+        tags: [ingestion_month]
+
+      - name: ingestion_day
+        description: Dia de ingestão.
+        tags: [ingestion_day]
+
+      - name: execution_date
+        description: Data de execução.
+        tags: [execution_date]
+
+      - name: execution_year
+        description: Ano de execução.
+        tags: [execution_year]
+
+      - name: execution_month
+        description: Mês de execução.
+        tags: [execution_month]
+
+      - name: execution_day
+        description: Dia de execução.
+        tags: [execution_day]

@@ -1,0 +1,125 @@
+version: 2
+
+models:
+  - name: whatsapp_sfmc
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.autorizado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Rastrear e registrar detalhes de eventos de envio e interação em campanhas via WhatsApp, incluindo detalhes de entrega e resposta do destinatário.
+
+      **Escopo:** Abrange dados sobre eventos de envio e recebimento no WhatsApp, incluindo informações detalhadas sobre o tipo de mensagem, canal, destinatário e status do envio.
+
+      **Audiência:** Destinado a equipes de atendimento e marketing que analisam o desempenho de campanhas de WhatsApp, buscando otimizar o engajamento e solucionar problemas de entrega.
+
+      **Processo:** Os dados são extraídos do sistema Salesforce e processados para centralizar informações de eventos de WhatsApp.
+
+      **Recorrência de atualização:** Atualizado 1x ao dia.
+
+    tags: [silver, comunicacoes, whatsapp, tracking]
+
+    columns:
+      - name: trackingtype
+        description: Tipo de evento de rastreamento, indicando se é um relatório de entrega (DeliveryReport) ou um envio (SEND).
+
+      - name: sendtype
+        description: Forma de envio da mensagem, especificando se foi via Journey Builder, API transacional ou resposta padrão.
+
+      - name: mid
+        description: ID do membro remetente da mensagem.
+
+      - name: eid
+        description: ID da empresa remetente.
+
+      - name: contactkey
+        description: Chave de contato do destinatário, usada para identificar o usuário.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: mobilenumber
+        description: Número de telefone do destinatário da mensagem.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: eventdateutc
+        description: Data e hora UTC do evento, registrando o momento exato do envio ou entrega.
+
+      - name: appid
+        description: ID do aplicativo do provedor de envio.
+
+      - name: channelid
+        description: Número de telefone do canal registrado para a comunicação.
+
+      - name: channeltype
+        description: Tipo de plataforma de canal, que neste caso é WhatsApp.
+
+      - name: conversationtype
+        description: Tipo de conversa categorizada por finalidade, podendo ser Marketing, utilitário, autenticação, serviço ou indicação.
+
+      - name: activityname
+        description: Nome da atividade de mensagem associada ao envio via Journey Builder no WhatsApp.
+
+      - name: channelname
+        description: Nome do canal utilizado para envio.
+
+      - name: status
+        description: Status do envio, indicando sucesso ou motivo de falha caso negativo.
+
+      - name: reason
+        description: Detalhe adicional do motivo, se o status do envio for negativo.
+
+      - name: jbdefinitionid
+        description: Identificador único para a jornada da qual a mensagem foi disparada.
+
+      - name: sendidentifier
+        description: Identificador interno de envio, associando um envio específico com informações de entrega.
+
+      - name: assetid
+        description: ID do ativo associado ao envio, usado em campanhas.
+
+      - name: messagetypeid
+        description: Identificador do tipo de mensagem enviada.
+
+      - name: messagedata
+        description: Dados da mensagem em formato JSON, com detalhes do conteúdo enviado.
+
+      - name: ingestion_date
+        description: Data de ingestão do registro no sistema, indicando o momento da captura dos dados.
+
+      - name: ingestion_year
+        description: Ano de ingestão do dado.
+
+      - name: ingestion_month
+        description: Mês de ingestão.
+
+      - name: ingestion_day
+        description: Dia de ingestão.
+
+      - name: execution_date
+        description: Data de execução.
+
+      - name: execution_year
+        description: Ano da execução do evento.
+
+      - name: execution_month
+        description: Mês da execução.
+
+      - name: execution_day
+        description: Dia da execução.

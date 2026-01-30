@@ -1,0 +1,84 @@
+version: 2
+
+models:
+  - name: retorno_push_unificado
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.autorizado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+        **Propósito:** Unifica eventos de push da Infobip e Salesforce, incluindo detalhes como mensagem, nomes de comunicação, identificação do número de telefone e engajamento do usuário.
+
+        **Escopo:** Essencial para análise da performance de campanhas de push, fornecendo dados valiosos para aprimorar estratégias de marketing e comunicação.
+
+        **Audiência:** Destinada a profissionais de marketing e analistas de dados.
+
+        **Processo:** Os dados são coletados das tabelas push_infobip e push_sfmc_opt, com transformações para padronizar os formatos e garantir consistência na unificação das informações.
+
+        **Recorrência de atualização:** A tabela é atualizada 1x ao dia, geralmente nas primeiras horas da manhã.
+
+
+    tags: [silver, comunicacoes, push_marketing, push]
+
+    columns:
+      - name: id_comunicacao
+        description: ID da mensagem que é o nome da peça da comunicação.
+        tags: []
+
+      - name: nome_da_comunicacao
+        description: Nome da comunicação que é o nome do criativo criado dentro do content builder da Salesforce.
+        tags: []
+
+      - name: dt_disparo
+        description: Data e hora de envio.
+        tags: []
+
+      - name: phone
+        description: Número de telefone (infobip), null salesforce.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: id_pessoa
+        description: hash do cpf do cliente / contactkey na salesforce.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: fl_recebeu
+        description: Status de recebimento da mensagem.
+        tags: []
+
+      - name: bu
+        description: Unidade de negócio relacionada.
+        tags: []
+
+      - name: execution_date
+        description: Data de execução relacionada ao registro.
+        tags: []
+
+      - name: execution_year
+        description: Ano isolado da data completa de execução.
+        tags: []
+
+      - name: execution_month
+        description: Mês isolado da data completa de execução.
+        tags: []
+        
+      - name: execution_day
+        description: Dia isolado da data completa de execução.
+        tags: []

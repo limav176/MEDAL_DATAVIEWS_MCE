@@ -1,0 +1,103 @@
+version: 2
+
+models:
+  - name: retorno_email_unificado
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.autorizado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Unifica eventos de email da Infobip e Salesforce, incluindo detalhes como identificação da comunicação, unidade de negócio, nome da comunicação, email, data de disparo, engajamento do usuário (recebimento, abertura, clique), tipo de comunicação, plataforma, assunto e categoria de rejeição.
+
+      **Escopo:** Fundamental para análise de performance de campanhas de email, oferecendo insights valiosos para o desenvolvimento de estratégias de marketing e comunicação eficazes.
+
+      **Audiência:** Direcionado a profissionais de marketing e analistas de dados interessados em otimizar campanhas de email.
+
+      **Processo:** Consolida dados das tabelas email_infobip e email_sfmc, aplicando lógica específica para classificar e enriquecer os registros.
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia.
+
+    tags: [silver, comunicacoes, email_marketing, infobip, salesforce]
+
+    columns:
+      - name: id_comunicacao
+        description: Identificador único da comunicação de email.
+        tags: []
+
+      - name: id_pessoa
+        description: Identificador único do contato.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: bu
+        description: Unidade de negócio relacionada à comunicação.
+        tags: []
+
+      - name: nome_da_comunicacao
+        description: Nome atribuído à campanha de email.
+        tags: []
+
+      - name: email
+        description: Endereço de email do destinatário (presente apenas para Infobip).
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: dt_disparo
+        description: Data e hora em que o email foi enviado.
+        tags: []
+
+      - name: fl_recebeu
+        description: Indica se o email foi recebido pelo destinatário (1 = sim, 0 = não).
+        tags: []
+
+      - name: fl_abertura
+        description: Indica se o email foi aberto pelo destinatário (1 = sim, 0 = não).
+        tags: []
+
+      - name: fl_clique
+        description: Indica se algum link no email foi clicado pelo destinatário (1 = sim, 0 = não).
+        tags: []
+
+      - name: tipo
+        description: Classificação da comunicação como 'Transacional' ou 'Comercial' com base na unidade de negócio.
+        tags: []
+
+      - name: plataforma
+        description: A plataforma através da qual o email foi enviado (Infobip ou Salesforce).
+        tags: []
+
+      - name: subject
+        description: Assunto do email enviado.
+        tags: []
+
+      - name: bouncecategory
+        description: Categoria de rejeição/bounce do email.
+        tags: []
+
+      - name: dt_ingestion
+        description: Data de ingestão do registro na tabela.
+        tags: []
+
+      - name: execution_year
+        description: Ano de execução do processo que gerou o registro.
+        tags: []
+        
+      - name: execution_month
+        description: Mês de execução do processo que gerou o registro.
+        tags: []

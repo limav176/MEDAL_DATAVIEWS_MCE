@@ -1,0 +1,90 @@
+version: 2
+
+models:
+  - name: retorno_click_inapp
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.autorizado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Esta tabela consolida dados de cliques em comunicações in-app, refinados e preparados para análises mais avançadas, permitindo insights mais detalhados sobre o engajamento dos clientes.
+
+      **Escopo:** Contém dados como ID do cliente, data do clique, campanha, comunicação, e detalhes de ingestão e execução. Esses dados são utilizados para análises aprofundadas de comportamento do cliente.
+
+      **Audiência:** Destinada às equipes de análise de dados e CRM, que utilizam esses dados para refinar as estratégias de comunicação e melhorar o engajamento.
+
+      **Recorrência de atualização:** Atualizada diariamente.
+
+    tags: [silver, comunicacoes, inapp, clique, analise]
+
+    columns:
+      - name: id_salesforce
+        description: ID do cliente na Salesforce.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: phone
+        description: Número de telefone do cliente.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: email
+        description: Endereço de e-mail do cliente.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: datahora_clique
+        description: Data e hora do clique na comunicação, coletada no fuso horário UTC. Essencial para rastrear o momento exato da interação do usuário com a comunicação.
+        tags: []
+
+      - name: campanha
+        description: Nome da campanha associada ao clique, que é levada manualmente como um campo fixo da comunicação enviada.
+        tags: []
+
+      - name: nome_da_comunicacao
+        description: Nome da comunicação enviada, geralmente representa o nome do criativo.
+        tags: []
+
+      - name: ingestion_date
+        description: Data em que o evento foi ingerido no pipeline de dados.
+
+      - name: ingestion_year
+        description: Ano correspondente à data de ingestão do evento.
+
+      - name: ingestion_month
+        description: Mês correspondente à data de ingestão do evento.
+
+      - name: ingestion_day
+        description: Dia correspondente à data de ingestão do evento.
+
+      - name: execution_date
+        description: Data de execução do processamento responsável pelo envio ou registro da mensagem.
+
+      - name: execution_year
+        description: Ano de execução do processamento.
+
+      - name: execution_month
+        description: Mês de execução do processamento.
+
+      - name: execution_day
+        description: Dia de execução do processamento.

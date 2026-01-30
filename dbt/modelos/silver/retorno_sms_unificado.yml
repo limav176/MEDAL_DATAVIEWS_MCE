@@ -1,0 +1,74 @@
+version: 2
+
+models:
+  - name: retorno_sms_unificado
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.autorizado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+        **Propósito:** Unifica eventos de SMS da Infobip e Salesforce, incluindo detalhes como mensagem, nomes de comunicação, identificação do número de telefone e engajamento do usuário.
+
+        **Escopo:** Essencial para análise da performance de campanhas de SMS, fornecendo dados valiosos para aprimorar estratégias de marketing e comunicação.
+
+        **Audiência:** Destinada a profissionais de marketing e analistas de dados.
+
+        **Processo:** Os dados são extraídos das tabelas sms_infobip e sms_sfmc, passando por transformações para padronização e unificação das informações.
+
+        **Recorrência de atualização:** A tabela é atualizada 1x ao dia, geralmente nas primeiras horas da manhã.
+
+    tags: [silver, comunicacoes, sms_marketing, sms]
+
+    columns:
+      - name: id_comunicacao
+        description: ID da mensagem que geralmente é a parte inicial do nome email e pode ser usado para filtros e análises.
+        tags: []
+
+      - name: nome_da_comunicacao
+        description: Nome da comunicação é o nome da mensagem de email, o criativo dentro do content builder
+        tags: []
+
+      - name: dt_disparo
+        description: Data e hora de envio da mensagem de sms
+        tags: []
+
+      - name: phone
+        description: Número de telefone do assinante
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: fl_recebeu
+        description: Status de recebimento da mensagem.
+        tags: []
+
+      - name: bu
+        description: Unidade de negócio relacionada.
+        tags: []
+
+      - name: execution_date
+        description: Data de execução relacionada ao registro.
+        tags: []
+
+      - name: execution_year
+        description: Ano isolado da data completa de execução.
+        tags: []
+
+      - name: execution_month
+        description: Mês isolado da data completa de execução.
+        tags: []
+        
+      - name: execution_day
+        description: Dia isolado da data completa de execução.
+        tags: []

@@ -1,0 +1,93 @@
+version: 2
+
+models:
+  - name: report_inapp_sfmc
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.autorizado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+        **Propósito:** Armazena dados dos relatórios in-app da Salesforce Marketing Cloud para acompanhamento de métricas de envio.
+
+        **Escopo:** Inclui nome do envio, data, número de envios únicos, exibições, dismissões, entregas, cliques em botões e datas de registro, ingestão e execução.
+
+        **Audiência:** Equipes de marketing, unidades de negócio e finanças.
+
+        **Processo:** Dados extraídos da tabela stg_report_inapp_sfi, originária do Salesforce Marketing Cloud.
+
+        **Recorrência de atualização:** Atualizada diariamente, geralmente nas primeiras horas da manhã.
+
+    tags: [silver, comunicacoes, inapp, sfmc]
+
+    columns:
+      - name: inappsendname
+        description: Nome do criativo utilizado no envio de notificação in-app, que também serve como título da comunicação.
+        tags: []
+
+      - name: senddate
+        description: Data em que o envio da notificação in-app foi realizado.
+        tags: []
+
+      - name: inappuniquesends
+        description: Quantidade de envios únicos da notificação in-app, representando usuários distintos que receberam a mensagem.
+        tags: []
+
+      - name: inappdevicedisplays
+        description: Total de vezes que a notificação in-app foi exibida nos dispositivos dos usuários.
+        tags: []
+
+      - name: inappdevicedismisses
+        description: Número de vezes que a notificação in-app foi dispensada ou fechada pelos usuários.
+        tags: []
+
+      - name: inappdevicedeliveries
+        description: Quantidade de notificações in-app efetivamente entregues aos dispositivos dos usuários.
+        tags: []
+
+      - name: inappdevicebuttonclicks
+        description: Total de cliques realizados em botões dentro das notificações in-app.
+        tags: []
+
+      - name: dtregistro
+        description: Data em que o registro da notificação in-app foi efetuado no sistema.
+        tags: []
+
+      - name: ingestion_date
+        description: Data em que os dados da notificação in-app foram ingeridos no sistema.
+        tags: []
+
+      - name: ingestion_year
+        description: Ano da ingestão dos dados da notificação in-app.
+        tags: []
+
+      - name: ingestion_month
+        description: Mês da ingestão dos dados da notificação in-app.
+        tags: []
+
+      - name: ingestion_day
+        description: Dia da ingestão dos dados da notificação in-app.
+        tags: []
+
+      - name: execution_date
+        description: Data em que o processamento ou execução do relatório in-app foi realizado.
+        tags: []
+
+      - name: execution_year
+        description: Ano isolado da execução do relatório in-app.
+        tags: []
+
+      - name: execution_month
+        description: Mês isolado da execução do relatório in-app.
+        tags: []
+
+      - name: execution_day
+        description: Dia do mês isolado da execução do relatório in-app.
+        tags: []

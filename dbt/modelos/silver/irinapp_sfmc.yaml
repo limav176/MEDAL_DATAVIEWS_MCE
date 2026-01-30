@@ -1,0 +1,105 @@
+version: 2
+
+models:
+  - name: irinapp_sfmc
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.autorizado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Esta tabela fornece uma visão consolidada e deduplicada das campanhas de marketing in-app, com métricas refinadas e normalizadas para análise de desempenho. 
+
+      **Escopo:** Inclui dados deduplicados sobre campanhas in-app, com métricas de engajamento normalizadas e datas padronizadas, facilitando análises comparativas e tendências.
+
+      **Audiência:** Destinada a analistas de dados e equipes de marketing que necessitam de dados confiáveis e consistentes para tomada de decisão.
+
+      **Processo:** Os dados são processados diariamente dentro do intelligence reports, a partir da geração um arquivo que vai para o SFTP de salesforce, com deduplicação baseada em chaves únicas e normalização de métricas, garantindo a qualidade e consistência dos dados.
+
+      **Recorrência de atualização:** A tabela é atualizada incrementalmente 1x ao dia.
+
+    tags: [silver, comunicacoes, marketing, inapp] 
+
+    columns:
+      - name: id_campaign
+        description: Chave primária composta que identifica unicamente cada registro da campanha in-app. Geralmente composta por combinação de IDs como InAppSendID e InAppButtonID.
+        tags: []
+
+      - name: InAppSendName
+        description: Nome da campanha in-app que identifica o título ou criativo do envio para usuários.
+        tags: []
+
+      - name: Eventdate
+        description: Data em que o evento relacionado à campanha in-app ocorreu, no formato YYYY-MM-DD, indicando quando a ação foi registrada.
+        tags: []
+
+      - name: InAppButtonID
+        description: Identificador único do botão utilizado na campanha in-app, usado para rastrear interações específicas dos usuários.
+        tags: []
+
+      - name: InAppSendID
+        description: Identificador único do envio da campanha in-app, representando cada envio distinto para destinatários.
+        tags: []
+
+      - name: InAppButtonLabel
+        description: Texto ou rótulo exibido no botão da campanha in-app, auxiliando na identificação da ação esperada do usuário.
+        tags: []
+
+      - name: envios_unicos
+        description: Quantidade de envios únicos realizados na campanha in-app, contabilizando destinatários distintos.
+        tags: []
+
+      - name: exibicoes
+        description: Total de exibições da campanha in-app nos dispositivos dos usuários, refletindo a visualização da mensagem.
+        tags: []
+
+      - name: dispensas
+        description: Número de vezes que os usuários dispensaram ou fecharam a mensagem in-app, indicando rejeição ou desinteresse.
+        tags: []
+
+      - name: entregas
+        description: Quantidade de mensagens in-app efetivamente entregues aos dispositivos dos usuários.
+        tags: []
+
+      - name: cliques
+        description: Número total de cliques realizados pelos usuários nos botões da campanha in-app, medindo o engajamento direto.
+        tags: []
+
+      - name: ingestion_date
+        description: Data de ingestão do evento.
+        tags: []
+
+      - name: ingestion_year
+        description: Ano isolado da data de ingestão.
+        tags: []
+
+      - name: ingestion_month
+        description: Mês do ano isolado da data de ingestão.
+        tags: []
+
+      - name: ingestion_day
+        description: Dia do mes isolado da data de ingestão.
+        tags: []
+
+      - name: execution_date
+        description: Data de execução do envio da tag.
+        tags: []
+
+      - name: execution_year
+        description: Ano isolado da data de execução.
+        tags: []
+
+      - name: execution_month
+        description: Mês do ano isolado da data de execução.
+        tags: []
+
+      - name: execution_day
+        description: Dia do mes isolado da data de execução.
+        tags: []

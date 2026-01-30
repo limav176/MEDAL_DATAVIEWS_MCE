@@ -1,0 +1,70 @@
+version: 2
+
+models:
+  - name: heldemail_sfmc 
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier4'
+
+    description: >
+      **Propósito:** Essa tabela, no contexto do domínio de Marketing Digital, contém informações sobre e-mails com status de entrega retida, com o objetivo de apoiar análises de performance de campanhas e resoluções operacionais na plataforma SFMC.
+
+      **Escopo:** Cada linha representa o status de um e-mail retido por pessoa em determinado momento de execução. A tabela se limita aos dados processados via SFMC e ingestos no pipeline padronizado da zona silver.
+
+      **Audiência:** A tabela foi criada para atender aos times de Marketing e Cobrança, especialmente os responsáveis pela comunicação com clientes e acompanhamento das entregas de campanhas por e-mail. É consumida principalmente por analistas de markting e equipes que fazem disparo de campanhas.
+
+      **Processo:** O servidor de e-mail do assinante aceita ou rejeita um e-mail quando ele é enviado. Se o servidor de e-mail aceitar o e-mail, o status do assinante permanecerá Ativo no Engajamento. Se o servidor de e-mail rejeitar o e-mail, o status do assinante mudará para Rejeitado. Os dados são extraídos da tabela `stg_heldemail_sfi`, uma stage que consolida as informações brutas da SFMC. São processados via pipeline dbt e armazenados na zona silver com transformações básicas de padronização e adição de datas de execução e ingestão.
+
+      **Recorrência de atualização:** A tabela é atualizada diariamente em D-1 após as cargas do Data Lake
+
+    tags: [silver, comunicacoes, salesforce, status, held, ingestao]
+
+    columns:
+      - name: id_pessoa
+        description: hash do cpf do contato, representa o identificador único do usuário na plataforma, utilizado para garantir a integridade e a singularidade dos registros. Este hash é gerado a partir do CPF do usuário, assegurando que cada contato seja tratado de forma exclusiva, facilitando o cruzamento de dados e a análise de informações sem expor dados sensíveis diretamente.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: email_status
+        description: Status do e-mail na fila da SFMC (por exemplo, entregue, retido, bounce).
+        tags: []
+
+      - name: ingestion_year
+        description: Ano de ingestão.
+        tags: [ingestion_year]
+
+      - name: ingestion_month
+        description: Mês de ingestão.
+        tags: [ingestion_month]
+
+      - name: ingestion_day
+        description: Dia de ingestão.
+        tags: [ingestion_day]
+
+      - name: execution_date
+        description: Data de execução.
+        tags: [execution_date]
+
+      - name: execution_year
+        description: Ano de execução.
+        tags: [execution_year]
+
+      - name: execution_month
+        description: Mês de execução.
+        tags: [execution_month]
+
+      - name: execution_day
+        description: Dia de execução.
+        tags: [execution_day]

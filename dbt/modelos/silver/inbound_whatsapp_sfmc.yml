@@ -1,0 +1,83 @@
+version: 2
+
+models:
+  - name: inbound_whatsapp_sfmc
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.autorizado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Centralizar e organizar mensagens recebidas via WhatsApp.
+
+      **Escopo:** Inclui dados sobre mensagens de entrada recebidas, com detalhes do canal, remetente, tipo e conteúdo da mensagem.
+
+      **Audiência:** Desenvolvido para as equipes de atendimento ao cliente e operações de marketing que monitoram e respondem a interações recebidas no WhatsApp.
+
+      **Processo:** Os dados são processados a partir da camada bronze, sem tratamento adicionais.
+
+      **Recorrência de atualização:** Atualizado 1x ao dia.
+
+    tags: [silver, comunicacoes, whatsapp, inbound]
+
+    columns:
+      - name: chatmessagingmologid
+        description: Identificador único sequencial da mensagem de entrada no log de mensagens.
+
+      - name: channelid
+        description: Número de telefone do canal registrado através do qual a mensagem foi recebida.
+
+      - name: channelname
+        description: Nome do canal utilizado pelo cliente para envio da mensagem.
+
+      - name: channeltype
+        description: Tipo de plataforma de canal, neste caso, WhatsApp.
+
+      - name: mobilenumber
+        description: Número de telefone do remetente da mensagem de entrada.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: messagedata
+        description: Dados da mensagem em formato JSON, contendo o conteúdo enviado pelo cliente.
+
+      - name: datecreatedutc
+        description: Data e hora UTC em que a mensagem de entrada foi recebida.
+
+      - name: messagetype
+        description: Tipo de mensagem recebida, indicando o formato ou intenção da interação.
+
+      - name: ingestion_date
+        description: Data de ingestão do registro no sistema, indicando quando a mensagem foi capturada.
+
+      - name: ingestion_year
+        description: Ano de ingestão do dado.
+
+      - name: ingestion_month
+        description: Mês de ingestão, útil para análises mensais.
+
+      - name: ingestion_day
+        description: Dia de ingestão, importante para análises diárias.
+
+      - name: execution_date
+        description: Data de execução relacionada ao registro, usada para rastrear o momento da mensagem.
+
+      - name: execution_year
+        description: Ano da execução do evento.
+
+      - name: execution_month
+        description: Mês da execução, útil para monitorar variações mensais.
+
+      - name: execution_day
+        description: Dia da execução, relevante para o acompanhamento diário.

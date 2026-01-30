@@ -1,0 +1,113 @@
+version: 2
+
+models:
+  - name: journey_sfmc
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Registra atividades no Salesforce Marketing Cloud para comunicações multi canais. Crucial para gestão e execução de comunicações.
+
+      **Escopo:** Analisa desempenho de jornadas de comunicação, oferecendo visão completa da eficácia de campanhas multi canais.
+
+      **Audiência:** Para profissionais de marketing e analistas buscando otimizar campanhas no Salesforce Marketing Cloud.
+
+      **Processo:** Coleta automatizada de dados sobre jobs no Salesforce, com o uso do automation studio, em que um arquivo com nome DV_JOURNEY é gerado a partir da dataview journey do SFMC.
+
+      **Recorrência de atualização:** Atualizada diariamente.
+
+    tags: [silver, comunicacoes, salesforce, job]
+
+    columns:
+      - name: versionid
+        description: Identificador exclusivo da versão da jornada, que permite rastrear diferentes versões ao longo do tempo.
+        tags: []
+
+      - name: activityid
+        description: Identificador único da atividade dentro da jornada, usado para distinguir cada ação ou passo da campanha.
+        tags: []
+
+      - name: activityname
+        description: Nome descritivo da atividade executada na jornada, facilitando a identificação do tipo de ação.
+        tags: []
+
+      - name: activityexternalkey
+        description: Chave externa associada à atividade, usada para integração e referência externa no sistema.
+        tags: []
+
+      - name: journeyactivityobjectid
+        description: Identificador do objeto de atividade da jornada, vinculando a atividade a elementos específicos do fluxo.
+        tags: []
+
+      - name: activitytype
+        description: Tipo da atividade realizada na jornada, como envio de e-mail, SMS, espera, ou decisão.
+        tags: []
+
+      - name: journeyid
+        description: Identificador exclusivo da jornada de comunicação, que pode conter várias versões e atividades.
+        tags: []
+
+      - name: journeyname
+        description: Nome da jornada de comunicação, representando o fluxo ou campanha configurada.
+        tags: []
+
+      - name: versionnumber
+        description: Número sequencial da versão da jornada, indicando atualizações ou modificações no fluxo.
+        tags: []
+
+      - name: createddate
+        description: Data e hora em que a versão da jornada foi criada no Salesforce Marketing Cloud.
+        tags: []
+
+      - name: lastpublisheddate
+        description: Data e hora da última publicação da versão da jornada, indicando quando ela entrou em produção.
+        tags: []
+
+      - name: modifieddate
+        description: Data e hora da última modificação realizada na versão da jornada.
+        tags: []
+
+      - name: journeystatus
+        description: Estado atual da jornada, podendo assumir valores como Rascunho, Em execução, Concluído ou Interrompido.
+        tags: []
+
+      - name: ingestion_date
+        description: Data de ingestão do evento.
+        tags: []
+
+      - name: ingestion_year
+        description: Ano isolado da data de ingestão.
+        tags: []
+
+      - name: ingestion_month
+        description: Mês do ano isolado da data de ingestão.
+        tags: []
+
+      - name: ingestion_day
+        description: Dia do mes isolado da data de ingestão.
+        tags: []
+
+      - name: execution_date
+        description: Data de execução do envio da tag.
+        tags: []
+
+      - name: execution_year
+        description: Ano isolado da data de execução.
+        tags: []
+
+      - name: execution_month
+        description: Mês do ano isolado da data de execução.
+        tags: []
+
+      - name: execution_day
+        description: Dia do mes isolado da data de execução.
+        tags: []

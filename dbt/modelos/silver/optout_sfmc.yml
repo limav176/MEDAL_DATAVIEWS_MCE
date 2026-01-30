@@ -1,0 +1,55 @@
+version: 2
+
+models:
+  - name: optout_sfmc
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.autorizado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+        **Propósito:** Registra pessoas que se desinscreveram das comunicações.
+
+        **Escopo:** Inclui dados sobre a interação dos usuários com os links de inscrição e desinscrição, registrando o comportamento de cancelamento.
+
+        **Audiência:** Direcionado a equipes de marketing e análise de dados que querem aprofundar o entendimento sobre o comportamento do usuário e ajustar suas estratégias de comunicação com base em dados concretos.
+
+        **Processo:** As interações são rastreadas e os dados coletados, fornecendo insights sobre a desinscrição das comunicações, permitindo análises detalhadas e oportunas.
+
+        **Recorrência de atualização:** A tabela é atualizada 1x ao dia, geralmente durante a madrugada, por overwrite.
+
+
+    tags: [silver, comunicacoes, salesforce, optout]
+
+    columns:
+      - name: Subscribertype
+        description: Identificador do tipo de inscrição do contato, indicando se é um usuário ativo ou se optou por não receber mais comunicações.
+        tags: []
+
+      - name: Dateunsubscribed
+        description: data de registro da desinscriçáo com origem no contato
+        tags: []
+
+      - name: status
+        description: status do contato na plataforma, indicando se o contato está ativo ou inativo.
+        tags: []
+
+      - name: DateJoined
+        description: Data e hora que o contato foi inscrito 
+        tags: []
+
+      - name: subscriberkey
+        description: id da pessoa, hash 256 do cpf
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]

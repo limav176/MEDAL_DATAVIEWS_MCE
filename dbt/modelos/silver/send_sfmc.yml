@@ -1,0 +1,209 @@
+version: 2
+
+models:
+  - name: send_sfmc
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+        **Propósito:** Registra eventos de envio de campanhas via Salesforce Marketing Cloud, incluindo informações detalhadas sobre cada job, como ID, nome, tipo, status e dados do remetente.
+
+        **Escopo:** Abrange os dados de envios de campanhas, permitindo análise de desempenho, controle de status e volume de destinatários.
+
+        **Audiência:** Profissionais de marketing e analistas que precisam monitorar e otimizar envios de campanhas.
+
+        **Processo:** Coleta dados diretamente da dataview _job do Salesforce Marketing Cloud, garantindo informações atualizadas e confiáveis sobre cada envio.
+
+        **Recorrência de atualização:** Atualizada diariamente, normalmente às 3h da manhã.
+
+    tags: [silver, comunicacoes, salesforce, envio]
+
+    columns:
+      - name: id
+        description: O número do ID do trabalho para o envio do email
+        tags: []
+
+      - name: emailid
+        description: O ID de email do trabalho vinculado ao disparo
+        tags: []
+
+      - name: accountid
+        description: O número de ID da conta que realizou o trabalho
+        tags: []
+
+      - name: accountuserid
+        description: ID do usuário da conta que criou o job
+        tags: []
+
+      - name: fromname
+        description: Nome do remetente configurado no setup de SFMC
+        tags: []
+
+      - name: fromaddress
+        description: Endereço virtual do remetente configurado no setup da conta.
+        tags: []
+
+      - name: schedtime
+        description: Horário programado para o disparo da comunicação.
+        tags: []
+
+      - name: pickuptime
+        description: A hora em que o Marketing Cloud Engagement iniciou o trabalho.
+        tags: []
+
+      - name: deliveredtime
+        description: Horário da entrega da mensagem enviada
+        tags: []
+
+      - name: eventid
+        description: ID do evento.
+        tags: []
+
+      - name: ismultipart
+        description: Indicador de mensagem multipart.
+        tags: []
+
+      - name: jobtype
+        description: Tipo de trabalho relacionado ao disparo da comunicação.
+        tags: []
+
+      - name: jobstatus
+        description: Status do trabalho.
+        tags: []
+
+      - name: modifiedby
+        description: Campo que identifica o usuário que fez a ultima modificação.
+        tags: []
+
+      - name: modifieddate
+        description: Campo que identifica a data de modificação.
+        tags: []
+
+      - name: emailname
+        description: Nome do email, campo utilizado para identificar o registro no lake
+        tags: []
+
+      - name: emailsubject
+        description: Assunto do email disparado no job em questão
+        tags: []
+
+      - name: iswrapped
+        description: Indicador de mensagem embrulhada.
+        tags: []
+
+      - name: testemailaddr
+        description: Endereço de email de teste.
+        tags: []
+
+      - name: category
+        description: Categoria.
+        tags: []
+
+      - name: bccemail
+        description: Endereço de email BCC, recebe um email que pode ficar escondido como cópia oculta
+        tags: []
+
+      - name: originalschedtime
+        description: Tempo programado original.
+        tags: []
+
+      - name: createddate
+        description: Data de criação.
+        tags: []
+
+      - name: characterset
+        description: Conjunto de caracteres.
+        tags: []
+
+      - name: ipaddress
+        description: Endereço IP vinculado ao disparo de email. Esse valor é sempre nulo.
+        tags: []
+
+      - name: salesforcetotalsubscribercount
+        description: O número total de assinantes do Salesforce incluídos no job
+        tags: []
+
+      - name: salesforceerrorsubscribercount
+        description: O número total de assinantes do Salesforce incluídos no trabalho que receberam erros
+        tags: []
+
+      - name: sendtype
+        description: Tipo de envio usado no job
+        tags: []
+
+      - name: dynamicemailsubject
+        description: Assunto do email dinâmico.
+        tags: []
+
+      - name: suppresstracking
+        description: Identifica se o rastreamento de informações para esse job tiver sido suprimido
+        tags: []
+
+      - name: sendclassificationtype
+        description: Tipo de classificação de envio.
+        tags: []
+
+      - name: sendclassification
+        description: Classificação de envio.
+        tags: []
+
+      - name: resolvelinkswithcurrentdata
+        description: Resolver links com dados atuais.
+        tags: []
+
+      - name: emailsenddefinition
+        description: Definição de envio de email.
+        tags: []
+
+      - name: deduplicatebyemail
+        description: Se os endereços de email no trabalho são usados para desduplicar assinantes
+        tags: []
+
+      - name: triggerersenddefinitionobjectid
+        description: O ID do objeto para a definição de envio acionado
+        tags: []
+
+      - name: triggeredsendcustomerkey
+        description: A chave do cliente para o envio acionado
+        tags: []
+
+      - name: ingestion_date
+        description: Data de ingestão do evento.
+        tags: []
+
+      - name: ingestion_year
+        description: Ano de ingestão.
+        tags: []
+
+      - name: ingestion_month
+        description: Mês de ingestão.
+        tags: []
+
+      - name: ingestion_day
+        description: Dia de ingestão.
+        tags: []
+
+      - name: execution_date
+        description: Data de execução do envio da tag.
+        tags: []
+
+      - name: execution_year
+        description: Ano de execução.
+        tags: []
+
+      - name: execution_month
+        description: Mês de execução.
+        tags: []
+        
+      - name: execution_day
+        description: Dia de execução.
+        tags: []

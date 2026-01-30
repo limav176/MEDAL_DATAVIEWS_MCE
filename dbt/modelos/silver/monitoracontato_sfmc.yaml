@@ -1,0 +1,73 @@
+version: 2
+
+models:
+  - name: monitoracontato_sfmc
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier4'
+        
+    description: >
+      **Propósito:** Esta tabela contém informações agregadas sobre a quantidade total de contatos inseridos na plataforma Salesforce Marketing Cloud (SFMC), com o objetivo de apoiar o monitoramento da evolução da base de comunicação.
+
+      **Escopo:** Contempla a soma diária de registros adicionados na SFMC, permitindo a análise da dinâmica de crescimento da base de pessoas aptas à comunicação via e-mail e outros canais.
+
+      **Audiência:** Destinada às equipes de Marketing, CRM e operações que utilizam a Salesforce Marketing Cloud, oferecendo uma visão consolidada dos principais métodos e canais de entrada de contatos na plataforma.
+
+      **Processo:** Os dados são coletados a partir das atividades de inserção de contatos registradas na plataforma SFMC e consolidados em processos diários de carga e transformação.
+
+      **Recorrência de atualização:** Atualização diária (D-1), após a finalização das cargas no Data Lake.
+
+    tags: [silver, comunicacoes, salesforce, totalizador, subscribers, pessoacontato, ingestao]
+
+    columns:
+      - name: DataRegistro
+        description: Data em que foi realizada a sumarização diária dos contatos inseridos na Salesforce Marketing Cloud, representando o momento em que os dados foram consolidados.
+        tags: [DataRegistro]
+
+      - name: TotalRegistros
+        description: Quantidade total de contatos inseridos na plataforma SFMC no dia indicado, resultado da soma das ingestões realizadas em diferentes canais e métodos.
+        tags: [TotalRegistros]
+
+      - name: NomeDE
+        description: Nome da Data Extension (DE) dentro da Salesforce Marketing Cloud que armazena os registros de contatos para fins de contabilização e monitoramento da base.
+        tags: [NomeDE]
+
+      - name: ingestion_date
+        description: Data de ingestão do evento.
+        tags: [ingestion_date]
+
+      - name: ingestion_year
+        description: Ano de ingestão.
+        tags: [ingestion_year]
+
+      - name: ingestion_month
+        description: Mês de ingestão.
+        tags: [ingestion_month]
+
+      - name: ingestion_day
+        description: Dia de ingestão.
+        tags: [ingestion_day]
+
+      - name: execution_date
+        description: Data de execução.
+        tags: [execution_date]
+
+      - name: execution_year
+        description: Ano de execução.
+        tags: [execution_year]
+
+      - name: execution_month
+        description: Mês de execução.
+        tags: [execution_month]
+
+      - name: execution_day
+        description: Dia de execução.
+        tags: [execution_day]

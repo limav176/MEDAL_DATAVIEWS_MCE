@@ -1,0 +1,80 @@
+{{ standard_config(
+	model_name='bounce_sfmc',
+	zone='silver',
+	materialized='table'
+) }}
+
+with base_bounce as (
+SELECT
+	accountid,
+	oybaccountid,
+	jobid,
+	listid,
+	batchid,
+	subscriberid,
+	eventdate,
+	isunique,
+	"domain",
+	bouncecategoryid,
+	bouncecategory,
+	bouncesubcategoryid,
+	bouncesubcategory,
+	bouncetypeid,
+	bouncetype,
+	smtpbouncereason,
+	smtpmessage,
+	smtpcode,
+	triggerersenddefinitionobjectid,
+	triggeredsendcustomerkey,
+	isfalsebounce,
+	subscriberkey,
+	id_email,
+	id_bounce,
+	ingestion_date,
+	ingestion_year,
+	ingestion_month,
+	ingestion_day,
+	execution_date,
+	execution_year,
+	execution_month,
+	execution_day ,
+   ROW_NUMBER() OVER(PARTITION BY id_bounce order by execution_date desc, ingestion_date DESC, smtpbouncereason, RANDOM()) as rownumber
+   FROM {{ ref('stg_bounce_sfi')}}  
+   )
+SELECT
+	accountid,
+	oybaccountid,
+	jobid,
+	listid,
+	batchid,
+	subscriberid,
+	eventdate,
+	isunique,
+	"domain",
+	bouncecategoryid,
+	bouncecategory,
+	bouncesubcategoryid,
+	bouncesubcategory,
+	bouncetypeid,
+	bouncetype,
+	smtpbouncereason,
+	smtpmessage,
+	smtpcode,
+	triggerersenddefinitionobjectid,
+	triggeredsendcustomerkey,
+	isfalsebounce,
+	subscriberkey,
+	id_email,
+	id_bounce,
+	ingestion_date,
+	ingestion_year,
+	ingestion_month,
+	ingestion_day,
+	execution_date,
+	execution_year,
+	execution_month,
+	execution_day
+FROM
+	base_bounce
+WHERE
+	rownumber = 1

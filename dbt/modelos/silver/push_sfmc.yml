@@ -1,0 +1,140 @@
+version: 2
+
+models:
+  - name: push_sfmc
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.autorizado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Esta tabela guarda os detalhes de notificações push enviadas aos dispositivos móveis dos usuários. Inclui quem recebeu, que tipo de mensagem foi, quando foi enviada, e outros detalhes importantes. Isso ajuda a entender quais notificações funcionam melhor e como as pessoas reagem a elas.
+
+      **Escopo:** Abrange tudo sobre as notificações push, como informações do destinatário, o conteúdo da mensagem, o momento do envio e como a mensagem foi recebida.
+
+      **Audiência:** Destinada a equipes de marketing e analistas de dados, que necessitam de insights precisos sobre o comportamento de abertura dos usuários para otimizar campanhas.
+
+      **Processo:** As informações vêm das notificações push enviadas pela Salesforce.
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia, aproximadamente meia noite e meia com os dados do dia anterior (D-1).
+
+    tags: [silver, comunicacoes, salesforce, push]
+
+    columns:
+    - name: appname
+      description: Nome do aplicativo a partir do qual a mensagem foi enviada ou recebida. Utilizado para identificar a origem da comunicação em cenários onde múltiplos aplicativos estão integrados à plataforma.
+
+    - name: messagename
+      description: Nome atribuído à mensagem no momento de sua criação na plataforma. Geralmente utilizado para fins de identificação, categorização e análise de performance de campanhas.
+
+    - name: messageid
+      description: Identificador único da mensagem gerado pelo sistema. Serve como referência para rastreamento, auditoria e vinculação com eventos de abertura ou clique.
+
+    - name: campaigns
+      description: Lista ou identificação das campanhas associadas à mensagem. Permite a análise de desempenho e engajamento por campanha.
+
+    - name: deviceid
+      description: Identificador único do dispositivo que recebeu a mensagem. Utilizado para rastrear interações no nível de dispositivo e evitar duplicidades. Considerado dado sensível (PII), pois possibilita identificação indireta do usuário.
+      meta:
+        openmetadata:
+          tags: ['pii.pii']
+
+    - name: dt_envio
+      description: Data e hora em que a mensagem foi enviada ao destinatário, no fuso horário padrão da plataforma.
+
+    - name: messagecontent
+      description: Conteúdo textual ou estruturado da mensagem enviada. Pode incluir informações personalizadas de acordo com o perfil do usuário.
+
+    - name: messageopened
+      description: Indicador booleano que informa se a mensagem foi aberta pelo destinatário. Geralmente armazenado como 0 (não aberta) ou 1 (aberta).
+
+    - name: dt_abertura
+      description: Data e hora em que a mensagem foi aberta pelo destinatário, permitindo cálculo de métricas como tempo até abertura.
+
+    - name: timeinapp
+      description: Tempo total gasto pelo usuário no aplicativo após o recebimento da mensagem, medido em segundos. Útil para avaliar o engajamento pós-interação.
+
+    - name: platformversion
+      description: Versão do sistema operacional ou da plataforma no momento do envio ou abertura da mensagem (exemplo - iOS 16.4, Android 13).
+
+    - name: status
+      description: Status final da mensagem, como 'Enviada', 'Entregue', 'Aberta' ou 'Falha'. Importante para relatórios de desempenho e troubleshooting.
+
+    - name: serviceresponse
+      description: Resposta retornada pelo serviço de push ou mensageria após tentativa de envio, podendo incluir códigos de erro ou confirmações.
+
+    - name: geofencename
+      description: Nome da geofence associada ao disparo da mensagem, quando aplicável. Utilizado em campanhas com segmentação geográfica.
+
+    - name: template
+      description: Nome ou identificador do template de mensagem utilizado. Permite rastrear padrões de layout e conteúdo.
+
+    - name: format
+      description: Formato da mensagem, como texto, imagem, rich push ou notificação interativa.
+
+    - name: pagename
+      description: Nome da página ou tela do aplicativo associada à mensagem, útil para medir direcionamento de tráfego interno.
+
+    - name: pushjobid
+      description: Identificador do job ou processo de envio da mensagem push, para rastreamento interno.
+
+    - name: systemtoken
+      description: Token interno utilizado pela plataforma para validação ou autenticação de envios. Não deve ser exposto externamente.
+
+    - name: inboxdownload
+      description: Indicador booleano que informa se a mensagem foi baixada na caixa de entrada in-app.
+
+    - name: inboxopen
+      description: Indicador booleano que informa se a mensagem da caixa de entrada in-app foi aberta pelo usuário.
+
+    - name: iosmediaurl
+      description: URL da mídia associada à mensagem para dispositivos iOS, podendo conter imagens ou vídeos.
+
+    - name: androidmediaurl
+      description: URL da mídia associada à mensagem para dispositivos Android, podendo conter imagens ou vídeos.
+
+    - name: mediaalt
+      description: Texto alternativo da mídia enviada, utilizado como fallback quando a mídia não pode ser exibida.
+
+    - name: contactkey
+      description: Identificador único do contato na plataforma, utilizado para correlacionar eventos de mensagens com o perfil do usuário. Considerado dado sensível (PII) por estar diretamente vinculado ao indivíduo.
+      meta:
+        openmetadata:
+          tags: ['pii.pii']
+
+    - name: requestid
+      description: Identificador único da solicitação de envio, útil para auditoria e troubleshooting.
+
+    - name: plataforma
+      description: Plataforma de envio da mensagem, como iOS, Android ou Web Push.
+
+    - name: ingestion_date
+      description: Data em que o evento foi ingerido no pipeline de dados.
+
+    - name: ingestion_year
+      description: Ano correspondente à data de ingestão do evento.
+
+    - name: ingestion_month
+      description: Mês correspondente à data de ingestão do evento.
+
+    - name: ingestion_day
+      description: Dia correspondente à data de ingestão do evento.
+
+    - name: execution_date
+      description: Data de execução do processamento responsável pelo envio ou registro da mensagem.
+
+    - name: execution_year
+      description: Ano de execução do processamento.
+
+    - name: execution_month
+      description: Mês de execução do processamento.
+
+    - name: execution_day
+      description: Dia de execução do processamento.

@@ -1,0 +1,146 @@
+version: 2
+
+models:
+  - name: inapp_sfmc
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.autorizado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+        **Propósito:** Esta tabela guarda os detalhes de notificações inapp enviadas aos dispositivos móveis dos usuários. Inclui quem recebeu, que tipo de mensagem foi, quando foi enviada, e outros detalhes importantes. Isso ajuda a entender quais notificações funcionam melhor e como as pessoas reagem a elas.
+
+        **Escopo:** Abrange tudo sobre as notificações inapp, como informações do destinatário, o conteúdo da mensagem, o momento do envio e como a mensagem foi recebida.
+
+        **Audiência:** Destinada a equipes de marketing e analistas de dados, que necessitam de insights precisos sobre o comportamento de abertura dos usuários para otimizar campanhas.
+
+        **Processo:** As informações vêm das notificações inapp enviadas pela Salesforce.
+
+        **Recorrência de atualização:** A tabela é atualizada 1x ao dia, geralmente por volta das 3h da manhã.
+
+    tags: [silver, comunicacoes, salesforce, inapp]
+
+    columns:
+      - name: appname
+        description: Nome do aplicativo móvel que enviou a notificação in-app, usado para identificar a origem da mensagem.
+
+      - name: messagename
+        description: Nome descritivo da mensagem in-app, que ajuda a identificar o conteúdo ou campanha associada.
+
+      - name: messageid
+        description: Identificador único da mensagem in-app, usado para rastrear e correlacionar eventos.
+
+      - name: campaigns
+        description: Lista ou identificador das campanhas de marketing associadas ao envio da mensagem in-app.
+
+      - name: deviceid
+        description: Identificador único do dispositivo móvel receptor da notificação, utilizado para rastreamento de entregas e interações.
+
+      - name: dt_envio
+        description: Data e hora exata em que a notificação in-app foi enviada ao dispositivo, no formato ISO 8601.
+
+      - name: messagecontent
+        description: Conteúdo completo da mensagem in-app enviada, podendo incluir texto, links e imagens.
+
+      - name: messageopened
+        description: Indicador booleano que sinaliza se o usuário abriu a notificação in-app (true) ou não (false).
+
+      - name: dt_abertura
+        description: Data e hora em que o usuário abriu a mensagem in-app, registrando o momento da interação.
+
+      - name: timeinapp
+        description: Tempo total, em segundos ou minutos, que o usuário permaneceu no aplicativo após abrir a notificação.
+
+      - name: platformversion
+        description: Versão do sistema operacional ou da plataforma do dispositivo receptor no momento do envio.
+
+      - name: status
+        description: Estado atual da mensagem in-app, como 'enviada', 'entregue', 'aberta' ou 'descartada'.
+
+      - name: serviceresponse
+        description: Resposta recebida do serviço de envio da notificação, usada para monitoramento e troubleshooting.
+
+      - name: geofencename
+        description: Nome da geofence associada à notificação, se aplicável, indicando o contexto geográfico do envio.
+
+      - name: template
+        description: Nome ou identificador do template utilizado para compor a mensagem in-app.
+
+      - name: format
+        description: Formato da mensagem in-app, por exemplo 'texto', 'imagem', 'rich media', etc.
+
+      - name: pagename
+        description: Nome da página do aplicativo onde a notificação foi exibida ou associada.
+
+      - name: inappjobid
+        description: Identificador do job ou processo responsável pelo envio da notificação in-app.
+
+      - name: systemtoken
+        description: Token do sistema utilizado para autenticação ou controle do envio da mensagem.
+
+      - name: inboxdownload
+        description: Indicador booleano que informa se a mensagem da caixa de entrada foi baixada para o dispositivo.
+
+      - name: inboxopen
+        description: Indicador booleano que informa se a mensagem da caixa de entrada foi aberta pelo usuário.
+
+      - name: iosmediaurl
+        description: URL do recurso de mídia associado à mensagem para dispositivos iOS.
+
+      - name: androidmediaurl
+        description: URL do recurso de mídia associado à mensagem para dispositivos Android.
+
+      - name: mediaalt
+        description: Texto alternativo para a mídia exibida na notificação, útil para acessibilidade.
+
+      - name: contactkey
+        description: Identificador único do contato ou usuário, utilizado para personalização e segmentação. Dados pessoais sensíveis (PII).
+        tags: []
+        meta:
+          openmetadata:
+            tags: ['pii.pii']
+
+      - name: requestid
+        description: Identificador único da solicitação de envio da notificação, útil para rastreamento e auditoria.
+
+      - name: plataforma
+        description: Plataforma utilizada para o envio da notificação, como Android, iOS ou web.
+
+      - name: ingestion_date
+        description: Data de ingestão do evento.
+        tags: []
+
+      - name: ingestion_year
+        description: Ano isolado da data de ingestão.
+        tags: []
+
+      - name: ingestion_month
+        description: Mês do ano isolado da data de ingestão.
+        tags: []
+
+      - name: ingestion_day
+        description: Dia do mes isolado da data de ingestão.
+        tags: []
+
+      - name: execution_date
+        description: Data de execução do envio da tag.
+        tags: []
+
+      - name: execution_year
+        description: Ano isolado da data de execução.
+        tags: []
+
+      - name: execution_month
+        description: Mês do ano isolado da data de execução.
+        tags: []
+
+      - name: execution_day
+        description: Dia do mes isolado da data de execução.
+        tags: []

@@ -1,0 +1,78 @@
+{{ 
+	standard_config(
+		model_name='whatsapp_sfmc',
+		zone='silver',
+		materialized='table'
+	)
+}}
+
+with wa_sfmc as (
+SELECT
+	primkey,
+	trackingtype,
+	mid,	
+	eid,
+	contactkey,
+	eventdateutc,
+	channeltype,
+	appid,
+	channelid,
+	channelname,
+	status,
+	reason,
+	jbdefinitionid,
+	jbactivityid,
+	sendidentifier,
+	assetid,
+	messagetypeid,
+	activityname,
+	mobilenumber,
+	messagedata,
+	sendtype,
+	conversationtype,
+	ingestion_date,
+	ingestion_year,
+	ingestion_month,
+	ingestion_day,
+	execution_date,
+	execution_year,
+	execution_month,
+	execution_day,
+	ROW_NUMBER() OVER (PARTITION BY primkey ORDER BY ingestion_date DESC,RANDOM()) AS rownumber
+FROM
+	{{ ref('stg_tracking_wa') }}
+)
+SELECT
+	primkey,
+	trackingtype,
+	mid,	
+	eid,
+	contactkey,
+	eventdateutc,
+	channeltype,
+	appid,
+	channelid,
+	channelname,
+	status,
+	reason,
+	jbdefinitionid,
+	jbactivityid,
+	sendidentifier,
+	assetid,
+	messagetypeid,
+	activityname,
+	mobilenumber,
+	messagedata,
+	sendtype,
+	conversationtype,
+	ingestion_date,
+	ingestion_year,
+	ingestion_month,
+	ingestion_day,
+	execution_date,
+	execution_year,
+	execution_month,
+	execution_day
+FROM 
+	wa_sfmc
+where rownumber = 1

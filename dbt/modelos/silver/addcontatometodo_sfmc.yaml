@@ -1,0 +1,80 @@
+version: 2
+
+models:
+  - name: addcontatometodo_sfmc
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier4' 
+
+    description: >
+      **Propósito:** Essa tabela, no contexto do domínio de comunicações, contém informações sobre a entrada de contatos na Salesforce Marketing Cloud, incluindo o usuário responsável, data de registro, método de entrada e dados de ingestão/execução, para atender ao monitoramento e análise do crescimento da base de contatos e efetividade dos métodos de captação.
+
+      **Escopo:** Cada linha representa um evento de entrada de contatos na SFMC, detalhando o responsável, quantidade, data e método utilizado. O uso é restrito a análises de performance e acompanhamento operacional, não devendo ser utilizada para identificação direta de indivíduos.
+
+      **Audiência:** Destinada a equipes de comunicação, marketing e analytics que utilizam a Salesforce Marketing Cloud, especialmente para acompanhamento de campanhas e estratégias de captação.
+
+      **Processo:** Os dados são derivados do modelo `stg_addcontatometodo_sfi` na camada silver, consolidando eventos de entrada de contatos registrados na SFMC, com enriquecimento de informações de ingestão e execução.
+
+      **Recorrência de atualização:** Atualização diária (D-1), após as cargas do Data Lake.
+
+    tags: [silver, comunicacoes, salesforce, metodos, ingestao]
+
+    columns:
+      - name: addedby
+        description: Identificador do usuário responsável pela adição dos contatos na SFMC. Pode ser considerado dado pessoal (PII) caso permita identificação direta de pessoa física.
+        tags: []
+        meta:
+          openmetadata:
+            tags: ['pii.pii']
+
+      - name: totalContatos
+        description: Quantidade total de contatos adicionados no evento.
+        tags: []
+
+      - name: dtRegistro
+        description: Data de registro do evento de adição de contatos.
+        tags: []
+
+      - name: Metodo
+        description: Método utilizado para a entrada dos contatos (ex importação manual, API, etc).
+        tags: []
+
+      - name: ingestion_date
+        description: Data de ingestão do evento no Data Lake.
+        tags: []
+
+      - name: ingestion_year
+        description: Ano de ingestão do evento.
+        tags: []
+
+      - name: ingestion_month
+        description: Mês de ingestão do evento.
+        tags: []
+
+      - name: ingestion_day
+        description: Dia de ingestão do evento.
+        tags: []
+
+      - name: execution_date
+        description: Data de execução do processo de ingestão.
+        tags: []
+
+      - name: execution_year
+        description: Ano de execução do processo de ingestão.
+        tags: []
+
+      - name: execution_month
+        description: Mês de execução do processo de ingestão.
+        tags: []
+
+      - name: execution_day
+        description: Dia de execução do processo de ingestão.
+        tags: []

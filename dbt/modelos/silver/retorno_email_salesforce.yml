@@ -1,0 +1,168 @@
+version: 2
+
+models:
+  - name: retorno_email_salesforce
+    meta:
+      domain: comunicacoes
+      layer: silver
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.autorizado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Registra atividades de email no Salesforce Marketing Cloud para comunicações multi canais. Importante para a análise detalhada de desempenho de campanhas de email.
+
+      **Escopo:** Permite a análise aprofundada de campanhas de email, incluindo aberturas, cliques, cancelamentos de inscrição e outras métricas relevantes.
+
+      **Audiência:** Voltado para profissionais de marketing e analistas interessados em detalhes granulares do desempenho das campanhas de email no Salesforce Marketing Cloud.
+
+      **Processo:** Coleta detalhada de eventos de email, incluindo interações dos usuários com os emails enviados.
+
+      **Recorrência de atualização:** Atualizada diariamente com dados de eventos de email mais recentes.
+
+    tags: [silver, comunicacoes, salesforce, email]
+
+    columns:
+      - name: id_email
+        description: Identificador único do email.
+        tags: []
+
+      - name: id_pessoa
+        description: Identificador de pessoa.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: triggerersenddefinitionobjectid
+        description: ID do objeto de definição de envio do acionador.
+        tags: []
+
+      - name: batchid
+        description: ID do lote de envio.
+        tags: []
+
+      - name: activityname
+        description: Nome da atividade associada ao email.
+        tags: []
+
+      - name: journeyname
+        description: Nome da jornada associada ao email.
+        tags: []
+
+      - name: versionnumber
+        description: Número da versão da jornada.
+        tags: []
+
+      - name: journeystatus
+        description: Status da jornada no momento do envio do email.
+        tags: []
+
+      - name: sendid
+        description: ID de envio do email.
+        tags: []
+
+      - name: emailname
+        description: Nome do email enviado.
+        tags: []
+
+      - name: subject
+        description: Assunto do email.
+        tags: []
+
+      - name: eventtype
+        description: Tipo de evento (por exemplo, enviado, aberto, clicado).
+        tags: []
+
+      - name: dt_envio
+        description: Data e hora do envio do email.
+        tags: []
+
+      - name: fromaddress
+        description: Endereço de email do remetente.
+        tags: []
+
+      - name: tipo
+        description: Tipo de email (por exemplo, transacional, marketing).
+        tags: []
+
+      - name: nr_open
+        description: Número de aberturas do email.
+        tags: []
+
+      - name: dt_firstopen
+        description: Data e hora da primeira abertura do email.
+        tags: []
+
+      - name: dt_lastopen
+        description: Data e hora da última abertura do email.
+        tags: []
+
+      - name: nr_click
+        description: Número de cliques em links no email.
+        tags: []
+
+      - name: dt_firstclick
+        description: Data e hora do primeiro clique.
+        tags: []
+
+      - name: dt_lastclick
+        description: Data e hora do último clique.
+        tags: []
+
+      - name: nr_bounce
+        description: Número de emails rejeitados.
+        tags: []
+
+      - name: dt_bounce
+        description: Data e hora do bounce (rejeição).
+        tags: []
+
+      - name: bouncecategory
+        description: Categoria do bounce (por exemplo, soft, hard).
+        tags: []
+
+      - name: smtpcode
+        description: Código SMTP do bounce.
+        tags: []
+
+      - name: smtpreason
+        description: Razão SMTP do bounce.
+        tags: []
+
+      - name: nr_unsubscribe
+        description: Número de cancelamentos de inscrição.
+        tags: []
+
+      - name: dt_unsubscribe
+        description: Data e hora do cancelamento de inscrição.
+        tags: []
+
+      - name: ingestion_date
+        description: Data de ingestão do registro.
+        tags: []
+
+      - name: execution_day
+        description: Dia de execução da análise.
+        tags: []
+
+      - name: execution_year
+        description: Ano de execução da análise.
+        tags: []
+
+      - name: execution_month
+        description: Mês de execução da análise.
+        tags: []
+      - name: execution_day
+        description: Dia de execução da análise.
+        tags: []
+      - name: current_date
+        description: Data atual no momento da ingestão do dado.
+        tags: []
