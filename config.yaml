@@ -1,0 +1,9 @@
+domain: comunicacoes
+display_name: Comunicações
+channel_slack: communication-platforms-monitoring
+check_dbt_source: False
+circle: comms
+circle_id: 632a37905ce4db14d040a108
+open_metadata_ingestion: True
+soda_check_silver_gold: True
+airflow_pool: trino_pool
