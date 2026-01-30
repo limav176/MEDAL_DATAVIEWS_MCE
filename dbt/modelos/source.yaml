@@ -1,0 +1,73 @@
+version: 2
+
+sources: 
+
+  - name: cliente_silver
+    quoting:
+      database: true
+      schema: true
+      identifier: true
+
+    tables:
+      - name: clientes 
+
+  - name: comunicacoes_bronze
+    quoting:
+      database: true
+      schema: true
+      identifier: true
+
+    tables:
+      - name: address_push_sfi
+      - name: job_sfi
+      - name: sms_sfi   
+      - name: open_sfi  
+      - name: journey_sfi  
+      - name: click_sfi
+      - name: bounce_sfi
+      - name: push_sfi
+      - name: sms_held_sfi
+      - name: unsubscribe_sfi 
+      - name: tag_push_sfi 
+      - name: sent_sfi 
+      - name: click_inapp_sfi
+      - name: viz_inapp_sfi
+      - name: inapp_sfi
+      - name: tracking_wa_sfi
+      - name: unsubscribe_wa_sfi
+      - name: inbound_wa_sfi
+      - name: optout_sfi
+      - name: wppquarentena_sfi
+      - name: wppclique_sfi
+      - name: wppoptout_sfi
+      - name: report_inapp_sfi
+      - name: addcontatometodo_sfi
+      - name: monitoracontato_sfi
+      - name: tipocontato_sfi
+      - name: heldemail_sfi
+      - name: not_sent_sfi     
+      - name: irinapp_sfi
+      - name: empeleg_sfi
+      - name: metadados_sfi
+      - name: ccusto_sfi
+
+
+  - name: wallet_gold
+    quoting:
+      database: true
+      schema: true
+      identifier: true
+
+    tables: 
+      - name: contas
+
+  - name: onboarding_silver
+    quoting:
+      database: true
+      schema: true
+      identifier: true
+
+    tables: 
+      - name: propostas
+      - name: endereco
+
