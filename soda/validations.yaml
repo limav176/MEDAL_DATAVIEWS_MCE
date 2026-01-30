@@ -1,0 +1,62 @@
+checks for bounce_sfmc:
+  - duplicate_count(id_bounce, eventdate) = 0
+  - freshness(eventdate):
+      warn: when > 1d8h
+      fail: when > 2d8h
+  - row_count >= 0
+checks for click_sfmc:
+  - duplicate_count(id_click, eventdate, isunique) = 0
+  - freshness(eventdate):
+      warn: when > 1d8h
+      fail: when > 2d8h
+  - row_count >= 0
+checks for journey_sfmc:
+  - duplicate_count(activityid, modifieddate) = 0
+  - freshness(execution_date):
+      warn: when > 2d8h
+      fail: when > 3d8h
+  - row_count >= 0
+checks for open_sfmc:
+  - duplicate_count(id_open, eventdate, isunique) = 0
+  - freshness(eventdate):
+      warn: when > 1d8h
+      fail: when > 2d8h
+  - row_count >= 0
+checks for send_sfmc:
+  - duplicate_count(id, modifieddate) = 0
+  - freshness(modifieddate):
+      warn: when > 1d8h
+      fail: when > 2d8h
+  - row_count >= 0
+checks for sms_sfmc:
+  - duplicate_count(mobilemessagetrackingid, modifieddatetime) = 0
+  - freshness(modifieddatetime):
+      warn: when > 1d8h
+      fail: when > 2d8h
+  - row_count >= 0
+checks for unsubscribe_sfmc:
+  - duplicate_count(id_unsubscribe, eventdate, isunique) = 0
+  - freshness(eventdate):
+      warn: when > 1d8h
+      fail: when > 2d8h
+  - row_count >= 0
+checks for push_sfmc:
+  - duplicate_count(id_push, dt_envio) = 0:
+      filter: cast(dt_envio as date) >= current_date - interval '30' day
+  - freshness(dt_envio):
+      warn: when > 1d8h
+      fail: when > 2d8h
+  - row_count >= 0
+checks for inapp_sfmc:
+  - duplicate_count(id_inapp, dt_envio) = 0
+  - freshness(dt_envio):
+      warn: when > 2d8h
+      fail: when > 3d8h
+  - row_count >= 0
+checks for whatsapp_sfmc:
+  - duplicate_count(primkey) = 0
+  - freshness(eventdateutc):
+      warn: when > 2d8h
+      fail: when > 3d8h
+  - row_count >= 0
+

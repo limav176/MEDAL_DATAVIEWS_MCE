@@ -1,0 +1,5 @@
+data_source athena:
+  type: athena
+  region_name: sa-east-1
+  staging_dir: s3://data-athena-query-result-will-prod/dbt/comunicacoes/
+  schema: comunicacoes_silver
