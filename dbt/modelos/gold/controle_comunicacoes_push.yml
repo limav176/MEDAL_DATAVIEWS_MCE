@@ -1,0 +1,59 @@
+version: 2
+
+models:
+  - name: controle_comunicacoes_push
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_gold
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier3'
+        
+    description: >
+      **Propósito:** Esta tabela armazena informações sobre as comunicações de push enviadas pela empresa, para monitorar o uso de recursos da plataforma.
+
+      **Escopo:** Contém detalhes como nome da comunicação, centro de custo, área disparadora, BU, BU rateio, total enviado, dia, mês e ano de disparo.
+
+      **Audiência:** Essencial para equipes de marketing, unidades de negócio e finanças.
+
+      **Processo:** Os dados são coletados do Salesforce Marketing Cloud, unificados e processados para fornecer uma visão consolidada das comunicações de push.
+
+      **Recorrência de atualização:** A tabela é atualizada diariamente.
+
+    tags: [gold, comunicacoes, push]
+
+    columns:
+      - name: nome_da_comunicacao
+        description: Nome da comunicação de push.
+
+      - name: centro_custo
+        description: Centro de custo associado à comunicação de push, extraído utilizando expressões regulares do nome da comunicação.
+
+      - name: disparado_por
+        description: Área disparadora da comunicação de push, extraído utilizando expressões regulares do nome da comunicação.
+
+      - name: bu
+        description: BU (Business Unit) associada à comunicação de push, obtida através de junção com tabela de centro de custo.
+
+      - name: bu_rateio
+        description: BU rateio associada à comunicação de push, obtida através de junção com tabela de centro de custo.
+
+      - name: total_enviado
+        description: Total de pushs enviados.
+
+      - name: dt_disparo
+        description: Data do disparo das comunicações.
+
+      - name: dia_disparo
+        description: Dia de disparo da comunicação de push.
+
+      - name: mes_disparo
+        description: Mês de disparo da comunicação de push.
+
+      - name: ano_disparo
+        description: Ano de disparo da comunicação de push.

@@ -1,0 +1,77 @@
+version: 2
+
+models:
+  - name: analitico_ingestaometodo
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_gold
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier4'
+
+    description: >
+      **Propósito: Esta tabela resume o total de contatos inseridos na Salesforce Marketing Cloud, segmentados de acordo com o método de entrada utilizado.
+
+      **Escopo:** Apresenta informações sobre os usuários e as respectivas datas de entrada, permitindo o monitoramento e a análise do crescimento da base de contatos destinada à comunicação.
+
+      **Audiência:** Equipes que utilizam a Salesforce Marketing Cloud, oferecendo insights sobre os canais utilizados e os responsáveis pela inserção dos contatos.
+
+      **Processo:** Os dados são extraídos diretamente das atividades registradas na Salesforce Marketing Cloud.
+      
+      **Recorrência de atualização:** A tabela é atualizada diariamente.
+
+    tags: [gold, comunicacoes, salesforce, metodos, ingestao]
+
+    columns:
+      - name: addedby
+        description: Identificador do usuário responsável pela inclusão dos registros diretamente na Salesforce Marketing Cloud (SFMC). Esse campo é útil para rastrear a origem manual dos dados inseridos na plataforma.
+        tags: []
+
+      - name: TotalRegistros
+        description: Quantidade total de registros ingeridos na tabela durante o processo de ingestão. Representa o volume de dados processados em uma determinada execução.
+        tags: []
+
+      - name: dtRegistro
+        description: Data em que os dados foram sumarizados ou agregados para análise, geralmente representando o momento em que a visão consolidada foi gerada a partir dos dados brutos.
+        tags: []
+
+      - name: Metodo
+        description: Indica o método de entrada dos dados na plataforma, podendo incluir categorias como carregamento manual, automação via API, integração com sistemas externos, entre outros.
+        tags: []
+
+      - name: ingestion_date
+        description: Data completa (formato AAAA-MM-DD) em que os dados foram ingeridos no Data Lake, refletindo o momento em que os registros foram disponibilizados para consumo interno.
+        tags: [ingestion_date]
+
+      - name: ingestion_year
+        description: Ano em que ocorreu a ingestão dos dados no Data Lake, derivado da coluna `ingestion_date`, utilizado para particionamento e consultas otimizadas.
+        tags: [ingestion_year]
+
+      - name: ingestion_month
+        description: Mês em que ocorreu a ingestão dos dados no Data Lake, derivado da coluna `ingestion_date`, utilizado para organização e filtragem temporal dos dados.
+        tags: [ingestion_month]
+
+      - name: ingestion_day
+        description: Dia do mês em que os dados foram ingeridos no Data Lake, extraído da `ingestion_date`, útil para granularidade mais fina em análises e auditorias.
+        tags: [ingestion_day]
+
+      - name: execution_date
+        description: Data em que o processo de geração da tabela foi executado. Pode ser utilizada para rastrear a data da última atualização ou execução do pipeline.
+        tags: [execution_date]
+
+      - name: execution_year
+        description: Ano em que o processo de execução foi realizado, extraído da `execution_date`, geralmente usado para particionamento de dados e controle de versões.
+        tags: [execution_year]
+
+      - name: execution_month
+        description: Mês em que o processo de execução foi realizado, derivado da `execution_date`, útil para agregações e filtragens mensais.
+        tags: [execution_month]
+
+      - name: execution_day
+        description: Dia do mês em que o processo de execução foi realizado, derivado da `execution_date`, permitindo controle detalhado de execuções diárias.
+        tags: [execution_day]

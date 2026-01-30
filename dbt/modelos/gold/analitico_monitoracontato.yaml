@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: analitico_monitoracontato
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier4'
+        
+    description: >
+      **Propósito:** Esta tabela contém informações agregadas sobre a quantidade total de contatos inseridos na plataforma Salesforce Marketing Cloud (SFMC), com o objetivo de apoiar o monitoramento da evolução da base de comunicação.
+
+      **Escopo:** Contempla a soma diária de registros adicionados na SFMC, permitindo a análise da dinâmica de crescimento da base de pessoas aptas à comunicação via e-mail e outros canais.
+
+      **Audiência:** Destinada às equipes de Marketing, CRM e operações que utilizam a Salesforce Marketing Cloud, oferecendo uma visão consolidada dos principais métodos e canais de entrada de contatos na plataforma.
+
+      **Processo:** Os dados são coletados a partir das atividades de inserção de contatos registradas na plataforma SFMC e consolidados em processos diários de carga e transformação.
+
+      **Recorrência de atualização:** Atualização diária (D-1), após a finalização das cargas no Data Lake.
+    
+    tags: [gold, comunicacoes, salesforce, totalizador, subscribers, pessoacontato, ingestao]
+
+    columns:
+      - name: DataRegistro
+        description: Data na qual os dados foram consolidados e sumarizados para análise diária da base de contatos
+
+      - name: TotalRegistros
+        description: Quantidade total de contatos inseridos na Salesforce Marketing Cloud naquele dia, somando todas as ingestações realizadas
+
+      - name: NomeDE
+        description: Nome da Data Extension que armazena os registros contabilizados para acompanhamento da base
+
+      - name: ingestion_date
+        description: Data em que o evento de inserção do contato foi registrado no sistema
+
+      - name: ingestion_year
+        description: Ano correspondente à data de ingestão do evento de contato
+
+      - name: ingestion_month
+        description: Mês correspondente à data de ingestão do evento de contato
+
+      - name: ingestion_day
+        description: Dia correspondente à data de ingestão do evento de contato
+
+      - name: execution_date
+        description: Data em que o processo de consolidação e atualização dos dados foi executado
+
+      - name: execution_year
+        description: Ano em que o processo de consolidação foi realizado
+
+      - name: execution_month
+        description: Mês em que o processo de consolidação foi realizado
+
+      - name: execution_day
+        description: Dia em que o processo de consolidação foi realizado

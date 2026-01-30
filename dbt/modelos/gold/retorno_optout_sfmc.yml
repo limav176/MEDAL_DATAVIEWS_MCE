@@ -1,0 +1,84 @@
+version: 2
+
+models:
+  - name: retorno_optout_sfmc
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_gold
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier2'
+        
+    description: >
+      **Propósito:** Esta tabela registra pessoas que optaram por se desinscrever das comunicações da empresa, fornecendo base para o controle e conformidade com preferências de contato dos usuários.
+
+      **Escopo:** Contém dados referentes às interações dos usuários com os links de descadastramento presentes nas comunicações, incluindo informações como data, canal e contexto da desinscrição.
+
+      **Audiência:** Indicada para equipes de Marketing, CRM e Analytics que buscam entender o comportamento do usuário e ajustar estratégias de comunicação com base em sinais explícitos de rejeição ou desinteresse.
+
+      **Processo:** As interações de desinscrição são rastreadas por meio de links únicos incorporados nas mensagens. Essas informações são coletadas automaticamente via integrações com a plataforma Salesforce Marketing Cloud, tratadas por pipelines de ingestão e armazenadas em formato padronizado para análises.
+
+      **Recorrência de atualização:** Atualização diária (D-1), com sobrescrita completa da tabela após a carga do Data Lake.
+
+    tags: [god, comunicacoes, salesforce, optout]
+
+    columns:
+      - name: SubscriberType
+        description: Tipo de inscrição do contato que realizou o descadastramento, indicando o canal ou modalidade, como 'Email', 'SMS' ou 'Push Notification'. Este campo ajuda a categorizar a origem da preferência de desinscrição.
+        tags: []
+
+      - name: DateUnsubscribed
+        description: Data e hora (formato ISO 8601, ex '2025-07-22T15:30:00Z') em que o contato realizou a desinscrição das comunicações. Representa o momento exato em que o usuário optou por não receber mais mensagens.
+        tags: []
+
+      - name: status
+        description: Status atual do contato relacionado às comunicações, podendo indicar se está 'Ativo', 'Desinscrito', 'Pendente' ou 'Bloqueado'. Auxilia no controle de consentimento e no envio adequado de mensagens.
+        tags: []
+
+      - name: DateJoined
+        description: Data e hora (formato ISO 8601) em que o contato foi inicialmente inscrito para receber comunicações, representando o início da jornada de marketing para este contato.
+        tags: []
+
+      - name: id_pessoa
+        description: Identificador único da pessoa, representado pelo hash SHA-256 do CPF, garantindo anonimização e privacidade dos dados pessoais.
+        tags: []
+        meta:
+          openmetadata:
+            tags: ['pii.pii']
+
+      - name: ingestion_date
+        description: Data em que o evento de desinscrição foi ingerido no Data Lake, usada para controle de carga e versionamento dos dados (formato YYYY-MM-DD).
+        tags: []
+
+      - name: ingestion_year
+        description: Ano extraído da data de ingestão do evento (formato YYYY), utilizado para particionamento e análise temporal.
+        tags: []
+
+      - name: ingestion_month
+        description: Mês extraído da data de ingestão do evento (formato MM), usado para filtros e agregações temporais.
+        tags: []
+
+      - name: ingestion_day
+        description: Dia extraído da data de ingestão do evento (formato DD), facilitando análise diária do volume de desinscrições.
+        tags: []
+
+      - name: execution_date
+        description: Data em que a carga ou processo que gerou esta linha foi executado, normalmente a data de processamento do evento (formato YYYY-MM-DD).
+        tags: []
+
+      - name: execution_year
+        description: Ano extraído da data de execução, usado para análise temporal e particionamento.
+        tags: []
+
+      - name: execution_month
+        description: Mês extraído da data de execução (formato MM), auxiliando em relatórios mensais.
+        tags: []
+
+      - name: execution_day
+        description: Dia extraído da data de execução (formato DD), útil para detalhamento de dados diários.
+        tags: []

@@ -1,0 +1,164 @@
+version: 2
+
+models:
+  - name: retorno_push_detalhado
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_gold
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.confiavel',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier3'
+        
+    description: >
+      **Propósito:** Esta tabela guarda os detalhes de notificações push enviadas aos dispositivos móveis dos usuários. Inclui quem recebeu, que tipo de mensagem foi, quando foi enviada, e outros detalhes importantes. Isso ajuda a entender quais notificações funcionam melhor e como as pessoas reagem a elas.
+
+      **Escopo:** Abrange tudo sobre as notificações push, como informações do destinatário, o conteúdo da mensagem, o momento do envio e como a mensagem foi recebida.
+
+      **Audiência:** Destinada a equipes de marketing e analistas de dados, que necessitam de insights precisos sobre o comportamento de abertura dos usuários para otimizar campanhas.
+
+      **Processo:** As informações vêm das notificações push enviadas pela Salesforce.
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia, preferencialmente às [inserir horário específico], garantindo dados frescos para análise.
+
+    tags: [gold, comunicacoes, salesforce, push]
+
+    columns:
+      - name: ds_origin
+        description: Origem do cliente, indicando se os dados são provenientes do sistema "pag" ou "will".
+
+      - name: id_push
+        description: Identificador único do push enviado, utilizado para rastreamento interno do evento.
+
+      - name: id_pessoa
+        description: Identificador único da pessoa no sistema legado, utilizado para vincular dados históricos.
+        meta:
+          openmetadata:
+            tags: ['pii.pii']
+
+      - name: id_customer
+        description: Identificador único do cliente na plataforma atual, usado em integrações e análises.
+        meta:
+          openmetadata:
+            tags: ['pii.pii']
+
+      - name: id_proposal
+        description: Identificador da proposta comercial relacionada ao push, caso aplicável.
+        meta:
+          openmetadata:
+            tags: ['pii.pii']
+
+      - name: name
+        description: Nome do cliente, extraído do cadastro ou base CRM.
+        meta:
+          openmetadata:
+            tags: ['pii.pii']
+
+      - name: appname
+        description: Nome do aplicativo no qual o push foi recebido, por exemplo "App PagBank" ou "App WillBank".
+
+      - name: messagename
+        description: Nome atribuído à mensagem na plataforma de envio, usado para controle e relatórios.
+
+      - name: tipo
+        description: Tipo da mensagem enviada, podendo ser "Transacional" (ex token, senha) ou "Comercial" (ex campanhas).
+
+      - name: messageid
+        description: Identificador exclusivo da mensagem gerado pela plataforma Salesforce, usado para rastreamento técnico.
+
+      - name: template
+        description: Nome do template utilizado na construção da mensagem, indicando o layout aplicado.
+
+      - name: format
+        description: Formato da notificação enviada, como "Texto", "Imagem" ou "Rich Push".
+
+      - name: deviceid
+        description: Identificador do dispositivo receptor, geralmente um hash único atribuído pelo Firebase ou Apple.
+        meta:
+          openmetadata:
+            tags: ['pii.pii']
+
+      - name: geofencename
+        description: Nome da geofence (cerca geográfica) associada à notificação, se houver.
+
+      - name: pagename
+        description: Nome da página ou destino vinculado à ação da notificação push.
+
+      - name: campaigns
+        description: Lista ou identificadores das campanhas associadas à mensagem, separados por vírgula.
+
+      - name: dt_envio
+        description: Data e hora do envio da notificação, no fuso horário da plataforma (geralmente UTC-3).
+
+      - name: messagecontent
+        description: Conteúdo textual da mensagem enviada ao usuário final.
+
+      - name: messageopened
+        description: Indicador booleano (true/false) se o push foi aberto pelo usuário.
+
+      - name: dt_abertura
+        description: Data e hora em que a mensagem foi aberta, caso tenha sido lida.
+
+      - name: timeinapp
+        description: Tempo total (em segundos) que o usuário permaneceu no aplicativo após abrir a notificação.
+
+      - name: platform
+        description: Plataforma do dispositivo, como "iOS", "Android" ou "WebPush".
+
+      - name: platformversion
+        description: Versão do sistema operacional do dispositivo no momento do recebimento do push, ex "iOS 16.4".
+
+      - name: status
+        description: Status final do envio da notificação, como "Enviado", "Entregue", "Erro" ou "Rejeitado".
+
+      - name: pushjobid
+        description: Identificador do job de envio do push na plataforma Salesforce Marketing Cloud.
+
+      - name: systemtoken
+        description: Token do sistema usado para autenticação da mensagem, geralmente vinculado ao app.
+
+      - name: inboxdownload
+        description: Indicador se a mensagem foi baixada para a inbox do aplicativo.
+
+      - name: inboxopen
+        description: Indicador se a mensagem foi aberta diretamente a partir da inbox no app.
+
+      - name: iosmediaurl
+        description: URL da mídia (imagem, vídeo) incluída no push para dispositivos iOS, quando aplicável.
+
+      - name: androidmediaurl
+        description: URL da mídia (imagem, vídeo) incluída no push para dispositivos Android, quando aplicável.
+
+      - name: mediaalt
+        description: Texto alternativo da mídia enviada com o push, usado para acessibilidade ou fallback.
+
+      - name: requestid
+        description: Identificador da requisição de envio no sistema de origem, útil para rastreio técnico.
+
+      - name: ingestion_date
+        description: Data em que os dados foram ingeridos no Data Lake, no formato YYYY-MM-DD.
+
+      - name: ingestion_year
+        description: Ano extraído da data de ingestão, no formato YYYY.
+
+      - name: ingestion_month
+        description: Mês extraído da data de ingestão, no formato MM (ex 07).
+
+      - name: ingestion_day
+        description: Dia extraído da data de ingestão, no formato DD (ex 22).
+
+      - name: execution_date
+        description: Data lógica de execução da carga, normalmente igual à data seguinte ao envio (dt_envio + 1).
+
+      - name: execution_year
+        description: Ano da execução lógica da carga (extraído de execution_date).
+
+      - name: execution_month
+        description: Mês da execução lógica da carga, no formato MM.
+
+      - name: execution_day
+        description: Dia da execução lógica da carga, no formato DD.

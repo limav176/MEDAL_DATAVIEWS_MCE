@@ -1,0 +1,87 @@
+version: 2
+
+models:
+  - name: push_unificado
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_gold
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier2'
+        
+    description: >
+      **Propósito:** Esta tabela disponibiliza os dados de comunicações via push originados na Salesforce Marketing Cloud (SFMC), com o objetivo de viabilizar sua análise em ferramentas como o Looker.
+
+      **Escopo:** Reúne e estrutura dados consolidados das camadas bronze e silver, promovendo sua integração e disponibilização na camada gold, garantindo consistência para visualizações analíticas.
+
+      **Audiência:** Destinada a profissionais de Marketing e analistas de dados que acompanham a performance de comunicações via push.
+
+      **Processo:** Os dados são extraídos da tabela `retorno_push_unificado` e processados para padronização e disponibilização em camada analítica.
+
+      **Recorrência de atualização:** Atualização diária (D-1), após a finalização das cargas no Data Lake.
+
+    tags: [gold, comunicacoes, push_marketing, push, looker]
+
+    columns:
+      - name: id_comunicacao
+        description: Identificador único da mensagem push enviada. Utilizado para rastreamento e análise individual da comunicação. Geralmente é uma string ou número sequencial gerado pela plataforma SFMC.
+        tags: []
+
+      - name: nome_da_comunicacao
+        description: Nome descritivo da comunicação push enviada, que identifica a campanha, fluxo ou propósito da mensagem. Exemplo "Promoção Verão 2025". Útil para relatórios e agrupamentos.
+        tags: []
+
+      - name: dt_disparo
+        description: Data e hora exatas do envio da mensagem push, no formato ISO 8601. Indica quando o push foi disparado para o destinatário.
+        tags: []
+
+      - name: phone
+        description: Número de telefone do destinatário, conforme cadastro na Infobip. Pode ser nulo se o dado não estiver disponível na Salesforce. Formato esperado código do país + DDD + número (ex +5511999999999).
+        tags: []
+        meta:
+          openmetadata:
+            tags: ['pii.pii']
+
+      - name: id_pessoa
+        description: Identificador único da pessoa, representado pelo hash do CPF do cliente ou pelo contactKey na Salesforce. Usado para anonimização e vínculo das interações ao usuário.
+        tags: []
+        meta:
+          openmetadata:
+            tags: ['pii.pii']
+
+      - name: fl_recebeu
+        description: Flag indicativa se o destinatário recebeu a mensagem push. Valores possíveis "true" (recebeu), "false" (não recebeu). Útil para avaliar entregabilidade.
+        tags: []
+
+      - name: bu
+        description: Unidade de negócio associada à comunicação push. Pode representar divisões internas da empresa como "Varejo", "Financeiro" ou "Atacado".
+        tags: []
+
+      - name: fl_abertura
+        description: Flag indicativa se o destinatário abriu ou visualizou a mensagem push. Valores possíveis "true" (abriu), "false" (não abriu). Importante para métricas de engajamento.
+        tags: []
+
+      - name: plataforma
+        description: Plataforma utilizada para o envio da comunicação push, por exemplo "iOS", "Android" ou "Web". Ajuda a segmentar análises por tipo de dispositivo ou sistema.
+        tags: []
+        
+      - name: execution_date
+        description: Data de execução relacionada ao registro.
+        tags: []
+
+      - name: execution_year
+        description: Ano de execução.
+        tags: []
+
+      - name: execution_month
+        description: Mês de execução.
+        tags: []
+        
+      - name: execution_day
+        description: Dia de execução.
+        tags: []

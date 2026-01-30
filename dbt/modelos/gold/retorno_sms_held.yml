@@ -1,0 +1,113 @@
+version: 2
+
+models:
+  - name: retorno_sms_held
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_gold
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier2'
+        
+    description: >
+      **Propósito:** Esta tabela armazena informações sobre SMS que foram retidos ou não chegaram aos destinatários. Inclui dados como detalhes da conta de envio, número de mensagens não entregues, informações sobre o cliente e o destinatário, além das datas em que as mensagens foram retidas. Este registro é essencial para entender e resolver problemas de entrega de SMS, melhorando a eficácia das comunicações.
+
+      **Escopo:** Oferece uma análise detalhada dos SMS não entregues, ajudando a identificar e corrigir questões que afetam a entrega das mensagens, como problemas de lista de contato ou bloqueios de operadora.
+
+      **Audiência:** Direcionado a equipes de marketing e equipes que necessitam monitorar a eficiência das campanhas de SMS e otimizar a gestão de listas de contato para evitar retenções futuras.
+
+      **Processo:** Dados sobre SMS retidos são coletados diretamente das atividades de envio realizadas através da Salesforce, proporcionando uma base confiável para a análise e melhoria contínua da qualidade da entrega.
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia.
+
+    tags: [gold, comunicacoes, salesforce, sms_held]
+
+    columns:
+      - name: primkey
+        description: Chave unica.
+        tags: []
+
+      - name: id_customer
+        description: Identificador único do cliente no sistema.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: first_name
+        description: Nome do destinatário do SMS.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: created_at
+        description: Data e hora de criação do registro.
+        tags: []
+
+      - name: mobilenumber
+        description: Número de telefone móvel do destinatário.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: bouncecount
+        description: Número total de tentativas de envio falhadas para este número móvel.
+        tags: []
+
+      - name: holddate
+        description: Data em que o SMS foi retido ou não entregue.
+        tags: []
+
+      - name: id_pessoa
+        description: Identificador pessoal associado ao destinatário no sistema.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: ingestion_date
+        description: Data em que o registro foi inserido no sistema.
+        tags: []
+
+      - name: ingestion_year
+        description: Ano de ingestão do registro no sistema.
+        tags: []
+
+      - name: ingestion_month
+        description: Mês de ingestão do registro no sistema.
+        tags: []
+
+      - name: ingestion_day
+        description: Dia de ingestão do registro no sistema.
+        tags: []
+
+      - name: execution_date
+        description: Data em que o processo associado ao registro foi executado.
+        tags: []
+
+      - name: execution_year
+        description: Ano de execução do processo associado ao registro.
+        tags: []
+
+      - name: execution_month
+        description: Mês de execução do processo associado ao registro.
+        tags: []
+
+      - name: execution_day
+        description: Dia de execução do processo associado ao registro.
+        tags: []

@@ -1,0 +1,84 @@
+version: 2
+
+models:
+  - name: retorno_wpp_unificado
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_gold
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.confiavel',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier3'
+        
+    description: >
+        **Propósito:** Unifica eventos de WhatsApp com consolidação de status por envio único, incluindo primeira data de envio e última data de status. Implementa lógica de prioridade de status baseada na ordem temporal e hierarquia de eventos.
+
+        **Escopo:** Essencial para análise da performance de campanhas de WhatsApp, fornecendo dados consolidados sobre engajamento do usuário e rastreamento de entregas. Inclui métricas de enviado, entregue, lido e falhou.
+
+        **Audiência:** Destinada a profissionais de marketing, analistas de dados e equipes de atendimento que monitoram campanhas de WhatsApp.
+
+        **Processo:** Os dados são consolidados a partir da tabela retorno_wpp_detalhado, aplicando lógica de agrupamento por chaves únicas (jbdefinitionid, jbactivityid, sendidentifier, assetid, contactkey) e implementando hierarquia de status final baseada na prioridade: Falhou > Lido > Entregue > Enviado.
+
+        **Recorrência de atualização:** A tabela é atualizada 1x ao dia, normalmente por volta das 3h da manhã.
+
+    tags: [gold, comunicacoes, whatsapp, whatsapp_marketing]
+
+    columns:
+      - name: assetid
+        description: Identificador único do ativo associado ao envio de WhatsApp, usado para rastrear campanhas específicas e relacionar eventos de uma mesma comunicação.
+        tags: []
+
+      - name: sendidentifier
+        description: Identificador interno de envio, associando um envio específico com informações de entrega.
+        tags: []
+
+      - name: contactkey
+        description: Chave de contato do destinatário, usada para identificar o usuário de forma única no sistema. Esta coluna contém dados pessoais identificáveis (PII).
+        tags: []
+        meta:
+          openmetadata:
+            tags: ['pii.pii']
+
+      - name: nome_da_comunicacao
+        description: Nome descritivo da comunicação ou campanha de WhatsApp associada ao evento, extraído do campo activityname para identificação clara em relatórios e análises.
+        tags: []
+
+      - name: dt_disparo
+        description: Data e hora exatas do primeiro envio da mensagem WhatsApp para este destinatário específico, considerando a combinação única de chaves de identificação.
+        tags: []
+
+      - name: fl_enviado
+        description: Indicador binário que representa se a mensagem WhatsApp foi enviada com sucesso (1 para enviado, 0 para não enviado). Baseado no status 'sent' dos eventos.
+        tags: []
+
+      - name: fl_entregue
+        description: Indicador binário que representa se a mensagem WhatsApp foi entregue ao dispositivo do destinatário (1 para entregue, 0 para não entregue). Baseado no status 'delivered'.
+        tags: []
+
+      - name: fl_lido
+        description: Indicador binário que representa se a mensagem WhatsApp foi lida pelo destinatário (1 para lido, 0 para não lido). Baseado no status 'read' dos eventos.
+        tags: []
+
+      - name: fl_falhou
+        description: Indicador binário que representa se houve falha no envio ou entrega da mensagem WhatsApp (1 para falhou, 0 para sem falha). Baseado nos status 'failed' e 'notsent'.
+        tags: []
+
+      - name: status_final
+        description: Status final consolidado da mensagem, determinado pela hierarquia de prioridade - Falhou > Lido > Entregue > Enviado. Representa o resultado mais significativo dentre todos os eventos registrados.
+        tags: []
+
+      - name: plataforma
+        description: Identificador da plataforma de comunicação, sempre 'WhatsApp' para este modelo, permitindo união com outras plataformas em análises consolidadas.
+        tags: []
+
+      - name: execution_year
+        description: Ano extraído da data de execução do processamento, facilitando agregações temporais e análises históricas por ano.
+        tags: []
+
+      - name: execution_month
+        description: Mês extraído da data de execução, em formato numérico, para uso em filtros e agregações temporais mensais.
+        tags: []

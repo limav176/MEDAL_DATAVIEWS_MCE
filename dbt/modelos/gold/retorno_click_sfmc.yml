@@ -1,0 +1,139 @@
+version: 2
+
+models:
+  - name: retorno_click_sfmc
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_gold
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier2'
+        
+    description: >
+      **Propósito:** Documenta cliques de e-mails, com dados sobre conta, assinante, domínio do e-mail e momento da abertura. Fundamental para entender o engajamento em e-mails e otimizar conteúdos.
+
+      **Escopo:** Analisa engajamento em e-mails, identifica padrões de abertura com cliques e informa estratégias de otimização.
+
+      **Audiência:** Para marketing e análise de dados focados em aumentar engajamento e eficácia do conteúdo de e-mails.
+
+      **Processo:** Eventos de cliques coletados pelo Salesforce.
+
+      **Recorrência de atualização:** Atualizada diariamente.
+
+    tags: [gold, comunicacoes, salesforce, email_click]
+
+    columns:
+      - name: accountid
+        description: Identificador da conta de onde o e-mail foi enviado.
+        tags: []
+
+      - name: id_email
+        description: Identificador do e-mail associado ao clique.
+        tags: []
+
+      - name: id_click
+        description: Identificador único do evento de clique.
+        tags: []
+
+      - name: oybaccountid
+        description: Identificador alternativo da conta.
+        tags: []
+
+      - name: jobid
+        description: Identificador do trabalho de envio do e-mail.
+        tags: []
+
+      - name: listid
+        description: Identificador da lista de envio.
+        tags: []
+
+      - name: batchid
+        description: Identificador do lote de envio.
+        tags: []
+
+      - name: subscriberid
+        description: Identificador do assinante que clicou.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: subscriberkey
+        description: Chave única do assinante.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: eventdate
+        description: Data e hora do evento de clique.
+        tags: []
+
+      - name: domain
+        description: Domínio do e-mail do assinante.
+        tags: []
+
+      - name: url
+        description: URL clicada pelo assinante.
+        tags: []
+
+      - name: linkname
+        description: Nome do link clicado.
+        tags: []
+
+      - name: linkcontent
+        description: Conteúdo do link associado ao clique.
+        tags: []
+
+      - name: isunique
+        description: Indica se o clique é único.
+        tags: []
+
+      - name: triggerersenddefinitionobjectid
+        description: Objeto que definiu o envio que resultou no clique.
+        tags: []
+
+      - name: triggeredsendcustomerkey
+        description: Chave do cliente do envio que resultou no clique.
+        tags: []
+
+      - name: ingestion_date
+        description: Data de ingestão do evento.
+        tags: []
+
+      - name: ingestion_year
+        description: Ano de ingestão.
+        tags: []
+
+      - name: ingestion_month
+        description: Mês de ingestão.
+        tags: []
+
+      - name: ingestion_day
+        description: Dia de ingestão.
+        tags: []
+
+      - name: execution_date
+        description: Data de execução do evento.
+        tags: []
+
+      - name: execution_year
+        description: Ano de execução.
+        tags: []
+
+      - name: execution_month
+        description: Mês de execução.
+        tags: []
+
+      - name: execution_day
+        description: Dia de execução.
+        tags: []

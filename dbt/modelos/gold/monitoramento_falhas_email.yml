@@ -1,0 +1,90 @@
+version: 2
+
+models:
+  - name: monitoramento_falhas_email
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_gold
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier2'
+        
+    description: >
+      **Propósito:** Esta tabela consolida o status de comunicação dos assinantes na Salesforce Marketing Cloud, incluindo eventos de bounce, mensagens não enviadas (not sent) e opt-out.
+
+      **Escopo:** Agrega dados de diferentes fontes da SFMC para fornecer uma visão única por `subscriberkey`, permitindo análise de entregabilidade e possíveis bloqueios de comunicação.
+
+      **Audiência:** Equipes de Produto, Marketing e Analytics que monitoram a performance das comunicações e identificam motivos de falha no envio.
+
+      **Processo:** A tabela é construída a partir da agregação de três datasets distintos: `bounce_sfmc`, `not_sent_sfmc` e `optout_sfmc`, com junções completas para garantir abrangência dos registros.
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia.
+
+    tags: [gold, comunicacoes, salesforce, bounce, not_sent, optout, entregabilidade]
+
+    columns:
+      - name: subscriberkey
+        description: Chave única do assinante na SFMC.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+      
+      - name: last_sent_date
+        description: Data do último envio registrado para o assinante.
+        tags: [last_sent_date]
+
+      - name: last_open_date
+        description: Data do último evento de abertura registrado para o assinante.
+        tags: [last_open_date]
+
+      - name: last_click_date
+        description: Data do último evento de clique registrado para o assinante.
+        tags: [last_click_date]
+
+      - name: total_bounce
+        description: Total de eventos de bounce registrados.
+        tags: [bounce, total]
+
+      - name: bounce_30d
+        description: Total de bounces nos últimos 30 dias.
+        tags: [bounce, ultimos_30_dias]
+
+      - name: days_since_last_bounce
+        description: Número de dias desde o último evento de bounce.
+        tags: [bounce, data_ultima_ocorrencia]
+
+      - name: bounce_reasons
+        description: Lista de subcategorias de bounce distintas registradas.
+        tags: [bounce, motivo]
+
+      - name: total_not_sent
+        description: Total de eventos de mensagens não enviadas.
+        tags: [not_sent, total]
+
+      - name: not_sent_30d
+        description: Total de eventos "not sent" nos últimos 30 dias.
+        tags: [not_sent, ultimos_30_dias]
+
+      - name: days_since_last_not_sent
+        description: Número de dias desde o último evento "not sent".
+        tags: [not_sent, data_ultima_ocorrencia]
+
+      - name: not_sent_reasons
+        description: Lista de motivos distintos para falhas de envio (not sent).
+        tags: [not_sent, motivo]
+
+      - name: total_optout
+        description: Total de opt-outs registrados para o assinante.
+        tags: [optout, total]
+
+      - name: days_since_last_optout
+        description: Número de dias desde o último opt-out registrado.
+        tags: [optout, data_ultima_ocorrencia]

@@ -1,0 +1,71 @@
+version: 2
+
+models:
+  - name: controle_de_consumo_sfmc
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_gold
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier3'
+        
+    description: >
+      **Propósito:** Esta tabela armazena informações sobre comunicações enviadas pela empresa, com o objetivo de monitorar a utilização dos recursos da plataforma Salesforce Marketing Cloud.
+
+      **Escopo:** Inclui dados como nome da comunicação, centro de custo, área responsável pelo disparo, unidade de negócio (BU), BU de rateio, total enviado, e datas de envio (dia, mês e ano).
+
+      **Audiência:** Destinada às equipes de Marketing, Unidades de Negócio e Finanças responsáveis pela gestão e acompanhamento dos custos de comunicação.
+
+      **Processo:** Os dados são extraídos da Salesforce Marketing Cloud, consolidados e tratados para fornecer uma visão unificada das comunicações enviadas por centro de custo, representada aqui pela BU.
+
+      **Recorrência de atualização:** Atualização diária (D-1), após a finalização das cargas no Data Lake, aproximadamente 10AM.
+      
+    tags: [gold, comunicacoes, salesforce]
+
+    columns:
+      - name: nome_da_comunicacao
+        description: Nome da comunicação utilizada para identificar a campanha ou ação de marketing enviada. Exemplo "Promoção Verão 2025". Fundamental para rastreamento e análise dos envios.
+
+      - name: canal
+        description: Canal pelo qual a comunicação foi enviada, como email, whatsapp, sms, inapp ou push. Indica o meio de contato utilizado para o disparo.
+
+      - name: categoria
+        description: Categoria da comunicação, que classifica o tipo de envio, por exemplo, "sends", "displays", "marketing", "service" ou "authentication". Usada para segmentação e análise.
+
+      - name: codigo_bu
+        description: Código do centro de custo relacionado à comunicação, extraído do nome da comunicação via expressões regulares. Serve para controle financeiro e alocação de custos.
+
+      - name: disparado_por
+        description: Área ou equipe responsável pelo disparo da comunicação, também extraída do nome da comunicação. Ajuda a identificar o time gestor da campanha.
+
+      - name: area
+        description: Unidade de negócio (Business Unit - BU) associada à comunicação, obtida por junção com tabela de centro de custo. Importante para análise por unidade organizacional.
+
+      - name: rateio
+        description: BU de rateio relacionada à comunicação, usada para distribuir custos entre unidades de negócio conforme regras internas.
+
+      - name: total_enviado
+        description: Quantidade total de mensagens enviadas na comunicação, representando o volume de envios realizados em cada disparo.
+
+      - name: consumo
+        description: Quantidade de supermessages (pacote de mensagens) consumidas no envio, calculada conforme regras específicas por canal e categoria.
+
+      - name: custo_estimado
+        description: Estimativa do custo financeiro associado à comunicação, calculada com base no consumo e valores unitários por tipo de mensagem e canal.
+
+      - name: dt_disparo
+        description: Data exata do disparo da comunicação, no formato YYYY-MM-DD. Usada para análises temporais e acompanhamento das campanhas.
+
+      - name: dia_disparo
+        description: Dia do mês em que a comunicação foi disparada, representado por número entre 1 e 31.
+
+      - name: mes_disparo
+        description: Mês do ano em que a comunicação foi disparada, representado por número entre 1 e 12.
+
+      - name: ano_disparo
+        description: Ano em que a comunicação foi disparada, no formato com quatro dígitos (exemplo 2025).

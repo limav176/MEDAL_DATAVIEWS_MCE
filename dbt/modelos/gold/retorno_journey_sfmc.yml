@@ -1,0 +1,114 @@
+version: 2
+
+models:
+  - name: retorno_journey_sfmc
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_gold
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier3'
+
+    description: >
+      **Propósito:** Esta tabela registra atividades de comunicações multicanais realizadas na Salesforce Marketing Cloud (SFMC), sendo essencial para a gestão e acompanhamento da execução de campanhas.
+
+      **Escopo:** Permite a análise do desempenho de jornadas e campanhas multicanais, oferecendo uma visão abrangente sobre a eficácia das comunicações em diferentes canais.
+
+      **Audiência:** Destinada a profissionais de Marketing e analistas que atuam na otimização de campanhas e estratégias de comunicação na SFMC.
+
+      **Processo:** Os dados são coletados automaticamente a partir dos jobs executados na Salesforce Marketing Cloud, utilizando integrações com APIs e pipelines de ingestão que consolidam e estruturam as informações relevantes.
+
+      **Recorrência de atualização:** Atualização diária (D-1), após a finalização das cargas no Data Lake.
+
+
+    tags: [gold, comunicacoes, salesforce, job]
+
+    columns:
+      - name: versionid
+        description: Identificador único da versão da jornada, utilizado para rastreamento e diferenciação entre múltiplas versões da mesma jornada. Formato numérico inteiro sequencial.
+        tags: []
+
+      - name: activityid
+        description: Identificador único da atividade dentro da jornada, permitindo referência específica a cada ação ou passo do fluxo. Formato UUID ou numérico.
+        tags: []
+
+      - name: activityname
+        description: Nome descritivo da atividade, que indica a função ou objetivo da etapa dentro da jornada, como 'Envio de Email' ou 'Espera'.
+        tags: []
+
+      - name: activityexternalkey
+        description: Chave externa única associada à atividade, usada para integração ou mapeamento com sistemas externos ou APIs. Geralmente uma string alfanumérica.
+        tags: []
+
+      - name: journeyactivityobjectid
+        description: Identificador único do objeto de atividade da jornada, usado internamente para vincular atividades ao fluxo de jornada no sistema de automação.
+        tags: []
+
+      - name: activitytype
+        description: Tipo da atividade realizada na jornada, como 'Email', 'SMS', 'Espera', 'Decisão' ou 'Atualização de Dados'. Ajuda a classificar e analisar o comportamento da jornada.
+        tags: []
+
+      - name: journeyid
+        description: Identificador único da jornada, que representa um fluxo completo de automação de marketing. Usado para rastrear e agrupar dados relacionados a essa jornada.
+        tags: []
+
+      - name: journeyname
+        description: Nome da jornada, geralmente uma descrição legível para humanos que explica o propósito ou campanha associada, por exemplo, 'Bem-vindo Novos Clientes'.
+        tags: []
+
+      - name: versionnumber
+        description: Número da versão da jornada, usado para controle de versões e para garantir que a análise considere o fluxo correto em produção. Geralmente um inteiro incremental.
+        tags: []
+
+      - name: createddate
+        description: Data e hora em que a versão da jornada foi criada no sistema, representando o início da validade dessa configuração.
+        tags: []
+
+      - name: lastpublisheddate
+        description: Data e hora (ISO 8601) da última publicação da versão da jornada, indicando quando ela foi disponibilizada para uso ativo em campanhas.
+        tags: []
+
+      - name: modifieddate
+        description: Data e hora (ISO 8601) da última modificação feita na versão da jornada, que pode incluir ajustes em atividades, critérios ou configurações.
+        tags: []
+
+      - name: journeystatus
+        description: Status atual da jornada, indicando se está 'Ativa', 'Inativa', 'Pausada' ou 'Finalizada', para controle do ciclo de vida da automação.
+        tags: []
+
+      - name: ingestion_date
+        description: Data em que os dados referentes a esta versão da jornada foram ingeridos no Data Lake, no formato YYYY-MM-DD, para controle de carga.
+        tags: []
+
+      - name: ingestion_year
+        description: Ano extraído da data de ingestão (YYYY), utilizado para particionamento e análises temporais.
+        tags: []
+
+      - name: ingestion_month
+        description: Mês extraído da data de ingestão (MM), utilizado para filtragem e relatórios mensais.
+        tags: []
+
+      - name: ingestion_day
+        description: Dia extraído da data de ingestão (DD), útil para detalhamento diário das cargas.
+        tags: []
+
+      - name: execution_date
+        description: Data em que o processo ou pipeline que gerou este registro foi executado, geralmente a data do processamento dos dados (formato YYYY-MM-DD).
+        tags: []
+
+      - name: execution_year
+        description: Ano extraído da data de execução, utilizado para particionamento e análise temporal.
+        tags: []
+
+      - name: execution_month
+        description: Mês extraído da data de execução (MM), utilizado para segmentação mensal nos relatórios.
+        tags: []
+
+      - name: execution_day
+        description: Dia extraído da data de execução (DD), que auxilia em análises diárias de ingestão e processamento.
+        tags: []

@@ -1,0 +1,209 @@
+version: 2
+
+models:
+  - name: retorno_send_sfmc
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_gold
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier3'
+
+    description: >
+        **Propósito:** Registra eventos de envio de campanhas via Salesforce Marketing Cloud, incluindo informações detalhadas sobre cada job, como ID, nome, tipo, status e dados do remetente.
+
+        **Escopo:** Abrange os dados de envios de campanhas, permitindo análise de desempenho, controle de status e volume de destinatários.
+
+        **Audiência:** Profissionais de marketing e analistas que precisam monitorar e otimizar envios de campanhas.
+
+        **Processo:** Coleta dados diretamente da dataview _job do Salesforce Marketing Cloud, garantindo informações atualizadas e confiáveis sobre cada envio.
+
+        **Recorrência de atualização:** Atualizada diariamente, normalmente às 3h da manhã.
+
+    tags: [gold, comunicacoes, salesforce, envio]
+
+    columns:
+      - name: id
+        description: Identificador único do job de envio no SFMC, usado para rastrear e correlacionar processos de disparo.
+        tags: []
+
+      - name: emailid
+        description: Identificador da versão específica do e-mail enviado, útil para diferenciação entre envios similares.
+        tags: []
+
+      - name: accountid
+        description: Código da conta corporativa associada ao envio, usado para segmentação e controle de acesso.
+        tags: []
+
+      - name: accountuserid
+        description: Identificador do usuário dentro da conta que disparou o envio, importante para auditoria e controle de permissões.
+        tags: []
+
+      - name: fromname
+        description: Nome exibido como remetente no e-mail, usado para personalização e identificação visual pelos destinatários.
+        tags: []
+
+      - name: fromaddress
+        description: Endereço de e-mail usado como remetente, essencial para resposta automática e reputação de envio.
+        tags: []
+
+      - name: schedtime
+        description: Timestamp programado para envio do e-mail, usado em planejamentos e comparações com horários reais.
+        tags: []
+
+      - name: pickuptime
+        description: Data e hora em que o sistema capturou o job para processamento, útil para monitorar atrasos.
+        tags: []
+
+      - name: deliveredtime
+        description: Data e hora em que o e-mail foi efetivamente entregue ao servidor receptor, indicando sucesso de entrega.
+        tags: []
+
+      - name: eventid
+        description: Identificador do evento de envio no SFMC, usado para rastrear ações associadas ao job.
+        tags: []
+
+      - name: ismultipart
+        description: Indicador booleano que sinaliza se o e-mail é multipart (text/plain + text/html), para compatibilidade de clientes.
+        tags: []
+
+      - name: jobtype
+        description: Tipo do job de envio, por exemplo “Automático”, “Programado” ou “Trigger”, útil para categorização de relatórios.
+        tags: []
+
+      - name: jobstatus
+        description: Estado atual do job (como Ativo, Pausado, Erro ou Concluído), importante para monitoramento de execução.
+        tags: []
+
+      - name: modifiedby
+        description: Identificador do usuário ou sistema que fez a última modificação no job, usado para auditoria.
+        tags: []
+
+      - name: modifieddate
+        description: Timestamp da última alteração no job, ajuda a rastrear atualizações e mudanças de configuração.
+        tags: []
+
+      - name: emailname
+        description: Nome legível atribuído ao e-mail no sistema, usado em relatórios e dashboards para identificação.
+        tags: []
+
+      - name: emailsubject
+        description: Assunto do e-mail enviado, usado em análises de performance e testes A/B.
+        tags: []
+
+      - name: iswrapped
+        description: Indicador se o e-mail foi “embrulhado” (wrapped) no template padrão, importante para compatibilidade móvel.
+        tags: []
+
+      - name: testemailaddr
+        description: Endereço de e-mail de teste usado em envios de validação, não enviado a usuários finais.
+        tags: []
+
+      - name: category
+        description: Categoria do envio atribuída no SFMC, usada para agrupamento por tipo de campanha.
+        tags: []
+
+      - name: bccemail
+        description: Endereço em cópia oculta (BCC) usado no envio, comum para monitoramento ou arquivamento.
+        tags: []
+
+      - name: originalschedtime
+        description: Timestamp original do agendamento antes de qualquer reprogramação automática.
+        tags: []
+
+      - name: createddate
+        description: Data e hora em que o job foi inicialmente criado no sistema, útil para auditoria de criação.
+        tags: []
+
+      - name: characterset
+        description: Conjunto de caracteres definidos para o e-mail (ex UTF-8), importante para suporte a idiomas.
+        tags: []
+
+      - name: ipaddress
+        description: Endereço IP do servidor de envio, útil para análise de reputação e monitoramento técnico.
+        tags: []
+
+      - name: salesforcetotalsubscribercount
+        description: Quantidade total de assinantes segmentados pela Salesforce para envio.
+        tags: []
+
+      - name: salesforceerrorsubscribercount
+        description: Número de assinantes que não receberam o e-mail devido a erro na segmentação ou envio.
+        tags: []
+
+      - name: sendtype
+        description: Tipo de envio utilizado (ex "Scheduled", "Triggered"), usado para categorização operacional.
+        tags: []
+
+      - name: dynamicemailsubject
+        description: Assunto dinâmico do e-mail se personalizado por usuário, importante para testes e personalização.
+        tags: []
+
+      - name: suppresstracking
+        description: Indicador se o rastreamento foi suprimido neste envio, usado para controle de dados sensíveis.
+        tags: []
+
+      - name: sendclassificationtype
+        description: Tipo de classificação do envio (ex Promoção, Informativo), usado para segmentar relatórios de compliance.
+        tags: []
+
+      - name: sendclassification
+        description: Nome da classificação usada, correspondente ao tipo de classificação definido.
+        tags: []
+
+      - name: resolvelinkswithcurrentdata
+        description: Indicador se links foram resolvidos com dados em tempo real no momento do envio.
+        tags: []
+
+      - name: emailsenddefinition
+        description: Nome da definição de envio armazenada no SFMC, usada para auditar templates e configurações.
+        tags: []
+
+      - name: deduplicatebyemail
+        description: Indicador se houve deduplicação de envios por endereço no job, para evitar múltiplos envios ao mesmo usuário.
+        tags: []
+
+      - name: triggerersenddefinitionobjectid
+        description: Identificador do objeto de definição de envio acionado por trigger, usado para automações.
+        tags: []
+
+      - name: triggeredsendcustomerkey
+        description: Chave do cliente usada no envio acionado por trigger, padrão para automações personalizadas.
+        tags: []
+
+      - name: ingestion_date
+        description: Data em que o registro foi inserido no Data Lake, útil para controle de ingestão.
+        tags: []
+
+      - name: ingestion_year
+        description: Ano derivado de ingestion_date, para facilitar segmentações temporais.
+        tags: []
+
+      - name: ingestion_month
+        description: Mês derivado de ingestion_date, em formato numérico.
+        tags: []
+
+      - name: ingestion_day
+        description: Dia derivado de ingestion_date, em formato numérico.
+        tags: []
+
+      - name: execution_date
+        description: Data associada ao processamento ou geração deste registro no sistema.
+        tags: []
+
+      - name: execution_year
+        description: Ano derivado de execution_date, usado para filtros em relatórios e dashboards.
+        tags: []
+
+      - name: execution_month
+        description: Mês derivado de execution_date, em formato numérico.
+        tags: []
+
+      - name: execution_day
+        description: Dia derivado de execution_date, em formato numérico.
+        tags: []

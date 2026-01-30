@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: controle_comunicacoes_inapp
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_gold
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier3'
+
+    description: >
+      **Propósito:** Esta tabela armazena informações sobre comunicações via in-app enviadas pela Salesforce Marketing Cloud, com o objetivo de mapear a utilização dos recursos da plataforma e otimizar os custos de campanhas.
+
+      **Escopo:** Abrange todas as comunicações in-app, incluindo dados como nome da comunicação, categoria, centro de custo, responsável pelo disparo, unidade de negócio (BU), BU de rateio, total enviado, além das datas de disparo (dia, mês e ano).
+
+      **Audiência:** Destinada às equipes de Marketing, Unidades de Negócio e Finanças que acompanham a execução e o custo das campanhas de comunicação.
+
+      **Processo:** As informações são extraídas da Salesforce Marketing Cloud e tratadas para permitir a classificação por unidade de negócio e centro de custo.
+
+      **Recorrência de atualização:** Atualização diária (D-1), após a finalização das cargas no Data Lake.
+
+    tags: [gold, comunicacoes, inapp]
+
+    columns:
+      - name: nome_da_comunicacao
+        description: Nome da comunicação enviada via in-app, utilizado para identificar e diferenciar as campanhas ou mensagens dentro da plataforma.
+
+      - name: categoria
+        description: Categoria da comunicação, fixa como "inapp" para indicar que se trata de mensagens enviadas dentro do aplicativo.
+
+      - name: centro_custo
+        description: Código numérico que identifica o centro de custo associado à comunicação, utilizado para controle financeiro e alocação de despesas.
+
+      - name: disparado_por
+        description: Nome da área, equipe ou departamento responsável pelo disparo da comunicação, extraído para fins de controle e análise operacional.
+
+      - name: bu
+        description: Unidade de negócio (Business Unit) responsável pela execução da comunicação, utilizada para segmentação e reporte interno.
+
+      - name: bu_rateio
+        description: Unidade de negócio responsável pelo rateio dos custos da comunicação, utilizada para distribuir despesas entre diferentes áreas ou projetos.
+
+      - name: total_enviado
+        description: Quantidade total de mensagens enviadas na comunicação in-app, importante para métricas de volume e custos.
+
+      - name: dt_disparo
+        description: Data completa (ano-mês-dia) em que a comunicação foi disparada, no formato padrão ISO 8601.
+
+      - name: dia_disparo
+        description: Dia do mês em que o disparo da comunicação foi realizado, representado como número inteiro.
+
+      - name: mes_disparo
+        description: Mês do ano em que o disparo da comunicação foi realizado, representado como número inteiro (1 a 12).
+
+      - name: ano_disparo
+        description: Ano em que o disparo da comunicação foi realizado, representado em formato de quatro dígitos (ex 2025).

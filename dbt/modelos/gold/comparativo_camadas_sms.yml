@@ -1,0 +1,50 @@
+version: 2
+
+models:
+  - name: comparativo_camadas_sms
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_gold
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier3'
+        
+    description: >
+      **Propósito:** Este modelo é usado para comparar os totais de registros de SMS enviados, diferenciando-os entre as camadas  bronze, silver e gold. 
+
+      **Escopo:** Contém dados agregados sobre envios de SMS, comparando as quantidades de registros entre as camadas para  identificar possíveis discrepâncias.
+
+      **Audiência:** Voltado para a equipes de martech como ferramenta de qualidade de dados.
+
+      **Processo:** Dados são extraídos das tabelas de SMS nas camadas bronze, silver e gold, são unificados e comparados para  fornecer uma visão clara das discrepâncias entre cada camada.
+
+      **Recorrência de atualização:** A tabela é atualizada diariamente. 
+
+    tags: [gold, comunicacoes, sms]
+
+    columns:
+      - name: dt_disparo
+        description: Data do disparo dos registros SMS.
+
+      - name: total_bronze
+        description: Total de registros enviados na camada bronze.
+
+      - name: total_silver
+        description: Total de registros enviados na camada silver.
+
+      - name: total_gold
+        description: Total de registros enviados na camada gold.
+
+      - name: diff_silver_bronze
+        description: Diferença no total de registros enviados entre as camadas silver e bronze.
+
+      - name: diff_gold_bronze
+        description: Diferença no total de registros enviados entre as camadas gold e bronze.
+
+      - name: diff_gold_silver
+        description: Diferença no total de registros enviados entre as camadas gold e silver.

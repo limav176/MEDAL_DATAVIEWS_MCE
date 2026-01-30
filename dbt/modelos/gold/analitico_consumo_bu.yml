@@ -1,0 +1,58 @@
+version: 2
+
+models:
+  - name: analitico_consumo_bu
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_gold
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier3'        
+    description: >
+      **Propósito:** Esta tabela incrementa informações sobre a quantidade de disparos realizados, segmentados por tipo de canal e categorias de BU, visando otimizar os custos associados a cada Unidade de Negócio (BU).
+
+      **Escopo:** Inclui detalhes como data de disparo, unidade de negócio, subcategoria, tipo de comunicação, e totais enviados por canal.
+
+      **Audiência:** Destina-se a equipes de dados, marketing e finanças.
+
+      **Processo:** Os dados são extraídos, transformados e carregados de sistemas de retorno de comunicações, processados para fornecer uma visão consolidada e atualizada diariamente.
+
+      **Recorrência de atualização:** A tabela é atualizada diariamente com estratégia de sobrescrita baseada em janela de dados recentes.
+
+    tags: [gold, comunicacoes, disparos, bu]
+
+    columns:
+      - name: dt_envio
+        description: Data de envio das comunicações, formatada.
+
+      - name: bu
+        description: Unidade de Negócio responsável pela comunicação.
+
+      - name: sub
+        description: Subcategoria da comunicação.
+
+      - name: tipo
+        description: Tipo da comunicação, como Transacional ou Comercial.
+
+      - name: qtd_email
+        description: Quantidade de comunicações enviadas via email.
+
+      - name: qtd_sms
+        description: Quantidade de comunicações enviadas via SMS.
+
+      - name: qtd_push
+        description: Quantidade de comunicações enviadas via notificações push.
+
+      - name: ingestion_year
+        description: Ano de ingestão dos dados para fins de partição.
+
+      - name: ingestion_month
+        description: Mês de ingestão dos dados para fins de partição.
+
+      - name: ingestion_day
+        description: Dia de ingestão dos dados para fins de partição.

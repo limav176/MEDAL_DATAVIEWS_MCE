@@ -1,0 +1,65 @@
+version: 2
+
+models:
+  - name: controle_comunicacoes_whatsapp
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_gold
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier3'
+
+    description: >
+      **Propósito:** Esta tabela armazena informações sobre comunicações via WhatsApp enviadas pela Salesforce Marketing Cloud, com o objetivo de mapear a utilização dos recursos da plataforma e otimizar os custos das campanhas.
+
+      **Escopo:** Contempla todas as comunicações realizadas por WhatsApp, incluindo dados como nome da comunicação, categoria, centro de custo, responsável pelo disparo, unidade de negócio (BU), BU de rateio, total enviado e datas de envio (dia, mês e ano).
+
+      **Audiência:** Destinada às equipes de Marketing, Unidades de Negócio e Finanças responsáveis pelo acompanhamento e controle dos custos de comunicação.
+
+      **Processo:** As informações são extraídas da Salesforce Marketing Cloud e tratadas para permitir a classificação por unidade de negócio e centro de custo.
+
+      **Recorrência de atualização:** Atualização diária (D-1), após a finalização das cargas no Data Lake.
+
+    tags: [gold, comunicacoes, whatsapp]
+
+    columns:
+      - name: nome_da_comunicacao
+        description: Nome identificador da comunicação enviada via WhatsApp, utilizado para referência e análise das campanhas.
+
+      - name: atividade
+        description: Nome identificador da atividade enviada via WhatsApp, utilizado para referência e análise das campanhas.
+
+      - name: categoria
+        description: Categoria da comunicação enviada, indicando o tipo da mensagem, como 'Marketing' (promoções), 'Utility' (serviços) ou 'Authentication' (autenticação).
+
+      - name: centro_custo
+        description: Código numérico que representa o centro de custo associado à comunicação, utilizado para controle financeiro e rateio interno. Quando não identificado, aparece como 'FORA DO PADRÃO'.
+
+      - name: disparado_por
+        description: Área ou equipe responsável pelo disparo da comunicação, extraída de registros da Salesforce Marketing Cloud. Valor padrão 'FORA DO PADRÃO' quando não identificado.
+
+      - name: bu
+        description: Unidade de Negócio (Business Unit) responsável pela comunicação, que representa a área organizacional para atribuição e análise de custos. Quando não identificado, consta 'FORA DO PADRÃO'.
+
+      - name: bu_rateio
+        description: Unidade de Negócio responsável pelo rateio do custo da comunicação, podendo ser diferente da unidade que realizou o disparo. Valor padrão 'FORA DO PADRÃO' se não houver correspondência.
+
+      - name: total_enviado
+        description: Quantidade total de mensagens enviadas na comunicação via WhatsApp, usada para cálculo de consumo e análise de performance.
+
+      - name: dt_disparo
+        description: Data completa (formato YYYY-MM-DD) em que a comunicação foi disparada.
+
+      - name: dia_disparo
+        description: Dia do mês em que a comunicação foi enviada, extraído da data de disparo, utilizado para análises temporais detalhadas.
+
+      - name: mes_disparo
+        description: Mês em que a comunicação foi enviada, extraído da data de disparo, no formato numérico (1 a 12).
+
+      - name: ano_disparo
+        description: Ano em que a comunicação foi enviada, extraído da data de disparo, para agrupamento anual das comunicações.

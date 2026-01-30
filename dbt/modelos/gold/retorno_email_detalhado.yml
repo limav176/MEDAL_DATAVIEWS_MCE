@@ -1,0 +1,189 @@
+version: 2
+
+models:
+  - name: retorno_email_detalhado
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_gold
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.confiavel',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Esta tabela armazena os detalhes dos e-mails enviados aos clientes, incluindo informações sobre destinatários, conteúdo, momento do envio e interações. Seu objetivo é fornecer subsídios para análise de desempenho das campanhas e engajamento dos clientes.
+
+      **Escopo:** Contempla dados completos sobre envios de e-mail, abrangendo informações do destinatário, abertura, cliques, cancelamentos de inscrição e demais métricas de interação.
+
+      **Audiência:** Indicada para equipes de Marketing, Engajamento e Analytics que acompanham o desempenho de campanhas de e-mail e comportamento do cliente.
+
+      **Processo:** Os dados são extraídos dos envios realizados pela Salesforce Marketing Cloud e processados para disponibilização analítica.
+
+      **Recorrência de atualização:** Atualização incremental diária (D-1), após a finalização das cargas no Data Lake.
+
+
+    tags: [gold, comunicacoes, salesforce, email]
+
+    columns:
+      - name: ds_origin
+        description: Origem do cliente, indicando a fonte do dado, com valores possíveis como "pag" (pago) ou "will" (Will Bank). Campo do tipo string.
+        tags: []
+
+      - name: id_email
+        description: Identificador único do e-mail enviado, usado para rastreamento e análise individual do envio. Pode ser um número sequencial ou UUID.
+        tags: []
+
+      - name: triggerersenddefinitionobjectid
+        description: ID do objeto que define a configuração do envio do e-mail disparado automaticamente (triggered send) na plataforma Salesforce.
+        tags: []
+
+      - name: batchid
+        description: Identificador do lote de envios ao qual o e-mail pertence, utilizado para agrupar envios realizados em massa na mesma campanha ou execução.
+        tags: []
+
+      - name: id_pessoa
+        description: Identificador único do destinatário (hash ou código), garantindo anonimização. Representa a pessoa que recebeu o e-mail.
+        tags: []
+        meta:
+          openmetadata:
+            tags: ['pii.pii']
+
+      - name: id_customer
+        description: Identificador único do cliente, que pode representar um usuário ou conta dentro do sistema. Usado para relacionar dados pessoais com ações.
+        tags: []
+        meta:
+          openmetadata:
+            tags: ['pii.pii']
+
+      - name: id_proposal
+        description: Identificador da proposta comercial ou oferta associada ao envio do e-mail, permitindo rastrear qual oferta está relacionada.
+        tags: []
+        meta:
+          openmetadata:
+            tags: ['pii.pii']
+
+      - name: email
+        description: Endereço de e-mail do destinatário. Importante para análise de entregabilidade e interações específicas. Campo sensível (PII).
+        tags: []
+        meta:
+          openmetadata:
+            tags: ['pii.pii']
+
+      - name: name
+        description: Nome completo do destinatário, utilizado para personalização e identificação em relatórios. Campo sensível (PII).
+        tags: []
+        meta:
+          openmetadata:
+            tags: ['pii.pii']
+
+      - name: activityname
+        description: Nome da atividade dentro da jornada ou fluxo de automação que gerou o envio deste e-mail, como "Envio de Boas Vindas".
+        tags: []
+
+      - name: journeyname
+        description: Nome da jornada de marketing à qual o e-mail pertence, representando o fluxo ou campanha automatizada.
+        tags: []
+
+      - name: versionnumber
+        description: Número da versão da jornada ou campanha, usado para identificar alterações e atualizações no fluxo de automação.
+        tags: []
+
+      - name: journeystatus
+        description: Status atual da jornada de marketing, como "Ativa", "Inativa" ou "Pausada", indicando se o fluxo está em execução.
+        tags: []
+
+      - name: sendid
+        description: Identificador único do envio específico deste e-mail, usado para rastreamento detalhado de eventos e interações.
+        tags: []
+
+      - name: emailname
+        description: Nome do e-mail ou template utilizado para o envio, ajudando a identificar a mensagem enviada.
+        tags: []
+
+      - name: subject
+        description: Assunto do e-mail enviado, utilizado para análise de engajamento e performance.
+        tags: []
+
+      - name: eventtype
+        description: Tipo de evento relacionado ao e-mail, como "Envio", "Abertura", "Clique", "Rejeição" ou "Cancelamento".
+        tags: []
+
+      - name: dt_envio
+        description: Data e hora exata do envio do e-mail, no formato ISO 8601 (exemplo 2025-07-22T15:30:00Z).
+        tags: []
+
+      - name: fromaddress
+        description: Endereço de e-mail do remetente, usado para controle e identificação da origem do envio.
+        tags: []
+
+      - name: tipo
+        description: Tipo de e-mail enviado, podendo indicar categorias como "Promocional", "Transacional" ou "Informativo".
+        tags: []
+
+      - name: nr_open
+        description: Quantidade total de vezes que o e-mail foi aberto pelo destinatário, indicador de engajamento.
+        tags: []
+
+      - name: dt_firstopen
+        description: Data e hora da primeira abertura do e-mail pelo destinatário, no formato ISO 8601.
+        tags: []
+
+      - name: dt_lastopen
+        description: Data e hora da última abertura registrada para o e-mail, útil para análise do tempo de engajamento.
+        tags: []
+
+      - name: nr_click
+        description: Número total de cliques realizados pelo destinatário dentro do e-mail, indicador de interação.
+        tags: []
+
+      - name: dt_firstclick
+        description: Data e hora do primeiro clique registrado no e-mail pelo destinatário.
+        tags: []
+
+      - name: dt_lastclick
+        description: Data e hora do último clique registrado, indicando o último momento de interação.
+        tags: []
+
+      - name: nr_bounce
+        description: Quantidade de vezes que o e-mail foi rejeitado pelo servidor de destino, importante para monitorar entregabilidade.
+        tags: []
+
+      - name: dt_bounce
+        description: Data e hora da ocorrência do bounce (rejeição) do e-mail, útil para troubleshooting.
+        tags: []
+
+      - name: bouncecategory
+        description: Categoria do bounce, como "Hard Bounce" (falha permanente) ou "Soft Bounce" (falha temporária), para análise de qualidade da lista.
+        tags: []
+
+      - name: smtpcode
+        description: Código de status SMTP retornado pelo servidor de e-mail, indicando o motivo técnico da rejeição ou sucesso.
+        tags: []
+
+      - name: smtpreason
+        description: Descrição textual do motivo associado ao código SMTP, ajudando na identificação de problemas.
+        tags: []
+
+      - name: nr_unsubscribe
+        description: Número total de cancelamentos de inscrição realizados a partir deste e-mail, mostrando rejeição do destinatário.
+        tags: []
+
+      - name: dt_unsubscribe
+        description: Data e hora do cancelamento de inscrição, no formato ISO 8601, para análise temporal do comportamento.
+        tags: []
+
+      - name: ingestion_year
+        description: Ano da ingestão dos dados no Data Lake, utilizado para particionamento e análises temporais.
+        tags: []
+
+      - name: ingestion_month
+        description: Mês da ingestão dos dados no Data Lake, para segmentação mensal.
+        tags: []
+
+      - name: ingestion_day
+        description: Dia da ingestão dos dados no Data Lake, usado para análises diárias.
+        tags: []

@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: controle_de_consumo_safra
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_gold
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Esta tabela armazena informações sobre as comunicações  enviadas pela empresa, para monitorar o uso de recursos da plataforma.
+
+      **Escopo:** Contém detalhes como nome da comunicação, BU, total enviado, dia, mês de disparo.
+
+      **Audiência:** Essencial para equipes de marketing, unidades de negócio e finanças para análise de volume e atribuição.
+
+      **Processo:** Os dados são coletados de múltiplas fontes do Salesforce Marketing Cloud (WhatsApp, Email, SMS, Push, In-App),
+      unificados e processados para fornecer uma visão consolidada e sumarizada dos envios de comunicações.
+
+      **Recorrência de atualização:** A tabela é atualizada diariamente.
+
+    tags: [gold, comunicacoes, salesforce, sumarizado, safra]
+
+    columns:
+      - name: id_customer
+        description: Identificador único do cliente para quem a comunicação foi enviada.
+
+      - name: bu
+        description: bu a qual a comunicação está atribuída, com 'FORA DO PADRÃO' para os que não seguem o padrão.
+
+      - name: total_envios_no_mes_ano
+        description: Número total de comunicações enviadas para o cliente (id_customer) via um determinado canal, para o centro de custo, no mês e ano específicos.
+
+      - name: canal
+        description: Canal utilizado para a comunicação (e.g., 'Whatsapp', 'Email', 'SMS', 'Push', 'In-App'). 
+
+      - name: ano_disparo
+        description: Ano em que a comunicação foi enviada.
+
+      - name: mes_disparo
+        description: Mês em que a comunicação foi enviada.

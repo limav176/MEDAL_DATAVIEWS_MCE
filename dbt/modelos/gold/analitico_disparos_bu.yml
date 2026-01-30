@@ -1,0 +1,58 @@
+version: 2
+
+models:
+  - name: analitico_disparos_bu
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_gold
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier3'
+    description: >
+      **Propósito:** Esta tabela armazena informações sobre a quantidade de disparos realizados via Salesforce Marketing Cloud,  segmentados por tipos de canal e categorias de BU, com o objetivo de monitorar e otimizar os custos associados a cada  Unidade de Negócio (BU).
+
+      **Escopo:** Contém detalhes como data de disparo, canal de comunicação, classificação de BU, subcategoria, tipo de  comunicação e totais enviados.
+
+      **Audiência:** Essencial para equipes de dados, marketing e finanças.
+
+      **Processo:** Os dados são coletados dos sistemas de retorno de push, email e sms, unificados e processados para  fornecer uma visão consolidada das comunicações e seus custos.
+
+      **Recorrência de atualização:** A tabela é atualizada diariamente.
+
+    tags: [gold, comunicacoes, disparos, bu]
+
+    columns:
+      - name: data_disparo
+        description: Data do disparo das comunicações.
+
+      - name: canal
+        description: Canal utilizado para a comunicação, como push, email ou sms.
+
+      - name: bu
+        description: Unidade de Negócio responsável pela comunicação após classificação.
+
+      - name: sub
+        description: Subcategoria de comunicação baseada no conteúdo e contexto.
+
+      - name: tipo
+        description: Tipo de comunicação, classificada como Transacional ou Comercial.
+
+      - name: comunicacao
+        description: Nome específico da comunicação enviada.
+
+      - name: total_enviado
+        description: Quantidade total de mensagens enviadas.
+
+      - name: execution_year
+        description: Ano de execução dos dados.
+
+      - name: execution_month
+        description: Mês de execução dos dados.
+
+      - name: execution_day
+        description: Dia de execução dos dados.

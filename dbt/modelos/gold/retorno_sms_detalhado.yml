@@ -1,0 +1,200 @@
+version: 2
+
+models:
+  - name: retorno_sms_detalhado
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_gold
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.confiavel',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier2'
+        
+    description: >
+        **Propósito:** Documenta eventos de SMS enviados, entregues, não entregues, opt-ins, opt-outs, e mensagens inbound e outbound, oferecendo uma visão abrangente da eficácia das campanhas de SMS. Inclui detalhes do assinante, IDs de mensagem, status de entrega, e timestamps de criação e modificação.
+
+        **Escopo:** Analisa a efetividade das comunicações via SMS, auxiliando na compreensão do engajamento dos destinatários e na eficiência das mensagens.
+
+        **Audiência:** Voltada para equipes de marketing que necessitam de insights detalhados sobre a performance das campanhas de SMS para otimização das estratégias.
+
+        **Processo:** As informações são coletadas a partir dos eventos de SMS gerados pela Salesforce Marketing Cloud.
+
+        **Recorrência de atualização:** A tabela é atualizada 1x ao dia,  por volta das 3h da manhã.
+
+    tags: [gold, comunicacoes, salesforce, sms_activity]
+
+    columns:
+      - name: ds_origin
+        description: Fonte original da entrada do cliente no sistema, podendo ser "pag" (formulário de página) ou "will" (canais internos), usada para identificar a origem do relacionamento com o usuário.
+        tags: []
+
+      - name: id_pessoa
+        description: Identificador único da pessoa no sistema interno. Utilizado para vincular informações comportamentais e demográficas do assinante. Trata-se de dado pessoal sensível (PII).
+        tags: []
+        meta:
+          openmetadata:
+            tags: ['pii.pii']
+
+      - name: id_customer
+        description: Código exclusivo que representa o cliente na base de dados da empresa. Usado para integrações com outros sistemas e análises de comportamento. Contém dado pessoal (PII).
+        tags: []
+        meta:
+          openmetadata:
+            tags: ['pii.pii']
+
+      - name: id_proposal
+        description: Identificador da proposta comercial associada ao cliente, quando aplicável. Permite cruzar informações de campanhas com oportunidades de negócio.
+        tags: []
+
+      - name: name
+        description: Nome completo do cliente conforme registrado no sistema, utilizado para personalização de mensagens e relatórios. Informação sensível classificada como PII.
+        tags: []
+        meta:
+          openmetadata:
+            tags: ['pii.pii']
+
+      - name: mobilemessagetrackingid
+        description: Identificador exclusivo da mensagem móvel, atribuído automaticamente pela plataforma para rastreamento de status e respostas. Utilizado para auditoria e monitoramento de campanhas.
+        tags: []
+        meta:
+          openmetadata:
+            tags: ['pii.pii']
+
+      - name: sendid
+        description: Código que representa uma instância específica de envio de SMS dentro da campanha. Serve para rastrear individualmente os disparos.
+        tags: []
+
+      - name: messageid
+        description: Identificador da mensagem específica enviada ao usuário, usado para rastrear conteúdo e performance de cada disparo.
+        tags: []
+
+      - name: tipo
+        description: Classificação da mensagem SMS como "Transacional" (mensagens operacionais, como códigos de verificação ou alertas) ou "Comercial" (promoções, ofertas e marketing).
+        tags: []
+
+      - name: sms_name
+        description: Nome atribuído à campanha ou ação de marketing no momento da criação, facilitando a identificação no relatório e análise de performance.
+        tags: []
+
+      - name: mobile
+        description: Número de telefone celular do cliente utilizado para envio do SMS. Dado sensível protegido por políticas de privacidade (PII).
+        tags: []
+        meta:
+          openmetadata:
+            tags: ['pii.pii']
+
+      - name: shortcode
+        description: Número curto utilizado como remetente do SMS, geralmente compartilhado entre campanhas promocionais ou operacionais.
+        tags: []
+
+      - name: sent
+        description: Timestamp em que a mensagem foi efetivamente enviada ao provedor de SMS, com base no horário do sistema de origem.
+        tags: []
+
+      - name: description
+        description: Texto informativo ou descrição contextual da mensagem enviada, podendo incluir resumo da campanha ou conteúdo do SMS.
+        tags: []
+
+      - name: delivered
+        description: Timestamp indicando quando a operadora confirmou a entrega da mensagem no dispositivo do destinatário.
+        tags: []
+
+      - name: dt_envio
+        description: Data e hora ajustada (UTC+3) em que o sistema criou o registro da mensagem enviada. Usado para análises temporais consistentes.
+        tags: []
+
+      - name: dt_atualizacao
+        description: Timestamp ajustado da última modificação registrada na mensagem, útil para auditoria ou reprocessamentos.
+        tags: []
+
+      - name: dt_recebimento_operadora
+        description: Data e hora ajustada em que a operadora registrou o recebimento ou processamento do SMS, refletindo a comunicação técnica do disparo.
+        tags: []
+
+      - name: jbdefinitionid
+        description: Identificador da definição da jornada no Salesforce Journey Builder, associado à lógica de automação do fluxo de mensagens.
+        tags: []
+
+      - name: jbactivityid
+        description: Identificador da atividade (step) dentro da jornada no Journey Builder, permitindo rastrear a etapa exata em que a mensagem foi enviada.
+        tags: []
+
+      - name: journeyname
+        description: Nome atribuído à jornada no Salesforce Journey Builder que originou o envio da mensagem, permitindo fácil rastreamento da automação.
+        tags: []
+
+      - name: versionnumber
+        description: Número da versão da jornada ativa no momento do envio. Importante para análises de performance por alterações de fluxo.
+        tags: []
+
+      - name: journeystatus
+        description: Status da jornada no momento do disparo da mensagem (por exemplo ativa, pausada, concluída). Útil para análise de contexto operacional.
+        tags: []
+
+      - name: origin
+        description: Fonte técnica ou plataforma que originou o evento (ex Salesforce, API, sistema legado). Auxilia no diagnóstico de integrações.
+        tags: []
+
+      - name: istest
+        description: Indicador booleano que marca se o envio foi de teste (`true`) ou um disparo real (`false`). Usado para separar dados em ambiente de homologação.
+        tags: []
+
+      - name: unsub
+        description: Data e hora em que o assinante optou por não receber mais mensagens SMS, marcando sua remoção da base ativa.
+        tags: []
+
+      - name: optin
+        description: Data e hora em que o cliente forneceu consentimento para começar a receber mensagens SMS (opt-in).
+        tags: []
+
+      - name: optout
+        description: Timestamp em que o cliente retirou o consentimento para receber mensagens, sendo removido da jornada ativa.
+        tags: []
+
+      - name: execution_year
+        description: Ano calculado com base na criação do evento de envio, ajustado para o fuso considerado. Usado para filtros e análises de séries temporais.
+        tags: []
+
+      - name: execution_month
+        description: Mês (formato numérico) calculado a partir do envio da mensagem, utilizado em agrupamentos e dashboards temporais.
+        tags: []
+
+      - name: execution_day
+        description: Dia (formato numérico) derivado da data de criação do envio, utilizado para detalhamento em relatórios diários.
+        tags: []
+
+      - name: ingestion_date
+        description: Data de ingestão do registro no sistema.
+        tags: []
+
+      - name: ingestion_year
+        description: Ano de ingestão do registro.
+        tags: []
+
+      - name: ingestion_month
+        description: Mês de ingestão do registro.
+        tags: []
+
+      - name: ingestion_day
+        description: Dia de ingestão do registro.
+        tags: []
+
+      - name: execution_date
+        description: Data de execução do registro no sistema.
+        tags: []
+
+      - name: execution_year
+        description: Ano de execução do registro.
+        tags: []
+
+      - name: execution_month
+        description: Mês de execução do registro.
+        tags: []
+
+      - name: execution_day
+        description: Dia de execução do registro.
+        tags: []

@@ -1,0 +1,133 @@
+version: 2
+
+models:
+  - name: envio_pessoa
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_gold
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.confiavel',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier5'
+
+    description: >
+      **Propósito:** A tabela `envio_pessoa` é utilizada para consolidar os dados de envio de contatos para comunicação para os clientes, incluindo informações sobre os destinatários.
+
+      **Escopo:** Essencial para possibilitar o envio de comunicações para a Salesforce.
+
+      **Audiência:** Destinada a profissionais de martech, como tabela auxiliar para registro de contatos
+
+      **Processo:** A tabela unifica dados de clientes e de leads que são potenciais alvos de comunicacões de marketing.
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia.
+
+    tags: [gold, comunicacoes, envio_mensagens]
+
+    columns:
+      - name: id
+        description: Identificador único da cliente ou lead. No caso de clientes se refere ao id_customer e de lead o id da proposta.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: id_pessoa
+        description: Identificador único da pessoa destinatária da comunicação.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: ds_email
+        description: Endereço de e-mail do destinatário, quando disponível.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: nr_celular
+        description: Número de telefone celular do destinatário.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: nm_social
+        description: Nome social do destinatário.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: dt_nascimento
+        description: Data de nascimento do destinatário.
+        tags: []
+
+      - name: st_conta
+        description: Status da conta do destinatário no momento do envio da comunicação.
+        tags: []
+
+      - name: nr_cep
+        description: CEP do destinatário, relacionado à localização.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: ds_estado
+        description: Estado relacionado ao CEP do destinatário.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: ds_logradouro
+        description: Logradouro relacionado ao endereço do destinatário.
+        tags: []
+
+      - name: is_pep
+        description: Indica se o destinatário é uma Pessoa Exposta Politicamente (PEP).
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: dt_ultima_alteracao
+        description: Data da última alteração no registro da pessoa.
+        tags: []
+
+      - name: execution_date
+        description: Data de execução da comunicação, relacionada ao envio.
+        tags: []
+
+      - name: execution_year
+        description: Ano de execução da tabela.
+        tags: []
+
+      - name: execution_month
+        description: Mês de execução da tabela.
+        tags: []
+        
+      - name: execution_day
+        description: Dia de execução da tabela.
+        tags: []

@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: analitico_tipocontato
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier4'
+        
+    description: >
+      **Propósito:** Esta tabela contém informações agregadas sobre a entrada de contatos na Salesforce Marketing Cloud (SFMC), segmentadas por tipo de contato (lead ou cliente), com o objetivo de apoiar a análise do crescimento da base de comunicação.
+
+      **Escopo:** Consolida a soma de registros inseridos na SFMC, agrupados por tipo de contato, facilitando o acompanhamento da evolução da base de pessoas elegíveis para ações de comunicação.
+
+      **Audiência:** Destinada às equipes de Marketing, CRM e Operações que utilizam a Salesforce Marketing Cloud, oferecendo uma visão das principais origens e métodos de inserção de contatos na plataforma.
+
+      **Processo:** Os dados são coletados a partir das atividades de cadastro de contatos na SFMC e consolidados diariamente por meio de processos de ingestão e transformação.
+
+      **Recorrência de atualização:** Atualização diária (D-1), após a finalização das cargas no Data Lake.
+
+    tags: [gold, comunicacoes, salesforce, totalizador, subscribers, tipo, pessoacontato, lead, ingestao]
+
+    columns:
+      - name: total
+        description: Quantidade total de contatos registrados, agrupada por tipo de contato
+
+      - name: tipo
+        description: Classificação do contato como lead ou cliente, indicando o segmento ao qual pertence
+
+      - name: dtRegistro
+        description: Data na qual os dados foram consolidados e sumarizados para análise
+
+      - name: ingestion_date
+        description: Data em que o evento de registro do contato foi ingerido no sistema
+
+      - name: ingestion_year
+        description: Ano correspondente à data de ingestão do evento
+
+      - name: ingestion_month
+        description: Mês correspondente à data de ingestão do evento
+
+      - name: ingestion_day
+        description: Dia correspondente à data de ingestão do evento
+
+      - name: execution_date
+        description: Data em que o processo de consolidação dos dados foi executado
+
+      - name: execution_year
+        description: Ano em que o processo de consolidação foi executado
+
+      - name: execution_month
+        description: Mês em que o processo de consolidação foi executado
+
+      - name: execution_day
+        description: Dia em que o processo de consolidação foi executado

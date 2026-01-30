@@ -1,0 +1,72 @@
+version: 2
+
+models:
+  - name: sms_unificado
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_gold
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier2'
+        
+    description: >
+        **Propósito:** Unifica eventos de SMS provenientes da Infobip e Salesforce, incluindo detalhes como mensagem, nomes de comunicação, identificação do número de telefone e engajamento do usuário.
+
+        **Escopo:** Essencial para acesso via Looker e para a análise da performance de campanhas de SMS, fornecendo dados valiosos para o aprimoramento de estratégias de marketing e comunicação.
+
+        **Audiência:** Destinada a profissionais de marketing e analistas de dados.
+
+        **Processo:** Os dados são consolidados a partir da tabela retorno_sms_unificado, que recebe e transforma registros extraídos diariamente de múltiplas fontes (como Infobip e Salesforce). As transformações padronizam os campos de diferentes plataformas para garantir consistência na análise.
+
+        **Recorrência de atualização:** A tabela é atualizada 1x ao dia, normalmente por volta das 3h da manhã.
+
+    tags: [gold, comunicacoes, sms_marketing, sms]
+
+    columns:
+      - name: id_comunicacao
+        description: Identificador único da comunicação SMS. Utilizado para rastrear e relacionar eventos específicos de mensagens enviadas, facilitando o monitoramento e análise das campanhas.
+        tags: []
+
+      - name: nome_da_comunicacao
+        description: Nome descritivo da comunicação ou campanha SMS associada ao evento, usado para identificação clara em relatórios e análises.
+        tags: []
+
+      - name: dt_disparo
+        description: Data e hora exatas em que a mensagem SMS foi enviada ao destinatário, no fuso horário padrão do sistema.
+        tags: []
+
+      - name: phone
+        description: Número de telefone do destinatário da mensagem SMS. Esta coluna contém dados pessoais identificáveis (PII) e deve ser tratada com cuidados especiais de segurança e privacidade.
+        tags: []
+        meta:
+          openmetadata:
+            tags: ['pii.pii']
+
+      - name: fl_recebeu
+        description: Indicador binário que representa se a mensagem SMS foi recebida pelo destinatário (por exemplo, '1' para recebido e '0' para não recebido). Útil para medir sucesso na entrega.
+        tags: []
+
+      - name: bu
+        description: Unidade de negócio responsável pela campanha ou comunicação, permitindo segmentação e análise por área ou departamento.
+        tags: []
+
+      - name: execution_date
+        description: Data associada à execução do processamento ou carga deste registro na plataforma, usada para rastrear atualizações e auditoria.
+        tags: []
+
+      - name: execution_year
+        description: Ano extraído da data de execução, facilitando agregações temporais e análises históricas.
+        tags: []
+
+      - name: execution_month
+        description: Mês extraído da data de execução, em formato numérico, para uso em filtros e agregações temporais.
+        tags: []
+
+      - name: execution_day
+        description: Dia do mês extraído da data de execução, permitindo detalhamento diário nas análises.
+        tags: []

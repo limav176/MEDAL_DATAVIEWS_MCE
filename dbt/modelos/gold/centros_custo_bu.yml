@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: centros_custo_bu
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_gold
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier4'
+    description: >
+      **Propósito:** Esta tabela é utilizada para registrar todas as unidades de negócio (BUs) e centros de custo, servindo como base para o acompanhamento e rateio dos custos de comunicação.
+
+      **Escopo:** Contém informações estruturadas sobre centros de custo, unidades de negócio responsáveis e categorias de rateio associadas, permitindo uma gestão eficiente da alocação de despesas.
+
+      **Audiência:** Destinada às equipes financeiras e de planejamento estratégico responsáveis pelo monitoramento e distribuição dos custos de comunicação entre as diferentes unidades de negócio.
+
+      **Processo:** Os dados são de natureza estática e são atualizados sempre que houver a criação ou modificação de centros de custo e/ou unidades de negócio.
+
+      **Recorrência de atualização:** Atualizada sob demanda, conforme a necessidade de inclusão ou alteração de registros.
+
+    tags: [gold, comunicacoes, rateio, custos]
+
+    columns:
+      - name: centro_custo
+        description: Código numérico que identifica o centro de custo utilizado para alocar e controlar os gastos relacionados às comunicações da empresa
+
+      - name: disparado_por
+        description: Nome da unidade de negócio (BU) ou área responsável pelo envio da comunicação, importante para rastrear a origem operacional das mensagens
+
+      - name: bu
+        description: Nome completo da unidade de negócio (BU) associada ao centro de custo, usada para organizar e segmentar os dados financeiros e operacionais
+
+      - name: bu_rateio
+        description: Categoria ou critério de rateio financeiro vinculado à unidade de negócio que define como os custos das comunicações serão distribuídos entre diferentes BUs
+

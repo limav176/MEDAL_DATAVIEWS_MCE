@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: retorno_sms_resumido
+    meta:
+      domain: comunicacoes
+      layer: gold
+      schema: comunicacoes_gold
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier2'
+        
+    description: >
+      **Propósito:** Esta tabela gera um resumo de notificações sms enviadas aos dispositivos móveis dos usuários. 
+
+      **Escopo:** Contém detalhes como data de envio, nome de comunicacao, plataforma e totais de interação.
+
+      **Audiência:** Essencial para equipes de dados, cxm e marketing.
+
+      **Processo:** Os dados são extraídos da Salesforce e Infobip, processados para identificar eventos de cancelamento de inscrição únicos e relevantes para análises de atendimento.
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia.
+
+    tags: [gold, comunicacoes, sms]
+
+    columns:
+      - name: nome_comunicacao
+        description: Identifica o nome dado à comunicação sms enviada.
+
+      - name: data_disparo
+        description: Data e hora em que a notificação sms foi enviada aos usuários.
+
+      - name: bu
+        description: Indica o departamento dentro da organização que originou a comunicação.
+
+      - name: plataforma
+        description: Denota a plataforma de envio Infobip ou Salesforce
+
+      - name: total_enviado
+        description: Número total de notificações sms enviadas
+
+      - name: total_recebimento
+        description: Número total de notificações que foram entregues com sucesso aos dispositivos dos destinatários.
+
+      - name: execution_year
+        description: Ano de execução da tabela.
+
+      - name: execution_month
+        description: Mês de execução da tabela.
