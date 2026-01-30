@@ -1,0 +1,42 @@
+{{ 
+	standard_config(
+		model_name='stg_bounce_sfi',
+		zone='bronze',
+		materialized='ephemeral'
+	)
+}}
+SELECT 
+	accountid,
+	oybaccountid,
+	jobid,
+	listid,
+	batchid,
+	subscriberid,
+	eventdate,
+	isunique,
+	"domain",
+	bouncecategoryid,
+	bouncecategory,
+	bouncesubcategoryid,
+	bouncesubcategory,
+	bouncetypeid,
+	bouncetype,
+	smtpbouncereason,
+	smtpmessage,
+	smtpcode,
+	triggerersenddefinitionobjectid,
+	triggeredsendcustomerkey,
+	isfalsebounce,
+	subscriberkey,
+	id_email,
+	id_bounce,
+	ingestion_date,
+	ingestion_year,
+	ingestion_month,
+	ingestion_day,
+	execution_date,
+	execution_year,
+	execution_month,
+	execution_day 
+FROM 
+{{ source('comunicacoes_bronze', 'bounce_sfi') }}

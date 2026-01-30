@@ -1,0 +1,83 @@
+version: 2
+
+models:
+  - name: stg_inbound_wa_sfi
+    meta:
+      domain: comunicacoes
+      layer: bronze
+      schema: comunicacoes_bronze
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Capturar e armazenar mensagens recebidas (inbound) via WhatsApp, incluindo dados sobre o remetente, canal e conteúdo da mensagem.
+
+      **Escopo:** Contém dados das mensagens de entrada enviadas pelos clientes através do WhatsApp, incluindo metadados sobre o canal e detalhes do conteúdo,.
+
+      **Audiência:** Destinado às equipes de atendimento ao cliente e operações de marketing que analisam interações recebidas no WhatsApp para melhorar a resposta e engajamento com o cliente.
+
+      **Processo:** Os dados são extraídos do Salesforce e processados para centralizar as informações das mensagens de entrada, facilitando a análise e resposta.
+
+      **Recorrência de atualização:** Atualizado 1x ao dia.
+
+    tags: [bronze, comunicacoes, whatsapp, inbound]
+
+    columns:
+      - name: chatmessagingmologid
+        description: Identificador exclusivo sequencial da mensagem de entrada no log de mensagens.
+
+      - name: channelid
+        description: Número de telefone do canal registrado através do qual a mensagem foi recebida.
+
+      - name: channelname
+        description: Nome do canal, especificado pelo cliente para a mensagem de entrada.
+
+      - name: channeltype
+        description: Tipo de plataforma de canal, neste caso, WhatsApp.
+
+      - name: mobilenumber
+        description: Número de telefone do contato que enviou a mensagem de entrada.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: messagedata
+        description: Dados da mensagem em formato JSON, contendo o conteúdo enviado pelo cliente.
+
+      - name: datecreatedutc
+        description: Data e hora UTC em que a mensagem de entrada foi recebida, útil para análise temporal.
+
+      - name: messagetype
+        description: Tipo de mensagem recebida, identificando o formato ou propósito da interação.
+
+      - name: ingestion_date
+        description: Data de ingestão do registro no sistema, indicando quando a mensagem foi capturada.
+
+      - name: ingestion_year
+        description: Ano de ingestão.
+
+      - name: ingestion_month
+        description: Mês de ingestão.
+
+      - name: ingestion_day
+        description: Dia de ingestão.
+
+      - name: execution_date
+        description: Data de execução.
+
+      - name: execution_year
+        description: Ano da execução.
+
+      - name: execution_month
+        description: Mês da execução.
+
+      - name: execution_day
+        description: Dia de execução.

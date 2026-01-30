@@ -1,0 +1,73 @@
+version: 2
+
+models:
+  - name: stg_metadados_sfi
+    meta:
+      domain: comunicacoes
+      layer: bronze
+      schema: comunicacoes_bronze
+      owner: fillipe.silva@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier3'
+
+    description: >
+      **Propósito:** Esta tabela contém informações volumétricas das integraçōes utilizadas pelo SFI.
+
+      **Escopo:** Inclui detalhes sobre os nome da integrações, data de disparo e volumetria para acompanhamento e monitoramento da saude das integracoes
+
+      **Audiência:** Todos os usuários do SFI que tenham necessidade de monitorar suas integrações
+
+      **Processo:** Os dados são coletados diretamente das integrações do SFI
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia.
+
+    tags: [bronze, comunicacoes, salesforce, metodos, ingestao]
+
+    columns:
+      - name: dag_name
+        description: nome da integraçao no SFI
+        tags: []
+
+      - name: volume
+        description:  volume de dados integrados via SFI
+        tags: []
+
+      - name: sendtime
+        description: horario do disparo
+        tags: []
+
+      - name: ingestion_date
+        description: Data de ingestão do evento.
+        tags: []
+
+      - name: ingestion_year
+        description: Ano de ingestão.
+        tags: []
+
+      - name: ingestion_month
+        description: Mês de ingestão.
+        tags: []
+
+      - name: ingestion_day
+        description: Dia de ingestão.
+        tags: []
+
+      - name: execution_date
+        description: Data de execução.
+        tags: []
+
+      - name: execution_year
+        description: Ano de execução.
+        tags: []
+
+      - name: execution_month
+        description: Mês de execução.
+        tags: []
+
+      - name: execution_day
+        description: Dia de execução.
+        tags: []

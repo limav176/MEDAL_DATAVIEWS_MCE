@@ -1,0 +1,105 @@
+version: 2
+
+models:
+  - name: stg_ir_inapp
+    meta:
+      domain: comunicacoes
+      layer: bronze
+      schema: comunicacoes_bronze
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Esta tabela armazena dados detalhados sobre campanhas de marketing in-app, incluindo métricas de engajamento, taxas de exibição e cliques. Essas informações são cruciais para avaliar a eficácia das campanhas e otimizar a experiência do usuário.
+
+      **Escopo:** Abrange todas as métricas obtidas pelo Inteliggence reports relacionadas a campanhas in-app, desde envios únicos até cliques em botões, permitindo uma análise completa do desempenho das campanhas.
+
+      **Audiência:** Destinada a equipes de marketing e análise de dados que precisam monitorar e otimizar campanhas in-app.
+
+      **Processo:** Os dados são coletados diretamente das campanhas in-app no intelligence reports fornecendo insights sobre o comportamento do usuário e a eficácia das comunicações.
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia.
+
+    tags: [bronze, comunicacoes, marketing, inapp, intelligence reports] 
+
+    columns:
+      - name: primkey
+        description: Chave primária composta (lower(concat("In-App Send Name", "Send Date", "In-App Send ID", "In-App Button ID")))
+        tags: []
+
+      - name: InAppSendName
+        description: Nome da campanha In-App
+        tags: []
+
+      - name: EventDate
+        description: Data do evento (convertida para date)
+        tags: []
+
+      - name: InAppButtonID
+        description: ID do botão In-App
+        tags: []
+
+      - name: InAppSendID
+        description: ID do envio In-App
+        tags: []
+
+      - name: InAppButtonLabel
+        description: Rótulo do botão In-App
+        tags: []
+
+      - name: InAppUniqueSends
+        description: Envios únicos In-App
+        tags: []
+
+      - name: InAppDeviceDisplays
+        description: Exibições em dispositivos
+        tags: []
+
+      - name: InAppDeviceDismisses
+        description: Descartes em dispositivos
+        tags: []
+
+      - name: InAppDeviceDeliveries
+        description: Entregas em dispositivos
+        tags: []
+
+      - name: InAppDeviceButtonClicks
+        description: Cliques em botões In-App
+        tags: []
+
+      - name: ingestion_date
+        description: Data de ingestão
+        tags: []
+
+      - name: ingestion_year
+        description: Ano de ingestão
+        tags: []
+
+      - name: ingestion_month
+        description: Mês de ingestão
+        tags: []
+
+      - name: ingestion_day
+        description: Dia de ingestão
+        tags: []
+
+      - name: execution_date
+        description: Data de execução
+        tags: []
+
+      - name: execution_year
+        description: Ano de execução
+        tags: []
+
+      - name: execution_month
+        description: Mês de execução
+        tags: []
+
+      - name: execution_day
+        description: Dia de execução
+        tags: []

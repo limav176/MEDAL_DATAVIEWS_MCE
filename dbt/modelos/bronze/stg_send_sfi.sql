@@ -1,0 +1,57 @@
+{{ 
+	standard_config(
+		model_name='stg_send_sfi',
+		zone='bronze',
+		materialized='ephemeral'
+	)
+}}
+
+select 
+	jobid,
+	emailid,
+	accountid,
+	accountuserid,
+	fromname,
+	fromemail,
+	schedtime,
+	pickuptime,
+	deliveredtime,
+	eventid,
+	ismultipart,
+	jobtype,
+	jobstatus,
+	modifiedby,
+	modifieddate,
+	emailname,
+	emailsubject,
+	iswrapped,
+	testemailaddr,
+	category,
+	bccemail,
+	originalschedtime,
+	createddate,
+	characterset,
+	ipaddress,
+	salesforcetotalsubscribercount,
+	salesforceerrorsubscribercount,
+	sendtype,
+	dynamicemailsubject,
+	suppresstracking,
+	sendclassificationtype,
+	sendclassification,
+	resolvelinkswithcurrentdata,
+	emailsenddefinition,
+	deduplicatebyemail,
+	triggerersenddefinitionobjectid,
+	triggeredsendcustomerkey,
+	ingestion_date,
+	ingestion_year,
+	ingestion_month,
+	ingestion_day,
+	execution_date,
+	execution_year,
+	execution_month,
+	execution_day
+FROM 
+	{{ source('comunicacoes_bronze', 'job_sfi') }}
+	

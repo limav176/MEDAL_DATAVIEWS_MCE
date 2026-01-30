@@ -1,0 +1,123 @@
+version: 2
+
+models:
+  - name: stg_sent_sfi
+    meta:
+      domain: comunicacoes
+      layer: bronze
+      schema: comunicacoes_bronze
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Esta tabela registra os detalhes dos e-mails enviados, como informações sobre o cliente, a lista de destinatários, o assinante, o assunto do e-mail, e identificadores únicos de cada envio, incluindo as datas, o tipo de e-mail, e outros metadados relevantes. É uma ferramenta crucial para medir o sucesso das campanhas de e-mail, avaliando tanto o desempenho quanto a reação dos destinatários às mensagens.
+
+      **Escopo:** Fornece uma visão completa dos eventos de e-mails enviados, permitindo análises detalhadas sobre a eficácia das comunicações via e-mail, desde a entrega até a interação do destinatário.
+
+      **Audiência:** Voltada para profissionais de marketing que dependem de dados concretos para ajustar e melhorar as estratégias de campanhas de e-mail, buscando maximizar o engajamento e a resposta dos destinatários.
+
+      **Processo:** Os eventos de envio de e-mails são meticulosamente coletados e documentados a partir das atividades realizadas através da Salesforce, garantindo que os profissionais de marketing tenham acesso a informações precisas e atualizadas para análise.
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia.
+
+    tags: [bronze, comunicacoes, salesforce, email_sent]
+
+    columns:
+      - name: client_id
+        description: Identificador do cliente no Salesforce.
+        tags: []
+
+      - name: partnerkey
+        description: Chave de parceiro relacionada ao envio.
+        tags: []
+
+      - name: listid
+        description: Identificador da lista de envio.
+        tags: []
+
+      - name: subscriberid
+        description: Identificador do assinante que recebeu o e-mail.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: objectid
+        description: Identificador do objeto de envio no Salesforce.
+        tags: []
+
+      - name: sendid
+        description: Identificador do envio.
+        tags: []
+
+      - name: subscriberkey
+        description: Chave única do assinante.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: eventdate
+        description: Data e hora do evento de envio.
+        tags: []
+
+      - name: eventtype
+        description: Tipo de evento registrado (enviado, aberto, clicado).
+        tags: []
+
+      - name: triggerersenddefinitionobjectid
+        description: Objeto que definiu o envio que resultou no evento.
+        tags: []
+
+      - name: batchid
+        description: Identificador do lote de envio.
+        tags: []
+
+      - name: triggeredsendcustomerkey
+        description: Chave do cliente do envio que resultou no evento.
+        tags: []
+
+      - name: partnerproperties
+        description: Propriedades do parceiro associadas ao envio.
+        tags: []
+
+      - name: ingestion_date
+        description: Data de ingestão do evento.
+        tags: []
+
+      - name: ingestion_year
+        description: Ano de ingestão.
+        tags: []
+
+      - name: ingestion_month
+        description: Mês de ingestão.
+        tags: []
+
+      - name: ingestion_day
+        description: Dia de ingestão.
+        tags: []
+
+      - name: execution_date
+        description: Data de execução do evento.
+        tags: []
+
+      - name: execution_year
+        description: Ano de execução.
+        tags: []
+
+      - name: execution_month
+        description: Mês de execução.
+        tags: []
+
+      - name: execution_day
+        description: Dia de execução.
+        tags: []

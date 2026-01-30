@@ -1,0 +1,52 @@
+version: 2
+
+models:
+  - name: stg_optout_sfi
+    meta:
+      domain: comunicacoes
+      layer: bronze
+      schema: comunicacoes_bronze
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Registra pessoas que se desinscreveram das comunicações
+
+      **Escopo:** Inclui dados sobre a interação dos usuários com os links de desinscriáo 
+
+      **Audiência:** Direcionado a equipes de marketing e análise de dados que querem aprofundar o entendimento sobre o comportamento do usuário e ajustar suas estratégias de comunicação com base em dados concretos.
+
+      **Processo:** As interações são rastreadas e os dados coletados, fornecendo insights sobre a desinscricao das comunicacoes, permitindo análises detalhadas e oportunas.
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia. Overwrite
+
+    tags: [bronze, comunicacoes, salesforce, optout]
+
+    columns:
+      - name: Subscribertype
+        description: Identificador do tipo de inscri;áo do contato
+
+      - name: Dateunsubscribed
+        description: data da desinscri;áo
+
+      - name: status
+        description: status da pessoa
+
+      - name: DateJoined
+        description: Data e hora que o contato foi inscrito 
+
+      - name: subscriberkey
+        description: id da pessoa, hash 256 do cpf
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+     

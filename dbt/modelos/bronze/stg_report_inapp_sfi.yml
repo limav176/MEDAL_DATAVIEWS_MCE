@@ -1,0 +1,77 @@
+version: 2
+
+models:
+  - name: stg_report_inapp_sfi
+    meta:
+      domain: comunicacoes
+      layer: bronze
+      schema: comunicacoes_bronze
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Esta tabela guarda informações sobre os relatórios de in-app da Salesforce Marketing Cloud, para acompanhamento de métricas importantes de envio.
+
+      **Escopo:** Abrange todos os relatórios de in-app da Salesforce Marketing Cloud, incluindo informações sobre o nome do envio, data de envio, número de envios únicos, exibições, dismissões, entregas, cliques em botões e datas de registro, ingestão e execução.
+
+      **Audiência:** Destinada a equipes de marketing, unidades de negócio e finanças.
+
+      **Processo:** As informações se originam do Salesforce Marketing Cloud. O campo senddate foi convertido para timestamp e os campos inappuniquesends, inappdevicedisplays, inappdevicedismisses, inappdevicedeliveries e inappdevicebuttonclicks foram convertidos para inteiros.
+
+      **Recorrência de atualização:** A tabela é atualizada diariamente.
+
+    tags: [bronze, comunicacoes, inapp, sfmc]
+
+    columns:
+      - name: inappsendname
+        description: Nome do envio de in-app.
+
+      - name: senddate
+        description: Data de envio do in-app (timestamp).
+
+      - name: inappuniquesends
+        description: Número de envios únicos de in-app (inteiro).
+
+      - name: inappdevicedisplays
+        description: Número de exibições de in-app (inteiro).
+
+      - name: inappdevicedismisses
+        description: Número de dismissões de in-app (inteiro).
+
+      - name: inappdevicedeliveries
+        description: Número de entregas de in-app (inteiro).
+
+      - name: inappdevicebuttonclicks
+        description: Número de cliques em botões de in-app (inteiro).
+
+      - name: dtregistro
+        description: Data de registro do in-app.
+
+      - name: ingestion_date
+        description: Data de ingestão do in-app.
+
+      - name: ingestion_year
+        description: Ano de ingestão do in-app.
+
+      - name: ingestion_month
+        description: Mês de ingestão do in-app.
+
+      - name: ingestion_day
+        description: Dia de ingestão do in-app.
+
+      - name: execution_date
+        description: Data de execução do in-app.
+
+      - name: execution_year
+        description: Ano de execução do in-app.
+
+      - name: execution_month
+        description: Mês de execução do in-app.
+
+      - name: execution_day
+        description: Dia de execução do in-app.

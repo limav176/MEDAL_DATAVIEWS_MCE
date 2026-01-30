@@ -1,0 +1,73 @@
+version: 2
+
+models:
+  - name: stg_tipocontato_sfi
+    meta:
+      domain: comunicacoes
+      layer: bronze
+      schema: comunicacoes_bronze
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Esta tabela contém informações sumarizadas de total de entrada de dados por tipo de contato em Salesforce Marketing Cloud.
+
+      **Escopo:** Inclui a somatoria de registros inseridos na plataforma agrupado por tipo (lead ou cliente) em sfmc facilitando o acompanhamento e a análise da dinamica do crescimento da base de pessoas para comunicação.
+
+      **Audiência:** Útil para equipes que trabalham com a Salesforce Marketing Cloud, oferecendo uma visao dos metodos e ofensores da entrada de contatos.
+
+      **Processo:** Os dados são coletados diretamente das atividades realizadas na Salesforce Marketing Cloud.
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia.
+
+    tags: [bronze, comunicacoes, salesforce, totalizador, subscribers, tipo, pessoacontato, lead, ingestao]
+
+    columns:
+      - name: total
+        description: total por tipo
+        tags: [tipo]
+
+      - name: tipo
+        description: leads, clientes 
+        tags: [Total]
+
+      - name: dtRegistro
+        description: data de sumarizacao
+        tags: [dtRegistro]
+
+      - name: ingestion_date
+        description: Data de ingestão do evento.
+        tags: [ingestion_date]
+
+      - name: ingestion_year
+        description: Ano de ingestão.
+        tags: [ingestion_year]
+
+      - name: ingestion_month
+        description: Mês de ingestão.
+        tags: [ingestion_month]
+
+      - name: ingestion_day
+        description: Dia de ingestão.
+        tags: [ingestion_day]
+
+      - name: execution_date
+        description: Data de execução.
+        tags: [execution_date]
+
+      - name: execution_year
+        description: Ano de execução.
+        tags: [execution_year]
+
+      - name: execution_month
+        description: Mês de execução.
+        tags: [execution_month]
+
+      - name: execution_day
+        description: Dia de execução.
+        tags: [execution_day]

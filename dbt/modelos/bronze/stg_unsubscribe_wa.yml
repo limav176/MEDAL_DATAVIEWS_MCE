@@ -1,0 +1,97 @@
+version: 2
+
+models:
+  - name: stg_unsubscribe_wa
+    meta:
+      domain: comunicacoes
+      layer: bronze
+      schema: comunicacoes_bronze
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Registrar eventos potenciais de cancelamento de assinatura no canal WhatsApp, incluindo detalhes como a quantidade de bounces e informações de contato.
+
+      **Escopo:** Contém informações detalhadas sobre possíveis eventos de cancelamento de assinatura e falhas de entrega (bounces) via WhatsApp.
+
+      **Audiência:** Voltado para as equipes de atendimento e marketing que buscam entender padrões de cancelamento no WhatsApp e tomar medidas para otimizar a experiência dos clientes.
+
+      **Processo:** Os dados são extraídos do sistema Salesforce e processados para capturar eventos relacionados a cancelamentos e bounces.
+      **Recorrência de atualização:** Atualizado 1x ao dia.
+
+    tags: [bronze, comunicacoes, whatsapp, unsubscribe]
+
+    columns:
+      - name: primkey
+        description: Chave primária do registro.
+        
+      - name: mid
+        description: ID do membro remetente associado ao evento de cancelamento.
+
+      - name: eid
+        description: ID da empresa remetente do evento de cancelamento.
+
+      - name: contactkey
+        description: Chave de contato do destinatário, usada para identificar o usuário cancelado.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: mobilenumber
+        description: Número de telefone do destinatário do evento de cancelamento.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: channeltype
+        description: Tipo de plataforma de canal, sendo WhatsApp neste caso.
+
+      - name: channelid
+        description: Número de telefone do canal registrado para comunicação.
+
+      - name: channelname
+        description: Nome do canal, fornecido pelo cliente para o evento de cancelamento.
+
+      - name: firstdateutc
+        description: Data e hora UTC do primeiro evento sem rastreamento de entrega, indicando um possível início de problemas de entrega.
+
+      - name: lastdateutc
+        description: Data e hora UTC do último evento sem rastreamento de entrega, importante para identificar o fim de uma sequência de bounces.
+
+      - name: potentialbouncecount
+        description: Contagem potencial de falhas de entrega (bounces), importante para identificar padrões de falha e possíveis cancelamentos.
+
+      - name: ingestion_date
+        description: Data de ingestão do registro no sistema, indicando quando o evento foi capturado.
+
+      - name: ingestion_year
+        description: Ano de ingestão, útil para análises anuais.
+
+      - name: ingestion_month
+        description: Mês de ingestão, usado para identificar padrões mensais.
+
+      - name: ingestion_day
+        description: Dia de ingestão, importante para análises diárias.
+
+      - name: execution_date
+        description: Data de execução relacionada ao evento de cancelamento.
+
+      - name: execution_year
+        description: Ano de execução do evento.
+
+      - name: execution_month
+        description: Mês da execução, útil para análises temporais de cancelamento.
+
+      - name: execution_day
+        description: Dia de execução, relevante para monitoramento diário de cancelamentos.

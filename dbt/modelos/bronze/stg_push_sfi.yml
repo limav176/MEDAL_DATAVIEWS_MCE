@@ -1,0 +1,150 @@
+version: 2
+
+models:
+  - name: stg_push_sfi
+    meta:
+      domain: comunicacoes
+      layer: bronze
+      schema: comunicacoes_bronze
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier3'
+
+    description: >
+      **Propósito:** Esta tabela guarda os detalhes de notificações push enviadas aos dispositivos móveis dos usuários. Inclui quem recebeu, que tipo de mensagem foi, quando foi enviada, e outros detalhes importantes. Isso ajuda a entender quais notificações funcionam melhor e como as pessoas reagem a elas.
+
+      **Escopo:** Abrange tudo sobre as notificações push, como informações do destinatário, o conteúdo da mensagem, o momento do envio e como a mensagem foi recebida.
+
+      **Audiência:** Destinada a equipes de marketing e analistas de dados, que necessitam de insights precisos sobre o comportamento de abertura dos usuários para otimizar campanhas.
+
+      **Processo:** As informações vêm das notificações push enviadas pela Salesforce, permitindo uma análise precisa do impacto dessas mensagens.
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia.
+
+    tags: [bronze, comunicacoes, salesforce, push]
+
+    columns:
+      - name: primkey
+        description: Chave única de registro.
+        tags: []
+
+      - name: appname
+        description: Nome do aplicativo.
+
+      - name: messagename
+        description: Nome da mensagem.
+
+      - name: messageid
+        description: ID da mensagem.
+
+      - name: campaigns
+        description: Campanhas associadas.
+
+      - name: deviceid
+        description: Identificador do dispositivo receptor.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: datetimesend
+        description: Data e hora de envio.
+
+      - name: messagecontent
+        description: Conteúdo da mensagem.
+
+      - name: messageopened
+        description: Indicador de mensagem aberta.
+
+      - name: opendate
+        description: Data de abertura da mensagem.
+
+      - name: timeinapp
+        description: Tempo gasto no aplicativo após o recebimento da mensagem.
+
+      - name: platformversion
+        description: Versão da plataforma.
+
+      - name: status
+        description: Status da mensagem.
+
+      - name: serviceresponse
+        description: Resposta do serviço.
+
+      - name: geofencename
+        description: Nome da geofence.
+
+      - name: template
+        description: Template da mensagem.
+
+      - name: format
+        description: Formato da mensagem.
+
+      - name: pagename
+        description: Nome da página associada.
+
+      - name: pushjobid
+        description: ID do trabalho de envio do push.
+
+      - name: systemtoken
+        description: Token do sistema.
+
+      - name: inboxmessagedownloaded
+        description: Indicador de mensagem da caixa de entrada baixada.
+
+      - name: inboxmessageopened
+        description: Indicador de mensagem da caixa de entrada aberta.
+
+      - name: iosmediaurl
+        description: URL da mídia para iOS.
+
+      - name: androidmediaurl
+        description: URL da mídia para Android.
+
+      - name: mediaalt
+        description: Alternativa de mídia.
+
+      - name: contactkey
+        description: Chave de contato.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: requestid
+        description: ID da solicitação.
+
+      - name: plataforma
+        description: Plataforma de envio.
+
+      - name: ingestion_date
+        description: Data de ingestão do evento.
+
+      - name: ingestion_year
+        description: Ano de ingestão.
+
+      - name: ingestion_month
+        description: Mês de ingestão.
+
+      - name: ingestion_day
+        description: Dia de ingestão.
+
+      - name: execution_date
+        description: Data de execução do envio da tag.
+
+      - name: execution_year
+        description: Ano de execução.
+
+      - name: execution_month
+        description: Mês de execução.
+
+      - name: execution_day
+        description: Dia de execução.

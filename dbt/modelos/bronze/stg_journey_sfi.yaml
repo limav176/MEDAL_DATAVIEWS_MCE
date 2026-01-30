@@ -1,0 +1,113 @@
+version: 2
+
+models:
+  - name: stg_journey_sfi
+    meta:
+      domain: comunicacoes
+      layer: bronze
+      schema: comunicacoes_bronze
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Esta tabela contém informações sobre journeys, que são sequências de interações personalizadas com clientes, planejadas na Salesforce Marketing Cloud. Os dados são utilizados para monitorar e analisar a eficácia dessas interações em diferentes canais, apoiando a personalização e otimização da experiência do cliente em todas as unidades de negócio que utilizam a plataforma.
+
+      **Escopo:** Abrange detalhes dos journeys, incluindo identificação, etapas, interações, canais utilizados, e resultados, permitindo uma análise detalhada da jornada do cliente e o impacto das comunicações.
+
+      **Audiência:** Direcionado para equipes de marketing digital e experiência do cliente, fornecendo dados cruciais para a criação e otimização de journeys que visam melhorar a interação e o engajamento dos clientes.
+
+      **Processo:** Os dados são extraídos da Salesforce Marketing Cloud, refletindo as atividades de interação com o cliente dentro de cada journey configurado, garantindo um acompanhamento preciso do desempenho e eficácia das estratégias de comunicação.
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia.
+
+    tags: [bronze, comunicacoes, salesforce, journey]
+
+    columns:
+      - name: versionid
+        description: ID da versão.
+        tags: []
+
+      - name: activityid
+        description: ID da atividade.
+        tags: []
+
+      - name: activityname
+        description: Nome da atividade.
+        tags: []
+
+      - name: activityexternalkey
+        description: Chave externa da atividade.
+        tags: []
+
+      - name: journeyactivityobjectid
+        description: ID do objeto de atividade da jornada.
+        tags: []
+
+      - name: activitytype
+        description: Tipo de atividade.
+        tags: []
+
+      - name: journeyid
+        description: ID da jornada.
+        tags: []
+
+      - name: journeyname
+        description: Nome da jornada.
+        tags: []
+
+      - name: versionnumber
+        description: Número da versão.
+        tags: []
+
+      - name: createddate
+        description: Data de criação.
+        tags: []
+
+      - name: lastpublisheddate
+        description: Data da última publicação.
+        tags: []
+
+      - name: modifieddate
+        description: Data de modificação.
+        tags: []
+
+      - name: journeystatus
+        description: Status da jornada.
+        tags: []
+
+      - name: ingestion_date
+        description: Data de ingestão do evento.
+        tags: []
+
+      - name: ingestion_year
+        description: Ano de ingestão.
+        tags: []
+
+      - name: ingestion_month
+        description: Mês de ingestão.
+        tags: []
+
+      - name: ingestion_day
+        description: Dia de ingestão.
+        tags: []
+
+      - name: execution_date
+        description: Data de execução do envio da tag.
+        tags: []
+
+      - name: execution_year
+        description: Ano de execução.
+        tags: []
+
+      - name: execution_month
+        description: Mês de execução.
+        tags: []
+
+      - name: execution_day
+        description: Dia de execução.
+        tags: []

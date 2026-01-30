@@ -1,0 +1,209 @@
+version: 2
+
+models:
+  - name: stg_job_sfi
+    meta:
+      domain: comunicacoes
+      layer: bronze
+      schema: comunicacoes_bronze
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Esta tabela contém informações de jobs, que são atividades realizadas dentro da Salesforce Marketing Cloud. Os dados ajudam a gerenciar o envio de comunicações multi canais em todas as unidades de negócio que utilizam a Salesforce Marketing Cloud.
+
+      **Escopo:** Inclui detalhes sobre os jobs, como identificação, tipo de atividade, status e resultados, facilitando o acompanhamento e a análise das campanhas de comunicação.
+
+      **Audiência:** Útil para equipes de marketing e TI que trabalham com a Salesforce Marketing Cloud, oferecendo uma visão clara sobre o desempenho e a eficácia das campanhas.
+
+      **Processo:** Os dados são coletados diretamente das atividades realizadas na Salesforce Marketing Cloud.
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia.
+
+    tags: [bronze, comunicacoes, salesforce, job]
+
+    columns:
+      - name: jobid
+        description: ID do trabalho de envio de e-mail.
+        tags: [jobid]
+
+      - name: emailid
+        description: ID do e-mail.
+        tags: []
+
+      - name: accountid
+        description: ID da conta.
+        tags: []
+
+      - name: accountuserid
+        description: ID do usuário da conta.
+        tags: []
+
+      - name: fromname
+        description: Nome do remetente.
+        tags: []
+
+      - name: fromemail
+        description: E-mail do remetente.
+        tags: []
+
+      - name: schedtime
+        description: Data e hora programadas para envio.
+        tags: [schedtime]
+
+      - name: pickuptime
+        description: Data e hora de coleta.
+        tags: [pickuptime]
+
+      - name: deliveredtime
+        description: Data e hora de entrega.
+        tags: [deliveredtime]
+
+      - name: eventid
+        description: ID do evento.
+        tags: [eventid]
+
+      - name: ismultipart
+        description: Indicador de e-mail multipart.
+        tags: [ismultipart]
+
+      - name: jobtype
+        description: Tipo de trabalho.
+        tags: [jobtype]
+
+      - name: jobstatus
+        description: Status do trabalho.
+        tags: [jobstatus]
+
+      - name: modifiedby
+        description: Modificado por.
+        tags: [modifiedby]
+
+      - name: modifieddate
+        description: Data de modificação.
+        tags: [modifieddate]
+
+      - name: emailname
+        description: Nome do e-mail.
+        tags: [emailname]
+
+      - name: emailsubject
+        description: Assunto do e-mail.
+        tags: [emailsubject]
+
+      - name: iswrapped
+        description: Indicador de e-mail embalado.
+        tags: [iswrapped]
+
+      - name: testemailaddr
+        description: Endereço de e-mail de teste.
+        tags: [testemailaddr]
+
+      - name: category
+        description: Categoria do e-mail.
+        tags: [category]
+
+      - name: bccemail
+        description: E-mail de cópia oculta (BCC).
+        tags: [bccemail]
+
+      - name: originalschedtime
+        description: Data e hora programadas originais.
+        tags: [originalschedtime]
+
+      - name: createddate
+        description: Data de criação.
+        tags: [createddate]
+
+      - name: characterset
+        description: Conjunto de caracteres.
+        tags: [characterset]
+
+      - name: ipaddress
+        description: Endereço IP.
+        tags: [ipaddress, pii]
+
+      - name: salesforcetotalsubscribercount
+        description: Contagem total de assinantes Salesforce.
+        tags: [salesforcetotalsubscribercount]
+
+      - name: salesforceerrorsubscribercount
+        description: Contagem de assinantes Salesforce com erro.
+        tags: [salesforceerrorsubscribercount]
+
+      - name: sendtype
+        description: Tipo de envio.
+        tags: [sendtype]
+
+      - name: dynamicemailsubject
+        description: Assunto de e-mail dinâmico.
+        tags: [dynamicemailsubject]
+
+      - name: suppresstracking
+        description: Rastreamento suprimido.
+        tags: [suppresstracking]
+
+      - name: sendclassificationtype
+        description: Tipo de classificação de envio.
+        tags: [sendclassificationtype]
+
+      - name: sendclassification
+        description: Classificação de envio.
+        tags: [sendclassification]
+
+      - name: resolvelinkswithcurrentdata
+        description: Resolver links com dados atuais.
+        tags: [resolvelinkswithcurrentdata]
+
+      - name: emailsenddefinition
+        description: Definição de envio de e-mail.
+        tags: [emailsenddefinition]
+
+      - name: deduplicatebyemail
+        description: Duplicação de e-mails por e-mail.
+        tags: [deduplicatebyemail]
+
+      - name: triggerersenddefinitionobjectid
+        description: ID do objeto de definição de envio acionado.
+        tags: [triggerersenddefinitionobjectid]
+
+      - name: triggeredsendcustomerkey
+        description: Chave do cliente de envio acionado.
+        tags: [triggeredsendcustomerkey]
+
+      - name: ingestion_date
+        description: Data de ingestão do evento.
+        tags: [ingestion_date]
+
+      - name: ingestion_year
+        description: Ano de ingestão.
+        tags: [ingestion_year]
+
+      - name: ingestion_month
+        description: Mês de ingestão.
+        tags: [ingestion_month]
+
+      - name: ingestion_day
+        description: Dia de ingestão.
+        tags: [ingestion_day]
+
+      - name: execution_date
+        description: Data de execução.
+        tags: [execution_date]
+
+      - name: execution_year
+        description: Ano de execução.
+        tags: [execution_year]
+
+      - name: execution_month
+        description: Mês de execução.
+        tags: [execution_month]
+
+      - name: execution_day
+        description: Dia de execução.
+        tags: [execution_day]

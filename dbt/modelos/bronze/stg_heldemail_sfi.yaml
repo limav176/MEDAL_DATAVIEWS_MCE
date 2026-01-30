@@ -1,0 +1,74 @@
+version: 2
+
+models:
+  - name: stg_heldemail_sfi
+    meta:
+      domain: comunicacoes
+      layer: bronze
+      schema: comunicacoes_bronze
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Esta tabela contém informações de contatod em status held na plataforma Salesforce Marketing Cloud.
+
+      **Escopo:** Inclui os usuarios e os status
+
+      **Audiência:** Útil para equipes que trabalham com a Salesforce Marketing Cloud, oferecendo uma ista de contatos em held.
+
+      **Processo:** OO servidor de e-mail do assinante aceita ou rejeita um e-mail quando ele é enviado. Se o servidor de e-mail aceitar o e-mail, o status do assinante permanecerá Ativo no Engajamento. Se o servidor de e-mail rejeitar o e-mail, o status do assinante mudará para Rejeitado.
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia.
+
+    tags: [bronze, comunicacoes, salesforce, status, held, ingestao]
+
+    columns:
+      - name: id_pessoa
+        description: ID do contato, hash256 do CPF.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: status
+        description: status do contato
+        tags: [status]
+
+      - name: dtRegistro
+        description: data da sumarizacao
+        tags: [dtRegistro]
+
+      - name: ingestion_year
+        description: Ano de ingestão.
+        tags: [ingestion_year]
+
+      - name: ingestion_month
+        description: Mês de ingestão.
+        tags: [ingestion_month]
+
+      - name: ingestion_day
+        description: Dia de ingestão.
+        tags: [ingestion_day]
+
+      - name: execution_date
+        description: Data de execução.
+        tags: [execution_date]
+
+      - name: execution_year
+        description: Ano de execução.
+        tags: [execution_year]
+
+      - name: execution_month
+        description: Mês de execução.
+        tags: [execution_month]
+
+      - name: execution_day
+        description: Dia de execução.
+        tags: [execution_day]

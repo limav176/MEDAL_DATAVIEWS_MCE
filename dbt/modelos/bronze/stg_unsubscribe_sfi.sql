@@ -1,0 +1,31 @@
+{{ 
+	standard_config(
+		model_name='stg_unsubscribe_sfi',
+		zone='bronze',
+		materialized='ephemeral'
+	)
+}}
+
+SELECT
+	accountid,
+	id_email,
+	id_unsubscribe,
+	oybaccountid,
+	jobid,
+	listid,
+	batchid,
+	subscriberid,
+	subscriberkey,
+	eventdate,
+	isunique,
+	"domain",
+	ingestion_date,
+	ingestion_year,
+	ingestion_month,
+	ingestion_day,
+	execution_date,
+	execution_year,
+	execution_month,
+	execution_day
+FROM
+    {{ source('comunicacoes_bronze', 'unsubscribe_sfi') }}

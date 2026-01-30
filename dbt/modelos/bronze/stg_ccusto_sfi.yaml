@@ -1,0 +1,80 @@
+version: 2
+
+models:
+  - name: stg_ccusto_sfi
+    meta:
+      domain: comunicacoes
+      layer: bronze
+      schema: comunicacoes_bronze
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Esta tabela armazena os metadados de criativos (assets) criados no Content Builder da Salesforce Marketing Cloud, permitindo análise, governança e auditoria dos conteúdos utilizados em campanha e gestão de consumo
+
+      **Escopo:** Inclui atributos essenciais de criativos, como datas de criação e modificação, responsável pela última alteração, identificador do asset, centro de custo e dados organizacionais associados, permitindo visibilidade operacional, financeira e de versionamento. 
+
+      **Audiência:** Destinada às equipes de Marketing, Operações, Finanças e Governança de conteúdo que necessitam consultar e controlar o uso de ativos criativos. 
+
+      **Processo:** Os dados são coletados por meio de chamadas REST da API de Content Builder, tratados por pipelines de ingestão e padronizados para consumo analítico. 
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia.
+
+    tags: [bronze, comunicacoes, salesforce, gestao, consumo]
+
+    columns:
+      - name: nm_mensagem
+        description: Nome do asset (mensagem ou item de conteúdo) no Content Builder, utilizado para identificação visual e lógica do criativo dentro da plataforma.
+
+      - name: centro_custo
+        description: Centro de custo financeiro associado ao ativo, utilizado para rateio e alocação de despesas relacionadas à criação e execução de campanhas.
+
+      - name: disparado_por
+        description: Usuário ou processo responsável pela execução ou publicação do asset, permitindo rastreamento operacional.
+
+      - name: modifiedBy
+        description: Identificador do usuário que realizou a última modificação no asset, permitindo auditoria e acompanhamento de versionamento.
+
+      - name: modifiedDate
+        description: Data e hora da última modificação do asset no Content Builder, utilizada para controle de versionamento e governança de conteúdo.
+
+      - name: createdDate
+        description: Data e hora de criação do asset no Content Builder, permitindo análise de ciclo de vida e idade do conteúdo.
+
+      - name: id
+        description: Identificador único do asset no Content Builder, utilizado para consultas, atualizações e rastreamento nos endpoints da API.
+
+      - name: bu
+        description: Nome completo da unidade de negócio (BU) associada ao centro de custo, usada para organizar e segmentar os dados financeiros e operacionais.
+
+      - name: bu_rateio
+        description: Categoria ou critério de rateio financeiro vinculado à unidade de negócio, definindo como os custos das comunicações serão distribuídos entre diferentes BUs.
+
+      - name: ingestion_date
+        description: Data de ingestão do registro no pipeline de dados.
+
+      - name: ingestion_year
+        description: Ano correspondente à ingestão do registro.
+
+      - name: ingestion_month
+        description: Mês correspondente à ingestão do registro.
+
+      - name: ingestion_day
+        description: Dia correspondente à ingestão do registro.
+
+      - name: execution_date
+        description: Data de execução do job responsável pelo processamento do registro.
+
+      - name: execution_year
+        description: Ano correspondente à execução do processamento.
+
+      - name: execution_month
+        description: Mês correspondente à execução do processamento.
+
+      - name: execution_day
+        description: Dia correspondente à execução do processamento.

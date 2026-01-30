@@ -1,0 +1,251 @@
+version: 2
+
+models:
+  - name: stg_address_push_sfi
+    meta:
+      domain: comunicacoes
+      layer: bronze
+      schema: comunicacoes_bronze
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Monitora a distribuição de endereços via Salesforce, detalhando contatos, dispositivos, e status de opt-in/opt-out, para fornecer insights sobre preferências de comunicação e eficácia do engajamento.
+
+      **Escopo:** A tabela inclui informações sobre contatos, dispositivos utilizados, e o status atual de opt-in ou opt-out, permitindo análises detalhadas sobre a forma como os contatos interagem com as comunicações enviadas.
+
+      **Audiência:** Destinada a equipes de marketing e análise de dados interessadas em entender e otimizar as estratégias de engajamento com o cliente através dos canais de comunicação.
+
+      **Processo:** Os dados são coletados a partir da plataforma Salesforce, garantindo que as informações sobre a distribuição de endereços e preferências de comunicação estejam sempre atualizadas e sejam precisas.
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia.
+
+    tags: [bronze, comunicacoes, salesforce, address_push]
+
+    columns:
+      - name: contactid
+        description: Identificador único do contato.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: deviceid
+        description: Identificador do dispositivo.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: apid
+        description: Identificador da aplicação.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: status
+        description: Status atual do contato.
+        tags: []
+
+      - name: source
+        description: Fonte da informação do contato.
+        tags: []
+
+      - name: sourceobjectid
+        description: Identificador do objeto na fonte.
+        tags: []
+
+      - name: platform
+        description: Plataforma do dispositivo.
+        tags: []
+
+      - name: platformversion
+        description: Versão da plataforma.
+        tags: []
+
+      - name: alias
+        description: Apelido do contato.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: optoutstatusid
+        description: Identificador do status de opt-out.
+        tags: []
+
+      - name: optoutmethodid
+        description: Método de opt-out.
+        tags: []
+
+      - name: optoutdate
+        description: Data do opt-out.
+        tags: []
+
+      - name: optinstatusid
+        description: Identificador do status de opt-in.
+        tags: []
+
+      - name: optinmethodid
+        description: Método de opt-in.
+        tags: []
+
+      - name: optindate
+        description: Data do opt-in.
+        tags: []
+
+      - name: channel
+        description: Canal de comunicação.
+        tags: []
+
+      - name: createddate
+        description: Data de criação do registro.
+        tags: []
+
+      - name: modifieddate
+        description: Data de última modificação.
+        tags: []
+
+      - name: createdby
+        description: Criador do registro.
+        tags: []
+
+      - name: modifiedby
+        description: Último a modificar o registro.
+        tags: []
+
+      - name: city
+        description: Cidade do contato.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: state
+        description: Estado do contato.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: zipcode
+        description: Código postal do contato.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: firstname
+        description: Primeiro nome do contato.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: lastname
+        description: Último nome do contato.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: utcoffset
+        description: Diferença de fuso horário em UTC.
+        tags: []
+
+      - name: ishonordst
+        description: Indica se respeita o horário de verão.
+        tags: []
+
+      - name: systemtoken
+        description: Token do sistema.
+        tags: []
+
+      - name: providertoken
+        description: Token do provedor.
+        tags: []
+
+      - name: badge
+        description: Distintivo.
+        tags: []
+
+      - name: locationenabled
+        description: Se a localização está habilitada.
+        tags: []
+
+      - name: timezone
+        description: Fuso horário do dispositivo.
+        tags: []
+
+      - name: device
+        description: Descrição do dispositivo.
+        tags: []
+
+      - name: hardwareid
+        description: Identificador do hardware.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: devicetype
+        description: Tipo do dispositivo.
+        tags: []
+
+      - name: ingestion_date
+        description: Data de ingestão do evento.
+        tags: []
+
+      - name: ingestion_year
+        description: Ano de ingestão.
+        tags: []
+
+      - name: ingestion_month
+        description: Mês de ingestão.
+        tags: []
+
+      - name: ingestion_day
+        description: Dia de ingestão.
+        tags: []
+
+      - name: execution_date
+        description: Data de execução do evento.
+        tags: []
+
+      - name: execution_year
+        description: Ano de execução.
+        tags: []
+
+      - name: execution_month
+        description: Mês de execução.
+        tags: []
+
+      - name: execution_day
+        description: Dia de execução.
+        tags: []

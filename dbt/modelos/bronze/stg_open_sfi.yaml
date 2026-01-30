@@ -1,0 +1,127 @@
+version: 2
+
+models:
+  - name: stg_open_sfi
+    meta:
+      domain: comunicacoes
+      layer: bronze
+      schema: comunicacoes_bronze
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Registra os eventos de abertura de e-mails enviados por meio da Salesforce Marketing Cloud, capturando detalhes como a conta do remetente, a identificação do assinante, o domínio do e-mail e o exato momento da abertura. Este registro é fundamental para avaliar o engajamento dos destinatários e a eficácia geral das campanhas de e-mail.
+
+      **Escopo:** Inclui dados detalhados sobre o engajamento do usuário, medido pela abertura de e-mails. Estas informações são cruciais para entender o interesse do destinatário na comunicação enviada, permitindo ajustes nas estratégias de conteúdo e segmentação para melhorar a eficácia das campanhas.
+
+      **Audiência:** Destinada a equipes de marketing e analistas de dados, que necessitam de insights precisos sobre o comportamento de abertura dos usuários para otimizar campanhas.
+
+      **Processo:** Os dados são extraídos após evento de abertura na Salesforce Marketing Cloud.
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia.
+
+    tags: [bronze, comunicacoes, salesforce, email_open]
+
+    columns:
+      - name: accountid
+        description: Identificador da conta de onde o e-mail foi enviado.
+        tags: []
+
+      - name: id_email
+        description: Identificador do e-mail associado à abertura.
+        tags: []
+
+      - name: id_open
+        description: Identificador único do evento de abertura.
+        tags: []
+
+      - name: batchid
+        description: Identificador do lote de envio.
+        tags: []
+
+      - name: domain
+        description: Domínio do e-mail do assinante.
+        tags: []
+
+      - name: eventdate
+        description: Data e hora do evento de abertura.
+        tags: []
+
+      - name: isunique
+        description: Indica se a abertura é única.
+        tags: []
+
+      - name: jobid
+        description: Identificador do trabalho de envio do e-mail.
+        tags: []
+
+      - name: listid
+        description: Identificador da lista de envio.
+        tags: []
+
+      - name: oybaccountid
+        description: Identificador alternativo da conta.
+        tags: []
+
+      - name: subscriberid
+        description: Identificador do assinante que abriu o e-mail.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: subscriberkey
+        description: Chave única do assinante.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: triggeredsendcustomerkey
+        description: Chave do cliente do envio que resultou na abertura.
+        tags: []
+
+      - name: triggerersenddefinitionobjectid
+        description: Objeto que definiu o envio que resultou na abertura.
+        tags: []
+
+      - name: ingestion_date
+        description: Data de ingestão do evento.
+        tags: []
+
+      - name: ingestion_year
+        description: Ano de ingestão.
+        tags: []
+
+      - name: ingestion_month
+        description: Mês de ingestão.
+        tags: []
+
+      - name: ingestion_day
+        description: Dia de ingestão.
+        tags: []
+
+      - name: execution_date
+        description: Data de execução do evento.
+        tags: []
+
+      - name: execution_year
+        description: Ano de execução.
+        tags: []
+
+      - name: execution_month
+        description: Mês de execução.
+        tags: []
+
+      - name: execution_day
+        description: Dia de execução.
+        tags: []

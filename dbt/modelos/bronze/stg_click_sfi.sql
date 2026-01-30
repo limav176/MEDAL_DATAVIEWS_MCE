@@ -1,0 +1,35 @@
+{{ 
+	standard_config(
+		model_name='stg_click_sfi',
+		zone='bronze',
+		materialized='ephemeral'
+	)
+}}
+SELECT 
+	accountid,
+	id_email,
+	to_hex(md5(to_utf8(concat(id_email, linkcontent,subscriberkey, CAST(eventdate AS varchar))))) AS id_click,
+	oybaccountid,
+	jobid,
+	listid,
+	batchid,
+	subscriberid,
+	subscriberkey,
+	eventdate,
+	"domain",
+	"url",
+	linkname,
+	linkcontent,
+	isunique,
+	triggerersenddefinitionobjectid,
+	triggeredsendcustomerkey,
+	ingestion_date,
+	ingestion_year,
+	ingestion_month,
+	ingestion_day,
+	execution_date,
+	execution_year,
+	execution_month,
+	execution_day
+FROM 
+{{ source('comunicacoes_bronze', 'click_sfi') }}

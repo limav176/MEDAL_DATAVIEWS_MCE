@@ -1,0 +1,86 @@
+version: 2
+
+models:
+  - name: stg_empeleg_sfi
+    meta:
+      domain: comunicacoes
+      layer: bronze
+      schema: comunicacoes_bronze
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.publico',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Esta tabela contém informações de pessoas que sao elegiveis a um novo emprestimo no willbank.
+
+      **Escopo:** Inclui detalhes sobre o digito do documento do usuario e criando o GC, a data de entrada, o id da pessoa para ser realizado o cruzamento de dados dentro do datalake.
+
+      **Audiência:** Útil para equipes que trabalham com Marketing Cloud, oferecendo uma visao da ingestrao feita pela equipe de emprestimo, sendo um as is da tabela de entrada.
+
+      **Processo:** Os dados são coletados da Data extension Backend11650_emprestimo_emprestimos_new_eligibles_created_account_email na Salesforce Marketing Cloud e é trafegado usando o salesforce_ingestion
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia.
+
+    tags: [bronze, comunicacoes, salesforce, emprestimos, elegiveis, ingestao]
+
+    columns:
+      - name: documentNumberSeventhDigit
+        description: digito controle do documento do contato para formacao do GC
+        tags: []
+
+      - name: idRegistro
+        description: id da entrada do dado
+        tags: [totalContatos]
+
+      - name: dataRegistro
+        description: data da entrada do dado
+        tags: []
+
+      - name: id_pessoa
+        description: hash do cpf do contato
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: firstName
+        description: primeiro nome do contato
+        tags: []
+
+      - name: ingestion_date
+        description: Data de ingestão do evento.
+        tags: [ingestion_date]
+
+      - name: ingestion_year
+        description: Ano de ingestão.
+        tags: [ingestion_year]
+
+      - name: ingestion_month
+        description: Mês de ingestão.
+        tags: [ingestion_month]
+
+      - name: ingestion_day
+        description: Dia de ingestão.
+        tags: [ingestion_day]
+
+      - name: execution_date
+        description: Data de execução.
+        tags: [execution_date]
+
+      - name: execution_year
+        description: Ano de execução.
+        tags: [execution_year]
+
+      - name: execution_month
+        description: Mês de execução.
+        tags: [execution_month]
+
+      - name: execution_day
+        description: Dia de execução.
+        tags: [execution_day]

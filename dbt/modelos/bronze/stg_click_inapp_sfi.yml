@@ -1,0 +1,87 @@
+version: 2
+
+models:
+  - name: stg_click_inapp_sfi
+    meta:
+      domain: comunicacoes
+      layer: bronze
+      schema: comunicacoes_bronze
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Esta tabela contém dados de cliques em comunicações in-app enviadas pela Salesforce Marketing Cloud. É usada para analisar interações de clientes e a eficácia das campanhas.
+
+      **Escopo:** Inclui informações como ID do cliente, data do clique, campanha, comunicação, e detalhes de ingestão e execução. Esses dados ajudam a otimizar estratégias de comunicação com base no comportamento do cliente.
+
+      **Audiência:** Destinada às equipes de marketing digital e CRM, fornecendo insights para melhorar o engajamento com comunicações in-app.
+
+      **Recorrência de atualização:** Atualizada diariamente.
+
+    tags: [bronze, comunicacoes, salesforce, inapp, clique]
+
+    columns:
+      - name: primkey
+        description: Chave unica por clique.
+        tags: []
+
+      - name: id_salesforce
+        description: ID do cliente na Salesforce.
+        tags: []
+
+      - name: phone
+        description: Número de telefone do cliente.
+        tags: [pii]
+
+      - name: email
+        description: Endereço de e-mail do cliente.
+        tags: [pii]
+
+      - name: datahora_clique
+        description: Data e hora do clique na comunicação.
+        tags: []
+
+      - name: campanha
+        description: Nome da campanha associada ao clique.
+        tags: []
+
+      - name: nome_da_comunicacao
+        description: Nome da comunicação enviada.
+        tags: []
+
+      - name: ingestion_date
+        description: Data de ingestão do evento.
+        tags: []
+
+      - name: ingestion_year
+        description: Ano de ingestão.
+        tags: []
+
+      - name: ingestion_month
+        description: Mês de ingestão.
+        tags: []
+
+      - name: ingestion_day
+        description: Dia de ingestão.
+        tags: []
+
+      - name: execution_date
+        description: Data de execução da comunicação.
+        tags: []
+
+      - name: execution_year
+        description: Ano de execução.
+        tags: []
+
+      - name: execution_month
+        description: Mês de execução.
+        tags: []
+
+      - name: execution_day
+        description: Dia de execução.
+        tags: []

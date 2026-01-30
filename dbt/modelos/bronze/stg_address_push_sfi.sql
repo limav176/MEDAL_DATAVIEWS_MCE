@@ -1,0 +1,59 @@
+{{ 
+	standard_config(
+		model_name='stg_address_push_sfi',
+		zone='bronze',
+		materialized='ephemeral'
+	)
+}}
+with source as (
+select 
+	* 
+FROM  
+	{{ source('comunicacoes_bronze', 'address_push_sfi') }} 
+)
+select
+contactid           
+,deviceid            
+,apid                
+,status              
+,source              
+,sourceobjectid      
+,platform            
+,platformversion     
+,alias               
+,optoutstatusid      
+,optoutmethodid      
+,optoutdate          
+,optinstatusid       
+,optinmethodid       
+,optindate           
+,channel             
+,cast(cast(createddate as varchar) as timestamp) as createddate
+,cast(cast(modifieddate as varchar) as timestamp) as modifieddate
+,createdby           
+,modifiedby          
+,city                
+,state               
+,zipcode             
+,firstname           
+,lastname            
+,utcoffset           
+,ishonordst          
+,systemtoken         
+,providertoken       
+,badge               
+,locationenabled     
+,timezone            
+,device              
+,hardwareid          
+,devicetype          
+,ingestion_date      
+,ingestion_year      
+,ingestion_month     
+,ingestion_day       
+,execution_date      
+,execution_year      
+,execution_month     
+,execution_day       
+from
+	source

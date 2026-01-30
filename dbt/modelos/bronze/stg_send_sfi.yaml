@@ -1,0 +1,210 @@
+version: 2
+
+models:
+  - name: stg_send_sfi
+    meta:
+      domain: comunicacoes
+      layer: bronze
+      schema: comunicacoes_silver
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Esta tabela registra eventos de envio da Salesforce, capturando informações sobre diferentes tipos de comunicações enviadas, como e-mails, SMS e notificações push. Inclui detalhes sobre o remetente, os destinatários, o conteúdo enviado, e o momento do envio. Essencial para monitorar a eficácia de várias formas de comunicação com o cliente.
+
+      **Escopo:** Abrange uma variedade de dados relacionados ao envio de comunicações, facilitando a análise da performance das campanhas e a interação dos destinatários com as mensagens.
+
+      **Audiência:** Destina-se a profissionais de marketing que utilizam diferentes canais de comunicação na Salesforce, permitindo uma visão integrada do desempenho das suas estratégias de envio.
+
+      **Processo:** Dados sobre os eventos de envio são coletados de todas as comunicações realizadas através da Salesforce, oferecendo insights precisos sobre o sucesso e o alcance das campanhas.
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia, proporcionando dados atuais para análise contínua.
+
+    tags: [bronze, comunicacoes, salesforce, send]
+
+    columns:
+      - name: jobid
+        description: ID do trabalho de envio do push.
+        tags: []
+
+      - name: emailid
+        description: ID do email.
+        tags: []
+
+      - name: accountid
+        description: ID da conta.
+        tags: []
+
+      - name: accountuserid
+        description: ID do usuário da conta.
+        tags: [pii]
+
+      - name: fromname
+        description: Nome do remetente.
+        tags: []
+
+      - name: fromaddress
+        description: Endereço do remetente.
+        tags: []
+
+      - name: schedtime
+        description: Tempo programado.
+        tags: []
+
+      - name: pickuptime
+        description: Tempo de coleta.
+        tags: []
+
+      - name: deliveredtime
+        description: Tempo de entrega.
+        tags: []
+
+      - name: eventid
+        description: ID do evento.
+        tags: []
+
+      - name: ismultipart
+        description: Indicador de mensagem multipart.
+        tags: []
+
+      - name: jobtype
+        description: Tipo de trabalho.
+        tags: []
+
+      - name: jobstatus
+        description: Status do trabalho.
+        tags: []
+
+      - name: modifiedby
+        description: Modificado por.
+        tags: []
+
+      - name: modifieddate
+        description: Data de modificação.
+        tags: []
+
+      - name: emailname
+        description: Nome do email.
+        tags: []
+
+      - name: emailsubject
+        description: Assunto do email.
+        tags: []
+
+      - name: iswrapped
+        description: Indicador de mensagem embrulhada.
+        tags: []
+
+      - name: testemailaddr
+        description: Endereço de email de teste.
+        tags: []
+
+      - name: category
+        description: Categoria.
+        tags: []
+
+      - name: bccemail
+        description: Endereço de email BCC.
+        tags: []
+
+      - name: originalschedtime
+        description: Tempo programado original.
+        tags: []
+
+      - name: createddate
+        description: Data de criação.
+        tags: []
+
+      - name: characterset
+        description: Conjunto de caracteres.
+        tags: []
+
+      - name: ipaddress
+        description: Endereço IP.
+        tags: []
+
+      - name: salesforcetotalsubscribercount
+        description: Contagem total de assinantes do Salesforce.
+        tags: []
+
+      - name: salesforceerrorsubscribercount
+        description: Contagem de assinantes de erro do Salesforce.
+        tags: []
+
+      - name: sendtype
+        description: Tipo de envio.
+        tags: []
+
+      - name: dynamicemailsubject
+        description: Assunto do email dinâmico.
+        tags: []
+
+      - name: suppresstracking
+        description: Rastreamento suprimido.
+        tags: []
+
+      - name: sendclassificationtype
+        description: Tipo de classificação de envio.
+        tags: []
+
+      - name: sendclassification
+        description: Classificação de envio.
+        tags: []
+
+      - name: resolvelinkswithcurrentdata
+        description: Resolver links com dados atuais.
+        tags: []
+
+      - name: emailsenddefinition
+        description: Definição de envio de email.
+        tags: []
+
+      - name: deduplicatebyemail
+        description: Duplicar por email.
+        tags: []
+
+      - name: triggerersenddefinitionobjectid
+        description: ID do objeto de definição de envio desencadeado.
+        tags: []
+
+      - name: triggeredsendcustomerkey
+        description: Chave do cliente de envio desencadeado.
+        tags: []
+
+      - name: ingestion_date
+        description: Data de ingestão do evento.
+        tags: []
+
+      - name: ingestion_year
+        description: Ano de ingestão.
+        tags: []
+
+      - name: ingestion_month
+        description: Mês de ingestão.
+        tags: []
+
+      - name: ingestion_day
+        description: Dia de ingestão.
+        tags: []
+
+      - name: execution_date
+        description: Data de execução do envio da tag.
+        tags: []
+
+      - name: execution_year
+        description: Ano de execução.
+        tags: []
+
+      - name: execution_month
+        description: Mês de execução.
+        tags: []
+
+      - name: execution_day
+        description: Dia de execução.
+        tags: []
+

@@ -1,0 +1,27 @@
+{{ 
+	standard_config(
+		model_name='stg_ccusto_sfi',
+		zone='bronze',
+		materialized='ephemeral'
+	)
+}}
+SELECT 
+	nm_mensagem,
+	centro_custo,
+	disparado_por,
+	bu,
+	bu_rateio,
+	modifiedBy,
+	modifiedDate,
+	createdDate,
+	id,
+	ingestion_date,
+	ingestion_year,
+	ingestion_month,
+	ingestion_day,
+	execution_date,
+	execution_year,
+	execution_month,
+	execution_day 
+FROM 
+{{ source('comunicacoes_bronze', 'ccusto_sfi') }}

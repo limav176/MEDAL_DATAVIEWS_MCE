@@ -1,0 +1,124 @@
+version: 2
+
+models:
+  - name: stg_not_sent_sfi
+    meta:
+      domain: comunicacoes
+      layer: bronze
+      schema: comunicacoes_bronze
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Esta tabela armazena eventos de tentativas de envio não realizadas (não enviadas) na Salesforce Marketing Cloud (SFMC).
+
+      **Escopo:** Contém informações detalhadas sobre os envios não concluídos, incluindo motivos da falha, dados do destinatário e metadados de envio.
+
+      **Audiência:** Equipes de CRM, Marketing e Produto que acompanham e analisam a performance de comunicações comerciais.
+
+      **Processo:** Os dados são coletados a partir de logs de eventos da SFMC referentes a mensagens que não foram enviadas com sucesso.
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia.
+
+    tags: [bronze, comunicacoes, salesforce, not_sent, eventos, ingestao]
+
+    columns:
+      - name: primkey
+        description: Chave primária da tabela, utilizada para identificar unicamente cada registro.
+        tags: []
+        
+      - name: clientid
+        description: Identificador do cliente na SFMC.
+        tags: []
+
+      - name: emailaddress
+        description: Endereço de e-mail do destinatário da comunicação.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: subscriberid
+        description: Identificador único do assinante na SFMC.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: triggeredsendexternalkey
+        description: Chave externa do envio disparado.
+        tags: []
+
+      - name: reason
+        description: Motivo pelo qual o envio não foi concluído.
+        tags: []
+
+      - name: sendid
+        description: Identificador do envio específico.
+        tags: []
+
+      - name: subscriberkey
+        description: Chave única do assinante.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: listid
+        description: Identificador da lista utilizada no envio.
+        tags: []
+
+      - name: eventdate
+        description: Data e hora do evento de falha de envio.
+        tags: []
+
+      - name: eventtype
+        description: Tipo de evento registrado (ex. NotSent).
+        tags: []
+
+      - name: batchid
+        description: Identificador do lote de envio.
+        tags: []
+
+      - name: ingestion_date
+        description: Data de ingestão do evento.
+        tags: [ingestion_date]
+
+      - name: ingestion_year
+        description: Ano de ingestão.
+        tags: [ingestion_year]
+
+      - name: ingestion_month
+        description: Mês de ingestão.
+        tags: [ingestion_month]
+
+      - name: ingestion_day
+        description: Dia de ingestão.
+        tags: [ingestion_day]
+
+      - name: execution_date
+        description: Data de execução da ingestão no pipeline.
+        tags: [execution_date]
+
+      - name: execution_year
+        description: Ano de execução.
+        tags: [execution_year]
+
+      - name: execution_month
+        description: Mês de execução.
+        tags: [execution_month]
+
+      - name: execution_day
+        description: Dia de execução.
+        tags: [execution_day]

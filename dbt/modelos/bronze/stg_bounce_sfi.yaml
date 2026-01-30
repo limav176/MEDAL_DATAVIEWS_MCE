@@ -1,0 +1,167 @@
+version: 2
+
+models:
+  - name: stg_bounce_sfi
+    meta:
+      domain: comunicacoes
+      layer: bronze
+      schema: comunicacoes_bronze
+      owner: valmir.lima@willbank.com.br
+      openmetadata:
+        tags: [
+          'confiabilidade.fonte_da_verdade',
+          'classificacao_da_informacao.privado',
+        ]
+        tier: 'Tier.Tier2'
+
+    description: >
+      **Propósito:** Registra eventos de bounce de e-mails, incluindo detalhes como ID de conta, categorias de bounce, e razões SMTP, essencial para análises de qualidade de envio de e-mail e otimização de listas de contato.
+
+      **Escopo:** A tabela abrange informações detalhadas sobre eventos de bounce, incluindo a identificação da conta, categorias de bounce (hard bounce, soft bounce, etc.) e as razões SMTP fornecidas para o bounce, permitindo uma análise profunda sobre a qualidade dos endereços de e-mail e a eficácia das campanhas de comunicação.
+
+      **Audiência:** Destinada a equipes de marketing por e-mail e analistas de dados que precisam monitorar a saúde e a eficácia de suas campanhas de e-mail, identificando problemas que podem afetar a entregabilidade e a receptividade.
+
+      **Processo:** Os dados são coletados a partir da integração com plataformas de e-mail marketing e Salesforce, permitindo uma análise precisa e oportuna sobre os eventos de bounce e possibilitando ajustes proativos nas estratégias de comunicação.
+
+      **Recorrência de atualização:** A tabela é atualizada 1x ao dia.
+
+    tags: [bronze, comunicacoes, salesforce, email_bounce]
+
+    columns:
+      - name: accountid
+        description: Identificador da conta relacionada ao bounce.
+        tags: []
+
+      - name: oybaccountid
+        description: Identificador alternativo da conta.
+        tags: []
+
+      - name: jobid
+        description: Identificador do trabalho de envio de e-mail.
+        tags: []
+
+      - name: listid
+        description: Identificador da lista de envio.
+        tags: []
+
+      - name: batchid
+        description: Identificador do lote de envio.
+        tags: []
+
+      - name: subscriberid
+        description: Identificador do assinante que recebeu o e-mail.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: eventdate
+        description: Data e hora do evento de bounce.
+        tags: []
+
+      - name: isunique
+        description: Indica se o bounce é único.
+        tags: []
+
+      - name: domain
+        description: Domínio do endereço de e-mail que gerou o bounce.
+        tags: []
+
+      - name: bouncecategoryid
+        description: ID da categoria de bounce.
+        tags: []
+
+      - name: bouncecategory
+        description: Descrição da categoria de bounce.
+        tags: []
+
+      - name: bouncesubcategoryid
+        description: ID da subcategoria de bounce.
+        tags: []
+
+      - name: bouncesubcategory
+        description: Descrição da subcategoria de bounce.
+        tags: []
+
+      - name: bouncetypeid
+        description: ID do tipo de bounce.
+        tags: []
+
+      - name: bouncetype
+        description: Descrição do tipo de bounce.
+        tags: []
+
+      - name: smtpbouncereason
+        description: Razão do bounce segundo o protocolo SMTP.
+        tags: []
+
+      - name: smtpmessage
+        description: Mensagem de retorno do SMTP.
+        tags: []
+
+      - name: smtpcode
+        description: Código de erro SMTP associado ao bounce.
+        tags: []
+
+      - name: triggerersenddefinitionobjectid
+        description: Objeto que definiu o envio que resultou em bounce.
+        tags: []
+
+      - name: triggeredsendcustomerkey
+        description: Chave do cliente do envio que resultou em bounce.
+        tags: []
+
+      - name: isfalsebounce
+        description: Indica se foi um falso bounce.
+        tags: []
+
+      - name: subscriberkey
+        description: Chave única do assinante.
+        tags: []
+        meta:
+          openmetadata:
+            tags: [
+              'pii.pii'
+            ]
+
+      - name: id_email
+        description: Identificador do e-mail no sistema.
+        tags: []
+
+      - name: id_bounce
+        description: Identificador único do evento de bounce.
+        tags: []
+
+      - name: ingestion_date
+        description: Data de ingestão do evento.
+        tags: []
+
+      - name: ingestion_year
+        description: Ano de ingestão.
+        tags: []
+
+      - name: ingestion_month
+        description: Mês de ingestão.
+        tags: []
+
+      - name: ingestion_day
+        description: Dia de ingestão.
+        tags: []
+
+      - name: execution_date
+        description: Data de execução do evento.
+        tags: []
+
+      - name: execution_year
+        description: Ano de execução.
+        tags: []
+
+      - name: execution_month
+        description: Mês de execução.
+        tags: []
+
+      - name: execution_day
+        description: Dia de execução.
+        tags: []
