@@ -1,0 +1,36 @@
+name: "{{ env_var('DBT_DOMAIN', var('domain')) }}"
+version: '1.0.0'
+config-version: 2
+
+profile: 'trino'
+
+vars:
+  environment: "{{ target.name }}"
+
+model-paths: ["./models"]
+analysis-paths: ["./analysis"]
+test-paths: ["./tests"]
+seed-paths: ["./data"]
+macro-paths: ["./macros"]
+snapshot-paths: ["./snapshots"]
+
+models:
+  comunicacoes:
+    bronze:
+      +schema: "{{ env_var('DBT_DOMAIN', var('domain')) }}_bronze"
+      +properties:
+        format: "'PARQUET'"
+      +on_table_exists: 'drop'
+      +on_schema_change: "sync_all_columns"
+    silver:
+      +schema: "{{ env_var('DBT_DOMAIN', var('domain')) }}_silver"
+      +properties:
+        format: "'PARQUET'"
+      +on_table_exists: 'drop'
+      +on_schema_change: "sync_all_columns"
+    gold:
+      +schema: "{{ env_var('DBT_DOMAIN', var('domain')) }}_gold"
+      +properties:
+        format: "'PARQUET'"
+      +on_table_exists: 'drop'
+      +on_schema_change: "sync_all_columns"
